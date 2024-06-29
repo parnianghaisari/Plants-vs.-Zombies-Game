@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "mainwindow2.h"
 #include <QTabBar>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -19,5 +20,13 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    this->hide();
+    MainWindow2* secondWindow= new MainWindow2();
+    secondWindow->show();
 }
 

@@ -151,7 +151,7 @@ font: 700 italic 20pt &quot;Segoe UI&quot;;
 font: 700 italic 20pt &quot;Segoe UI&quot;;</string>
       </property>
       <property name="text">
-       <string>IP</string>
+       <string>Port</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="lineEdit_2">
