@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
         tab->hide(); // Hide the tab
         ui->tabWidget->setStyleSheet("QTabWidget::tab_2 { background: transparent; border: 0; }"
                                          "QTabBar::tab { background: transparent; }");
-        this->setStyleSheet("MainWindow { background-image: url(D:/AP_newPro/AP_project/ZombieVSPlants/Screenshot (7) (1).png); }");
+        this->setStyleSheet("MainWindow { background-image: url(D:/AP_newPro/AP_project/ZombieVSPlants/Screenshot_8_optimized.png); }");
 
 }
 
@@ -23,7 +23,7 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::on_pushButton_2_clicked()
+void MainWindow::on_pushButton_clicked()
 {
     this->hide();
     MainWindow2* secondWindow= new MainWindow2();
