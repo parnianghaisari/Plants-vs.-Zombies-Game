@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     forgotwindow.cpp \
+    globals.cpp \
     loginwindow.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -18,6 +19,7 @@ SOURCES += \
 
 HEADERS += \
     forgotwindow.h \
+    globals.h \
     loginwindow.h \
     mainwindow.h \
     mainwindow2.h \

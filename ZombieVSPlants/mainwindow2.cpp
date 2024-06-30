@@ -3,6 +3,8 @@
 #include "loginwindow.h"
 #include <QTabBar>
 #include "signupwindow.h"
+#include "globals.h"
+
 MainWindow2::MainWindow2(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow2)
@@ -21,7 +23,8 @@ MainWindow2::~MainWindow2()
 
 void MainWindow2::on_pushButton_clicked()
 {
-
+QByteArray data="l";
+clientS->write(data);
 this->hide();
 LoginWindow* thirdWindow= new LoginWindow();
 thirdWindow->show();
