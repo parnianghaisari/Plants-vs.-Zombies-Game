@@ -7,13 +7,13 @@ MainWindow::MainWindow(QWidget *parent)
     , server(new Server(this))
 {
     ui->setupUi(this);
+
     connect(server, &Server::clientConnected, this, &MainWindow::onClientConnected);
     connect(server, &Server::clientDisconnected, this, &MainWindow::onClientDisconnected);
     connect(server, &Server::messageReceived, this, &MainWindow::onMessageReceived);
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
     delete ui;
 }
 
