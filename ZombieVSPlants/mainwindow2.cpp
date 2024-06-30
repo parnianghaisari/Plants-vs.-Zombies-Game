@@ -10,9 +10,8 @@ MainWindow2::MainWindow2(QWidget *parent) :
         tab2->hide(); // Hide the tab
         ui->tabWidget->setStyleSheet("QTabWidget::tab_2 { background: transparent; border: 0; }"
                                          "QTabBar::tab { background: transparent; }");
-       this->setStyleSheet("MainWindow { background-image: url(D:/AP_newPro/AP_project/ZombieVSPlants/Screenshot_8_optimized.png); }");
+      this->setStyleSheet("MainWindow2 { background-image: url(D:/AP_newPro/AP_project/ZombieVSPlants/Screenshot_10_optimized.png); }");
 }
-
 MainWindow2::~MainWindow2()
 {
     delete ui;
