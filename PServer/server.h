@@ -6,6 +6,10 @@
 #include <QTcpServer>
 #include <QMutex>
 #include <QList>
+#include <QString>
+#include <QHostInfo>
+#include <QNetworkInterface>
+
 
 class Server : public QTcpServer
 {
@@ -20,13 +24,15 @@ signals:
 protected:
     void incomingConnection(qintptr socketDescriptor) override;
 
+public slots:
+    QString getWifiIPv4Address();
+
 private slots:
     void readClient();
     void handleClientDisconnected();
 
 private:
     QList<QTcpSocket*> clients;
-    QMutex mutex;
     void broadcastMessage(const QByteArray &message, QTcpSocket *excludeSocket = nullptr);
 };
 
