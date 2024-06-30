@@ -29,14 +29,14 @@ void MainWindow::on_pushButton_clicked()
     QString text_1 = ui->lineEdit->text();
     QString text_2="192.168.1.101";
     QString text_3 = ui->lineEdit_2->text();
-    QString text_4="2025";
+    QString text_4="5000";
     if(text_1.compare(text_2)==0 && text_3.compare(text_4)==0 )
           {
             //check address and port
         connectToServer();
-      this->hide();
-      MainWindow2* secondWindow= new MainWindow2();
-      secondWindow->show();
+     // this->hide();
+     // MainWindow2* secondWindow= new MainWindow2();
+     // secondWindow->show();
           }
     else{
 
@@ -47,7 +47,7 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::connectToServer()
 {
     clientSocket = new QTcpSocket();
-    clientSocket->connectToHost("192.168.1.101",2025);
+    clientSocket->connectToHost("192.168.1.101",5000);
     ui->textEdit->setText("connecting...");
     clientSocket->waitForConnected(-1);
     if( clientSocket->waitForConnected(-1)){
