@@ -34,9 +34,9 @@ void MainWindow::on_pushButton_clicked()
           {
             //check address and port
         connectToServer();
-      //  this->hide();
-      // MainWindow2* secondWindow= new MainWindow2();
-      // secondWindow->show();
+      this->hide();
+      MainWindow2* secondWindow= new MainWindow2();
+      secondWindow->show();
           }
     else{
 
@@ -55,3 +55,5 @@ void MainWindow::connectToServer()
     }
 
 }
+
+

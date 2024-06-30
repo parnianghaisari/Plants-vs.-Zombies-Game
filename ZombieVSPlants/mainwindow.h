@@ -3,6 +3,11 @@
 
 #include <QMainWindow>
 #include <QTcpSocket>
+#include <QHostInfo>
+#include <QNetworkInterface>
+#include <QString>
+#include <QList>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -17,7 +22,6 @@ public:
     void connectToServer();
 
 private slots:
-
     void on_pushButton_clicked();
 
 private:
