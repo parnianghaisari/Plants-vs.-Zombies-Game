@@ -7,8 +7,9 @@ LoginWindow::LoginWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setStyleSheet("LoginWindow { background-image: url(D:/AP_newPro/AP_project/ZombieVSPlants/pvz2-ea-hero-pvz2-xl.jpg.adapt.crop16x9.1023w.jpg); }");
-   ui->password->setEchoMode(QLineEdit::Password); // Set echo mode to Password
-   // ui->verticalLayout->addWidget(passwordEdit);
+   ui->password->setEchoMode(QLineEdit::Password); // hide password
+   ui->password->setMaxLength(8); // only 8 charachters
+
 }
 
 LoginWindow::~LoginWindow()

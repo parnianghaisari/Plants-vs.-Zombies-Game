@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="phone">
     <property name="geometry">
      <rect>
       <x>400</x>
@@ -77,7 +77,7 @@ font: 700 9pt &quot;Segoe UI&quot;;
      <string>Password:</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="pass">
     <property name="geometry">
      <rect>
       <x>400</x>

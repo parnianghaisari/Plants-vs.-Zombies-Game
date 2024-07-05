@@ -2,7 +2,7 @@
 #define FORGOTWINDOW_H
 
 #include <QMainWindow>
-
+#include"globals.h"
 namespace Ui {
 class ForgotWindow;
 }
@@ -14,6 +14,9 @@ class ForgotWindow : public QMainWindow
 public:
     explicit ForgotWindow(QWidget *parent = nullptr);
     ~ForgotWindow();
+
+private slots:
+    void on_pushButton_clicked();
 
 private:
     Ui::ForgotWindow *ui;

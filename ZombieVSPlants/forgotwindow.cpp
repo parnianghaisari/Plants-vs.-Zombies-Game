@@ -13,3 +13,14 @@ ForgotWindow::~ForgotWindow()
 {
     delete ui;
 }
+
+void ForgotWindow::on_pushButton_clicked()
+{
+     QByteArray data="f2";
+     clientS->write(data);
+    QByteArray data1 = ui->phone->text().toUtf8()+ "\n";
+    clientS->write(data1);
+    QByteArray data2 = ui->pass->text().toUtf8()+ "\n";
+    clientS->write(data2);
+}
+

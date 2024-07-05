@@ -2,7 +2,7 @@
 #define LOGINWINDOW_H
 
 #include <QMainWindow>
-
+#include "globals.h"
 namespace Ui {
 class LoginWindow;
 }
@@ -17,6 +17,8 @@ public:
 
 private slots:
     void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
 
 private:
     Ui::LoginWindow *ui;

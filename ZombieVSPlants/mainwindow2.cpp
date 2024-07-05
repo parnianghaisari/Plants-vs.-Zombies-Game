@@ -33,6 +33,8 @@ thirdWindow->show();
 
 void MainWindow2::on_pushButton_2_clicked()
 {
+    QByteArray data="s";
+    clientS->write(data);
     this->hide();
     SignUpWindow* SWindow= new SignUpWindow();
     SWindow->show();
