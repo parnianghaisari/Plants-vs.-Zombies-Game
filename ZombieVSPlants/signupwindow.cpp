@@ -18,20 +18,20 @@ SignUpWindow::~SignUpWindow()
 void SignUpWindow::on_pushButton_clicked()
 {
 
-    QByteArray data="s2";
-    clientS->write(data);
-   QByteArray data1 = ui->name->text().toUtf8()+ "\n";
+   QByteArray data="s+";
+   clientS->write(data);
+   QByteArray data1 = ui->name->text().toUtf8()+ "+";
    clientS->write(data1);
-   QByteArray data2 = ui->uName->text().toUtf8()+ "\n";
+   QByteArray data2 = ui->uName->text().toUtf8()+ "+";
    clientS->write(data2);
-   QByteArray data3 = ui->pass->text().toUtf8()+ "\n";
+   QByteArray data3 = ui->pass->text().toUtf8()+ "+";
    clientS->write(data3);
-   QByteArray data4 = ui->address->text().toUtf8()+ "\n";
+   QByteArray data4 = ui->address->text().toUtf8()+ "+";
    clientS->write(data4);
-   QByteArray data5 = ui->PNumber->text().toUtf8()+ "\n";
+   QByteArray data5 = ui->PNumber->text().toUtf8();
    clientS->write(data5);
    this->hide();
-  StartWindow* SWindow= new StartWindow();
+   StartWindow* SWindow= new StartWindow();
    SWindow->show();
 }
 

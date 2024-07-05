@@ -21,8 +21,8 @@ LoginWindow::~LoginWindow()
 
 void LoginWindow::on_pushButton_clicked()
 {
-    QByteArray data="f";
-    clientS->write(data);
+    //QByteArray data="f";
+   //192.168.1.6 clientS->write(data);
     this->hide();
     ForgotWindow* FWindow= new ForgotWindow();
     FWindow->show();
@@ -32,11 +32,13 @@ void LoginWindow::on_pushButton_clicked()
 
 void LoginWindow::on_pushButton_2_clicked()
 {
-    QByteArray data="l2";
+   QByteArray data="l+";
     clientS->write(data);
-    QByteArray data1 = ui->username->text().toUtf8()+ "\n";
+    QByteArray data1 = ui->username->text().toUtf8()+ "+";
     clientS->write(data1);
-    QByteArray data2 = ui->password->text().toUtf8()+ "\n";
+    QByteArray data2 = ui->password->text().toUtf8();
     clientS->write(data2);
+   StartWindow * FWindow= new StartWindow();
+    FWindow->show();
 }
 

@@ -14,44 +14,11 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>460</x>
-      <y>90</y>
-      <width>83</width>
-      <height>29</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">
-color: rgb(0, 0, 0);</string>
-    </property>
-    <property name="text">
-     <string>History</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_2">
-    <property name="geometry">
-     <rect>
-      <x>460</x>
-      <y>140</y>
-      <width>83</width>
-      <height>29</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(0, 0, 0);</string>
-    </property>
-    <property name="text">
-     <string>setting</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
      <rect>
       <x>430</x>
-      <y>200</y>
+      <y>140</y>
       <width>141</width>
       <height>29</height>
      </rect>
@@ -63,6 +30,16 @@ font: 700 9pt &quot;Segoe UI&quot;;</string>
     </property>
     <property name="text">
      <string>START</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_dataReceived">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>100</y>
+      <width>113</width>
+      <height>28</height>
+     </rect>
     </property>
    </widget>
   </widget>
