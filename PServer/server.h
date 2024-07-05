@@ -9,6 +9,9 @@
 #include <QString>
 #include <QHostInfo>
 #include <QNetworkInterface>
+#include <QHash>
+
+#include "jsonmanager.h"
 
 
 class Server : public QTcpServer
@@ -26,6 +29,7 @@ protected:
 
 public slots:
     QString getWifiIPv4Address();
+    void sendMessageToClients(const QString &message, int id);
 
 private slots:
     void readClient();

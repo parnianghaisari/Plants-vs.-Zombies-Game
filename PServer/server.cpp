@@ -1,5 +1,6 @@
 #include "server.h"
 #include <QDebug>
+#include <QStringList>
 
 Server::Server(QObject *parent)
     : QTcpServer(parent) {
@@ -54,13 +55,45 @@ QString Server::getWifiIPv4Address()
     return QString();
 }
 
+void Server::sendMessageToClients(const QString &message, int id)
+{
+    QByteArray data = message.toUtf8();
+    if (clients[id]->state() == QAbstractSocket::ConnectedState)
+        clients[id]->write(data);
+}
+
 void Server::readClient() {
     QTcpSocket *socket = qobject_cast<QTcpSocket*>(sender());
     if (!socket) return;
 
+    int socketDescriptor = socket->socketDescriptor();
     QByteArray data = socket->readAll();
     QString message = QString::fromUtf8(data);
     qDebug() << "Received data from client:" << message;
+
+    JsonManager LoginSignup("D:\\AP\\AP_project\\PServer\\SignUpInformation.json");
+    if (message == 'l')
+    {
+        bool Flag = false;
+        LoginSignup.loadData();
+        QByteArray data_ = socket->readAll();
+        QString str(data_);
+        QStringList usAndps = str.split('+');
+        for (int i = 0; i < LoginSignup.getUsers().size(); ++i)
+        {
+            if (usAndps[0] == LoginSignup.getUsers()[i].userVal())
+            {
+                if (usAndps[1] == LoginSignup.getUsers()[i].pswVal())
+                {
+                    Flag = true;
+                    break;
+                }
+                break;
+            }
+        }
+        //if (Flag == false)
+            //sendMessageToClients("p", )
+    }
 
     emit messageReceived(message);
     broadcastMessage(data, socket);
