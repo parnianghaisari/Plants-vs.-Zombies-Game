@@ -5,7 +5,6 @@
 #include <QTcpSocket>
 #include <QTcpServer>
 #include <QMutex>
-#include <QList>
 #include <QString>
 #include <QHostInfo>
 #include <QNetworkInterface>
@@ -36,7 +35,7 @@ private slots:
     void handleClientDisconnected();
 
 private:
-    QList<QTcpSocket*> clients;
+    QHash<int, QTcpSocket*> clients;
     void broadcastMessage(const QByteArray &message, QTcpSocket *excludeSocket = nullptr);
 };
 

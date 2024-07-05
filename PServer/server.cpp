@@ -23,7 +23,7 @@ void Server::incomingConnection(qintptr socketDescriptor) {
 
     QTcpSocket *socket = new QTcpSocket(this);
     socket->setSocketDescriptor(socketDescriptor);
-    clients.append(socket);
+    clients.insert(socketDescriptor, socket);
     connect(socket, &QTcpSocket::readyRead, this, &Server::readClient);
     connect(socket, &QTcpSocket::disconnected, this, &Server::handleClientDisconnected);
     emit clientConnected(socket->peerAddress().toString());
@@ -71,14 +71,17 @@ void Server::readClient() {
     QString message = QString::fromUtf8(data);
     qDebug() << "Received data from client:" << message;
 
-    JsonManager LoginSignup("D:\\AP\\AP_project\\PServer\\SignUpInformation.json");
-    if (message == 'l')
+    QString fileP = "D:\\AP\\AP_project\\PServer\\SignUpInformation.json";
+    JsonManager LoginSignup(fileP);
+    if (message == "l" || message == "l2")
     {
         bool Flag = false;
         LoginSignup.loadData();
         QByteArray data_ = socket->readAll();
         QString str(data_);
         QStringList usAndps = str.split('+');
+        for (int i = 0; i < usAndps.size(); ++i)
+            qDebug() << "Received data from client:" << usAndps[i];
         for (int i = 0; i < LoginSignup.getUsers().size(); ++i)
         {
             if (usAndps[0] == LoginSignup.getUsers()[i].userVal())
@@ -91,8 +94,8 @@ void Server::readClient() {
                 break;
             }
         }
-        //if (Flag == false)
-            //sendMessageToClients("p", )
+        if (Flag == false)
+            sendMessageToClients("f", socketDescriptor);
     }
 
     emit messageReceived(message);
@@ -103,7 +106,8 @@ void Server::handleClientDisconnected() {
     QTcpSocket *socket = qobject_cast<QTcpSocket*>(sender());
     if (!socket) return;
 
-    clients.removeAll(socket);
+    int socketDescriptor = socket->socketDescriptor();
+    clients.remove(socketDescriptor);
     emit clientDisconnected(socket->peerAddress().toString());
     socket->deleteLater();
     qDebug() << "Client disconnected";;
