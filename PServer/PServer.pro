@@ -11,6 +11,7 @@ CONFIG += c++17
 
 SOURCES += \
     jsonmanager.cpp \
+    login.cpp \
     main.cpp \
     mainwindow.cpp \
     server.cpp \
@@ -18,6 +19,7 @@ SOURCES += \
 
 HEADERS += \
     jsonmanager.h \
+    login.h \
     mainwindow.h \
     server.h \
     users.h

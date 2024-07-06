@@ -69,37 +69,25 @@ void Server::readClient() {
     int socketDescriptor = socket->socketDescriptor();
     QByteArray data = socket->readAll();
     QString message = QString::fromUtf8(data);
-    qDebug() << "Received data from client:" << message;
-
-    QString fileP = "D:\\AP\\AP_project\\PServer\\SignUpInformation.json";
-    JsonManager LoginSignup(fileP);
-    if (message == "l" || message == "l2")
+    QString str(data);
+    QStringList usAndps = str.split('+');
+    for (int i = 0; i < usAndps.size(); ++i)
+        qDebug() << "Received data from client :" << usAndps[i];
+    if (usAndps[0] == 'l')
     {
-        bool Flag = false;
-        LoginSignup.loadData();
-        QByteArray data_ = socket->readAll();
-        QString str(data_);
-        QStringList usAndps = str.split('+');
-        for (int i = 0; i < usAndps.size(); ++i)
-            qDebug() << "Received data from client:" << usAndps[i];
-        for (int i = 0; i < LoginSignup.getUsers().size(); ++i)
-        {
-            if (usAndps[0] == LoginSignup.getUsers()[i].userVal())
-            {
-                if (usAndps[1] == LoginSignup.getUsers()[i].pswVal())
-                {
-                    Flag = true;
-                    break;
-                }
-                break;
-            }
-        }
-        if (Flag == false)
-            sendMessageToClients("f", socketDescriptor);
+
+    }
+    else if (usAndps[0] == 'f')
+    {
+
+    }
+    else if (usAndps[0] == 's')
+    {
+
     }
 
     emit messageReceived(message);
-    broadcastMessage(data, socket);
+    //broadcastMessage(data, socket);
 }
 
 void Server::handleClientDisconnected() {

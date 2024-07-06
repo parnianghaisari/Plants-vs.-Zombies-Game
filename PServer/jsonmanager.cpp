@@ -15,21 +15,23 @@ QVector<Users> JsonManager::getUsers()
 void JsonManager::saveData()
 {
     QJsonArray jsonArray;
-        for (const Users &user : arrayOfUsers) {
-            jsonArray.append(user.toJson());
-        }
+    for (const Users &user : arrayOfUsers) {
+        jsonArray.append(user.toJson());
+    }
+    QJsonDocument jsonDoc(jsonArray);
+    QFile file(filePath);
 
-        QJsonDocument jsonDoc(jsonArray);
-        QFile file(filePath);
+    file.open(QIODevice::WriteOnly);
 
-        file.write(jsonDoc.toJson());
-        file.close();
+    file.write(jsonDoc.toJson());
+    file.close();
 }
 
 void JsonManager::loadData()
 {
     QFile file(filePath);
 
+    file.open(QIODevice::ReadOnly);
     QByteArray jsonData = file.readAll();
     file.close();
 
