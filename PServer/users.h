@@ -8,6 +8,7 @@ class Users
 {
 public:
     Users();
+    Users(QString name, QString us, QString ps, QString em, QString num);
 
     QJsonObject toJson() const;
     void fromJson(const QJsonObject &json);
@@ -16,7 +17,6 @@ public:
     QString& pswVal();
     QString& numberVal();
     QString& nameVal();
-    QString& familyVal();
     QString& emailVal();
 
 private:
@@ -25,7 +25,6 @@ private:
     QString PNumber;
     QString Name;
     QString Email;
-    QString Family;
 };
 
 #endif // USERS_H

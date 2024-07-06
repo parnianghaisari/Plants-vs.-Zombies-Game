@@ -15,6 +15,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     server.cpp \
+    signup.cpp \
     users.cpp
 
 HEADERS += \
@@ -22,6 +23,7 @@ HEADERS += \
     login.h \
     mainwindow.h \
     server.h \
+    signup.h \
     users.h
 
 FORMS += \

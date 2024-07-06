@@ -10,7 +10,9 @@
 #include <QNetworkInterface>
 #include <QHash>
 
-#include "jsonmanager.h"
+#include "signup.h"
+
+extern int flagForStarting;
 
 
 class Server : public QTcpServer
@@ -29,6 +31,7 @@ protected:
 public slots:
     QString getWifiIPv4Address();
     void sendMessageToClients(const QString &message, int id);
+    void StartTheGame();
 
 private slots:
     void readClient();

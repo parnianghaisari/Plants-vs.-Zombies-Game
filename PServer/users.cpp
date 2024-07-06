@@ -7,7 +7,15 @@ Users::Users()
     PNumber = "";
     Email = "";
     Name = "";
-    Family = "";
+}
+
+Users::Users(QString name, QString us, QString ps, QString em, QString num)
+{
+    UserName = us;
+    PSW = ps;
+    PNumber = num;
+    Name = name;
+    Email = em;
 }
 
 QJsonObject Users::toJson() const
@@ -17,7 +25,6 @@ QJsonObject Users::toJson() const
     json["phoneNumber"] = PNumber;
     json["password"] = PSW;
     json["name"] = Name;
-    json["family"] = Family;
     json["email"] = Email;
     return json;
 }
@@ -28,7 +35,6 @@ void Users::fromJson(const QJsonObject &json)
     PNumber = json["phoneNumber"].toString();
     PSW = json["password"].toString();
     Name = json["name"].toString();
-    Family = json["famili"].toString();
     Email = json["email"].toString();
 }
 
@@ -52,10 +58,6 @@ QString &Users::nameVal()
     return Name;
 }
 
-QString &Users::familyVal()
-{
-    return Family;
-}
 
 QString &Users::emailVal()
 {

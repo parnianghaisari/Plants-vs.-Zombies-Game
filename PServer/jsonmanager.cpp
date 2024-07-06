@@ -23,7 +23,7 @@ void JsonManager::saveData()
 
     file.open(QIODevice::WriteOnly);
 
-    file.write(jsonDoc.toJson());
+    file.write(jsonDoc.toJson(QJsonDocument::Indented));
     file.close();
 }
 
