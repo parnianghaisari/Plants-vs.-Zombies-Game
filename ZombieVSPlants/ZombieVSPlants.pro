@@ -16,8 +16,10 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     mainwindow2.cpp \
+    plants.cpp \
     signupwindow.cpp \
-    startwindow.cpp
+    startwindow.cpp \
+    zambiesgame.cpp
 
 HEADERS += \
     datahandeler.h \
@@ -26,16 +28,20 @@ HEADERS += \
     loginwindow.h \
     mainwindow.h \
     mainwindow2.h \
+    plants.h \
     signupwindow.h \
-    startwindow.h
+    startwindow.h \
+    zambiesgame.h
 
 FORMS += \
     forgotwindow.ui \
     loginwindow.ui \
     mainwindow.ui \
     mainwindow2.ui \
+    plants.ui \
     signupwindow.ui \
-    startwindow.ui
+    startwindow.ui \
+    zambiesgame.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

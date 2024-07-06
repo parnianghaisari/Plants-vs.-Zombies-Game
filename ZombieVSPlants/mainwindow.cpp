@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include"zambiesgame.h"
 #include "mainwindow2.h"
 #include <QTabBar>
 #include "globals.h"
@@ -35,7 +36,9 @@ void MainWindow::on_pushButton_clicked()
             //check address and port
         connectToServer();
       this->hide();
-     MainWindow2* secondWindow= new MainWindow2();
+
+
+    MainWindow2* secondWindow= new MainWindow2();
      secondWindow->show();
           }
     else{

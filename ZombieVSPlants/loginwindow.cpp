@@ -38,7 +38,15 @@ void LoginWindow::on_pushButton_2_clicked()
     clientS->write(data1);
     QByteArray data2 = ui->password->text().toUtf8();
     clientS->write(data2);
-   StartWindow * FWindow= new StartWindow();
+    QByteArray lisend = clientS->readAll();
+    if(lisend=="1")
+    {
+        StartWindow * FWindow= new StartWindow();
     FWindow->show();
+    }
+    if(lisend=="0")
+    {
+     ui->textEdit->setText("wrong...");
+    }
 }
 
