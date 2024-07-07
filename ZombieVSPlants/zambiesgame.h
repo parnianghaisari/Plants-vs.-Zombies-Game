@@ -2,7 +2,12 @@
 #define ZAMBIESGAME_H
 
 #include <QMainWindow>
-
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QGraphicsItem>
+#include <QGraphicsRectItem>
+#include <QMouseEvent>
+#include <QBrush>
 namespace Ui {
 class zambiesGame;
 }

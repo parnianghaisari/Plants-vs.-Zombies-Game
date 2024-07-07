@@ -32,6 +32,7 @@ zambiesGame::zambiesGame(QWidget *parent) :
      ui->pushButton_6 ->setStyleSheet("QPushButton { "
                            "    border-image: url(" + imagePath + ") stretch;"
                              "}");
+      QGraphicsScene gamepage;
 
 
 }
