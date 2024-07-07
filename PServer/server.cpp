@@ -64,9 +64,17 @@ void Server::sendMessageToClients(const QString &message, int id)
         clients[id]->write(data);
 }
 
-void Server::StartTheGame()
+void Server::StartTheGame(int num1, int num2)
 {
-
+    QString client2;
+    int client = QRandomGenerator::global()->bounded(2);
+    if (client)
+        client2 = "0";
+    else
+        client2 = "1";
+    QString client1 = QString::number(client);
+    sendMessageToClients(client1, num1);
+    sendMessageToClients(client2, num2);
 }
 
 void Server::readClient() {
@@ -98,6 +106,9 @@ void Server::readClient() {
         Users user(usAndps[1], usAndps[2], usAndps[3], usAndps[4], usAndps[5]);
         sig.sign(user);
     }
+
+    if (flagForStarting == 2)
+        StartTheGame(clients[0]->socketDescriptor(), clients[1]->socketDescriptor());
 
     emit messageReceived(message);
     //broadcastMessage(data, socket);

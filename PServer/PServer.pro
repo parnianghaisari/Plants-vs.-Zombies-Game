@@ -10,21 +10,27 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    datetime.cpp \
     jsonmanager.cpp \
     login.cpp \
     main.cpp \
     mainwindow.cpp \
     server.cpp \
     signup.cpp \
-    users.cpp
+    userhistory.cpp \
+    users.cpp \
+    zombies.cpp
 
 HEADERS += \
+    datetime.h \
     jsonmanager.h \
     login.h \
     mainwindow.h \
     server.h \
     signup.h \
-    users.h
+    userhistory.h \
+    users.h \
+    zombies.h
 
 FORMS += \
     mainwindow.ui

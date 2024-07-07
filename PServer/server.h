@@ -9,6 +9,7 @@
 #include <QHostInfo>
 #include <QNetworkInterface>
 #include <QHash>
+#include <QRandomGenerator>
 
 #include "signup.h"
 
@@ -31,7 +32,7 @@ protected:
 public slots:
     QString getWifiIPv4Address();
     void sendMessageToClients(const QString &message, int id);
-    void StartTheGame();
+    void StartTheGame(int num1, int num2);
 
 private slots:
     void readClient();
