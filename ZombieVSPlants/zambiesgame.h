@@ -8,6 +8,7 @@
 #include <QGraphicsRectItem>
 #include <QMouseEvent>
 #include <QBrush>
+#include "board.h"
 namespace Ui {
 class zambiesGame;
 }
@@ -25,6 +26,10 @@ private slots:
 
 private:
     Ui::zambiesGame *ui;
+    QGraphicsView *view;
+    QGraphicsScene *scene;
+    Board *board;
 };
+
 
 #endif // ZAMBIESGAME_H

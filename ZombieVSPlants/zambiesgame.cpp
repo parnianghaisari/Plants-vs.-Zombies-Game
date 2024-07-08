@@ -1,11 +1,25 @@
 #include "zambiesgame.h"
 #include "ui_zambiesgame.h"
 #include"loginwindow.h"
-zambiesGame::zambiesGame(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::zambiesGame)
-{
+zambiesGame::zambiesGame(QWidget *parent)
+    : QMainWindow(parent),
+      ui(new Ui::zambiesGame),
+      view(new QGraphicsView(this)),
+      scene(new QGraphicsScene(this)),
+      board(new Board(scene)) {
+
     ui->setupUi(this);
+
+    // Set up the scene
+    scene->setSceneRect(10, 20, 1212, 426);
+
+    // Set up the view
+    view->setScene(scene);
+    view->setRenderHint(QPainter::Antialiasing);
+
+    // Set the main window layout
+    setCentralWidget(view);
+    setFixedSize(1232, 466);
     this->setStyleSheet("zambiesGame { background-image: url(D:/AP_newPro/AP_project/ZombieVSPlants/Screenshot_12_optimized.png); }");
 
     QString imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/regular zombie.jpg";
@@ -32,7 +46,6 @@ zambiesGame::zambiesGame(QWidget *parent) :
      ui->pushButton_6 ->setStyleSheet("QPushButton { "
                            "    border-image: url(" + imagePath + ") stretch;"
                              "}");
-      QGraphicsScene gamepage;
 
 
 }
@@ -49,4 +62,3 @@ void zambiesGame::on_pushButton_clicked()
     LoginWindow* thirdWindow= new LoginWindow();
     thirdWindow->show();
 }
-
