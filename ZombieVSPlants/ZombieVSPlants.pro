@@ -1,5 +1,5 @@
 QT       += core gui
-
+QT       += network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
@@ -9,18 +9,44 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    datahandeler.cpp \
+    forgotwindow.cpp \
+    globals.cpp \
+    loginwindow.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    mainwindow2.cpp \
+    plants.cpp \
+    signupwindow.cpp \
+    startwindow.cpp \
+    zambiesgame.cpp
 
 HEADERS += \
-    Test.h \
-    mainwindow.h
+    datahandeler.h \
+    forgotwindow.h \
+    globals.h \
+    loginwindow.h \
+    mainwindow.h \
+    mainwindow2.h \
+    plants.h \
+    signupwindow.h \
+    startwindow.h \
+    zambiesgame.h
 
 FORMS += \
-    mainwindow.ui
+    forgotwindow.ui \
+    loginwindow.ui \
+    mainwindow.ui \
+    mainwindow2.ui \
+    plants.ui \
+    signupwindow.ui \
+    startwindow.ui \
+    zambiesgame.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
+RESOURCES += \
+    images.qrc

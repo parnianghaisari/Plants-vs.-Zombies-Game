@@ -19,7 +19,11 @@ object_script.*.Debug
 *.pro.user
 *.pro.user.*
 */*.pro.user
+<<<<<<< HEAD
 */*.pro.user.*
+=======
+*/*.pro.user*
+>>>>>>> Pari
 *.qbs.user
 *.qbs.user.*
 *.moc
