@@ -58,3 +58,39 @@ void plants::on_pushButton_7_clicked()
     thirdWindow->show();
 }
 
+void plants::on_pushButton_clicked()
+{
+    plant=1;
+}
+
+
+void plants::on_pushButton_2_clicked()
+{
+    plant=2;
+}
+
+
+void plants::on_pushButton_3_clicked()
+{
+    plant=3;
+}
+
+
+void plants::on_pushButton_4_clicked()
+{
+    plant=4;
+}
+
+
+
+void plants::on_pushButton_5_clicked()
+{
+    plant=5;
+}
+
+
+void plants::on_pushButton_6_clicked()
+{
+    plant=6;
+}
+
