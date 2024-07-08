@@ -2,24 +2,14 @@
 #include "ui_zambiesgame.h"
 #include"loginwindow.h"
 zambiesGame::zambiesGame(QWidget *parent)
-    : QMainWindow(parent),
-      ui(new Ui::zambiesGame),
-      view(new QGraphicsView(this)),
-      scene(new QGraphicsScene(this)),
-      board(new Board(scene)) {
+    : QMainWindow(parent)
+    , ui(new Ui::zambiesGame)
+{
 
     ui->setupUi(this);
 
-    // Set up the scene
-    scene->setSceneRect(10, 20, 1212, 426);
 
-    // Set up the view
-    view->setScene(scene);
-    view->setRenderHint(QPainter::Antialiasing);
 
-    // Set the main window layout
-    setCentralWidget(view);
-    setFixedSize(1232, 466);
     this->setStyleSheet("zambiesGame { background-image: url(D:/AP_newPro/AP_project/ZombieVSPlants/Screenshot_12_optimized.png); }");
 
     QString imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/regular zombie.jpg";
@@ -47,7 +37,7 @@ zambiesGame::zambiesGame(QWidget *parent)
                            "    border-image: url(" + imagePath + ") stretch;"
                              "}");
 
-
+    applyStylesheets();
 }
 
 zambiesGame::~zambiesGame()
@@ -61,4 +51,22 @@ void zambiesGame::on_pushButton_clicked()
     this->hide();
     LoginWindow* thirdWindow= new LoginWindow();
     thirdWindow->show();
+}
+
+void zambiesGame::on_pushButton_7_clicked()
+{
+    this->hide();
+    LoginWindow* thirdWindow= new LoginWindow();
+    thirdWindow->show();
+}
+
+void zambiesGame::applyStylesheets()
+{
+    for (int i = 7; i <= 78; ++i) {
+        QString buttonName = QString("pushButton_%1").arg(i);
+        QPushButton *button = findChild<QPushButton*>(buttonName);
+        if (button) {
+            button->setStyleSheet("QPushButton { background-color: rgba(255, 255, 255, 0); border: none; }");
+        }
+    }
 }

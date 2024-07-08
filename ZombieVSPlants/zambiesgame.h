@@ -24,11 +24,11 @@ public:
 private slots:
     void on_pushButton_clicked();
 
+    void on_pushButton_7_clicked();
+
 private:
     Ui::zambiesGame *ui;
-    QGraphicsView *view;
-    QGraphicsScene *scene;
-    Board *board;
+     void applyStylesheets();
 };
 
 

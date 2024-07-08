@@ -1,6 +1,7 @@
+
 #include "plants.h"
 #include "ui_plants.h"
-
+#include "zambiesgame.h"
 plants::plants(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::plants)
@@ -32,9 +33,28 @@ plants::plants(QWidget *parent) :
      ui->pushButton_6 ->setStyleSheet("QPushButton { "
                            "    border-image: url(" + imagePath + ") stretch;"
                              "}");
+       applyStylesheets();
 }
 
 plants::~plants()
 {
     delete ui;
 }
+void plants::applyStylesheets()
+{
+    for (int i = 7; i <= 78; ++i) {
+        QString buttonName = QString("pushButton_%1").arg(i);
+        QPushButton *button = findChild<QPushButton*>(buttonName);
+        if (button) {
+            button->setStyleSheet("QPushButton { background-color: rgba(255, 255, 255, 0); border: none; }");
+        }
+    }
+}
+
+void plants::on_pushButton_7_clicked()
+{
+    this->hide();
+    zambiesGame* thirdWindow= new zambiesGame();
+    thirdWindow->show();
+}
+
