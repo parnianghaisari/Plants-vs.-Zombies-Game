@@ -1,0 +1,30 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>field.png</file>
+        <file>Screenshot (4).png</file>
+        <file>Screenshot (5) (1).png</file>
+        <file>Screenshot (5) (2).png</file>
+        <file>Screenshot (1).png</file>
+        <file>Screenshot (6).png</file>
+        <file>Screenshot (7) (1).png</file>
+        <file>Screenshot_8_optimized.png</file>
+        <file>Screenshot_9_optimized.png</file>
+        <file>Screenshot (10).png</file>
+        <file>Screenshot_10_optimized.png</file>
+        <file>pvz2-ea-hero-pvz2-xl.jpg.adapt.crop16x9.1023w.jpg</file>
+        <file>Screenshot_11_optimized.png</file>
+        <file>astronaut zombie.jpg</file>
+        <file>Bucket head zombie.jpg</file>
+        <file>leaf hair zombie.jpg</file>
+        <file>purple hair zombie.jpg</file>
+        <file>regular zombie.jpg</file>
+        <file>tall zombie.jpg</file>
+        <file>Screenshot_12_optimized.png</file>
+        <file>boomerang.jpg</file>
+        <file>jalapino.jpg</file>
+        <file>pea shooter.jpg</file>
+        <file>plum mine.jpg</file>
+        <file>two_peashooter.jpg</file>
+        <file>walnut.jpg</file>
+    </qresource>
+</RCC>
