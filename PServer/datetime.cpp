@@ -8,10 +8,6 @@ DateTime::DateTime(const QDateTime &dateTime) {
     this->dateTime = dateTime;
 }
 
-DateTime::DateTime(const QString &dateTimeString) {
-    fromString(dateTimeString);
-}
-
 void DateTime::setCurrentDateTime() {
     dateTime = QDateTime::currentDateTime();
 }

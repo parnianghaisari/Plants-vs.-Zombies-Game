@@ -18,8 +18,7 @@ SOURCES += \
     server.cpp \
     signup.cpp \
     userhistory.cpp \
-    users.cpp \
-    zombies.cpp
+    users.cpp
 
 HEADERS += \
     datetime.h \
@@ -29,8 +28,7 @@ HEADERS += \
     server.h \
     signup.h \
     userhistory.h \
-    users.h \
-    zombies.h
+    users.h
 
 FORMS += \
     mainwindow.ui
