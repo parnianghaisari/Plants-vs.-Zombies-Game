@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     plants p;
     p.show();
     //zambiesGame w;
-   // w.show();
+ //  w.show();
     //MainWindow w;
    // w.show();
     return a.exec();
