@@ -9,6 +9,7 @@
 #include <QMouseEvent>
 #include <QBrush>
 #include "board.h"
+#include <QTimer>
 namespace Ui {
 class zambiesGame;
 }
@@ -22,13 +23,25 @@ public:
     ~zambiesGame();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_pushButtonC1_clicked();
 
     void on_pushButton_7_clicked();
+
+    void on_pushButtonC2_clicked();
+
+    void on_pushButtonC3_clicked();
+
+    void on_pushButtonC4_clicked();
+
+    void on_pushButtonC5_clicked();
+
+    void on_pushButtonC6_clicked();
+    void generateRandomNumberZ();
 
 private:
     Ui::zambiesGame *ui;
      void applyStylesheets();
+     QTimer *timer;
 };
 
 

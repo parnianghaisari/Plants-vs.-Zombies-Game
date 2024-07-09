@@ -10,27 +10,27 @@ plants::plants(QWidget *parent) :
     this->setStyleSheet("plants { background-image: url(D:/AP_newPro/AP_project/ZombieVSPlants/Screenshot_12_optimized.png); }");
 
     QString imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/boomerang.jpg";
-     ui->pushButton ->setStyleSheet("QPushButton { "
+     ui->pushButtonC1_2 ->setStyleSheet("QPushButton { "
                              "    border-image: url(" + imagePath + ") stretch;"
                              "}");
      imagePath="D:/AP_newPro/AP_project/ZombieVSPlants/jalapino.jpg";
-     ui->pushButton_2 ->setStyleSheet("QPushButton { "
+     ui->pushButtonC2_2 ->setStyleSheet("QPushButton { "
                              "    border-image: url(" + imagePath + ") stretch;"
                              "}");
      imagePath="D:/AP_newPro/AP_project/ZombieVSPlants/pea shooter.jpg";
-     ui->pushButton_3 ->setStyleSheet("QPushButton { "
+     ui->pushButtonC3_2 ->setStyleSheet("QPushButton { "
                             "    border-image: url(" + imagePath + ") stretch;"
                              "}");
      imagePath="D:/AP_newPro/AP_project/ZombieVSPlants/plum mine.jpg";
-     ui->pushButton_4 ->setStyleSheet("QPushButton { "
+     ui->pushButtonC4_2 ->setStyleSheet("QPushButton { "
                              "    border-image: url(" + imagePath + ") stretch;"
                              "}");
      imagePath="D:/AP_newPro/AP_project/ZombieVSPlants/two_peashooter.jpg";
-     ui->pushButton_5 ->setStyleSheet("QPushButton { "
+     ui->pushButtonC5_2 ->setStyleSheet("QPushButton { "
                              "    border-image: url(" + imagePath + ") stretch;"
                              "}");
      imagePath="D:/AP_newPro/AP_project/ZombieVSPlants/walnut.jpg";
-     ui->pushButton_6 ->setStyleSheet("QPushButton { "
+     ui->pushButtonC6_2 ->setStyleSheet("QPushButton { "
                            "    border-image: url(" + imagePath + ") stretch;"
                              "}");
        applyStylesheets();
@@ -42,7 +42,7 @@ plants::~plants()
 }
 void plants::applyStylesheets()
 {
-    for (int i = 7; i <= 78; ++i) {
+    for (int i = 1; i <= 72; ++i) {
         QString buttonName = QString("pushButton_%1").arg(i);
         QPushButton *button = findChild<QPushButton*>(buttonName);
         if (button) {
@@ -56,5 +56,41 @@ void plants::on_pushButton_7_clicked()
     this->hide();
     zambiesGame* thirdWindow= new zambiesGame();
     thirdWindow->show();
+}
+
+
+void plants::on_pushButtonC1_2_clicked()
+{
+    plant=1;
+}
+
+
+void plants::on_pushButtonC2_2_clicked()
+{
+    plant=2;
+}
+
+
+void plants::on_pushButtonC3_2_clicked()
+{
+    plant=3;
+}
+
+
+void plants::on_pushButtonC4_2_clicked()
+{
+    plant=4;
+}
+
+
+void plants::on_pushButtonC5_2_clicked()
+{
+    plant=5;
+}
+
+
+void plants::on_pushButtonC6_2_clicked()
+{
+    plant =6;
 }
 
