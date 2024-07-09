@@ -9,29 +9,57 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    astronautzombie.cpp \
+    boomerangplant.cpp \
+    bucketheadzombie.cpp \
     datahandeler.cpp \
     forgotwindow.cpp \
     globals.cpp \
+    jalapeno.cpp \
+    leafheadzombie.cpp \
     loginwindow.cpp \
     main.cpp \
     mainwindow.cpp \
     mainwindow2.cpp \
+    peashooterplant.cpp \
+    plant.cpp \
     plants.cpp \
+    plummineplant.cpp \
+    purplehairzombie.cpp \
+    regularzombie.cpp \
     signupwindow.cpp \
     startwindow.cpp \
-    zambiesgame.cpp
+    tallzombie.cpp \
+    twopeashooterplant.cpp \
+    walnutplant.cpp \
+    zambiesgame.cpp \
+    zombie.cpp
 
 HEADERS += \
+    astronautzombie.h \
+    boomerangplant.h \
+    bucketheadzombie.h \
     datahandeler.h \
     forgotwindow.h \
     globals.h \
+    jalapeno.h \
+    leafheadzombie.h \
     loginwindow.h \
     mainwindow.h \
     mainwindow2.h \
+    peashooterplant.h \
+    plant.h \
     plants.h \
+    plummineplant.h \
+    purplehairzombie.h \
+    regularzombie.h \
     signupwindow.h \
     startwindow.h \
-    zambiesgame.h
+    tallzombie.h \
+    twopeashooterplant.h \
+    walnutplant.h \
+    zambiesgame.h \
+    zombie.h
 
 FORMS += \
     forgotwindow.ui \

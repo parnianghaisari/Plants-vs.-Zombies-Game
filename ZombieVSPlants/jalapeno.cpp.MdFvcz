@@ -1,0 +1,6 @@
+#include "jalapeno.h"
+
+Jalapeno::Jalapeno(int _name, int _health, int _attackPower, int _firingRate, int _sunVal, QObject *parent)
+{
+
+}
