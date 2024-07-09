@@ -9,8 +9,8 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     plants p;
     p.show();
-    //zambiesGame w;
- //  w.show();
+   // zambiesGame w;
+ // w.show();
     //plants p;
     //p.show();
     //MainWindow w;
