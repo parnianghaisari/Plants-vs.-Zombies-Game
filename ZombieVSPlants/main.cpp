@@ -11,6 +11,8 @@ int main(int argc, char *argv[])
     p.show();
     //zambiesGame w;
  //  w.show();
+    //plants p;
+    //p.show();
     //MainWindow w;
    // w.show();
     return a.exec();

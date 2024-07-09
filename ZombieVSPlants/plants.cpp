@@ -1,4 +1,3 @@
-
 #include "plants.h"
 #include "ui_plants.h"
 #include "zambiesgame.h"
@@ -94,7 +93,7 @@ void plants::on_pushButtonC5_2_clicked()
 
 void plants::on_pushButtonC6_2_clicked()
 {
-    plant =6;
+    plant=6;
 }
 
 void plants::generateRandomNumberS() {

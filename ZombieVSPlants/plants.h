@@ -2,11 +2,13 @@
 #define PLANTS_H
 
 #include <QMainWindow>
-#include"globals.h"
+#include <QTimer>
+#include <QWidget>
+#include "globals.h"
+
 namespace Ui {
 class plants;
 }
-
 class plants : public QMainWindow
 {
     Q_OBJECT

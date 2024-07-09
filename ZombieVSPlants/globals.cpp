@@ -1,6 +1,7 @@
 #include "globals.h"
 
 QTcpSocket *clientS =  new QTcpSocket();
+
 int zamby=0;
 int plant=0;
 int locBrain=0;
