@@ -34,6 +34,10 @@ plants::plants(QWidget *parent) :
                            "    border-image: url(" + imagePath + ") stretch;"
                              "}");
        applyStylesheets();
+       srand(time(nullptr));
+      timer = new QTimer(this);
+      connect(timer, &QTimer::timeout, this, &plants::generateRandomNumberS);
+      timer->start(5000);
 }
 
 plants::~plants()
@@ -44,6 +48,13 @@ void plants::applyStylesheets()
 {
     for (int i = 1; i <= 72; ++i) {
         QString buttonName = QString("pushButton_%1").arg(i);
+        QPushButton *button = findChild<QPushButton*>(buttonName);
+        if (button) {
+            button->setStyleSheet("QPushButton { background-color: rgba(255, 255, 255, 0); border: none; }");
+        }
+    }
+    for (int i = 1; i <= 36; ++i) {
+        QString buttonName = QString("pushButtonS%1").arg(i);
         QPushButton *button = findChild<QPushButton*>(buttonName);
         if (button) {
             button->setStyleSheet("QPushButton { background-color: rgba(255, 255, 255, 0); border: none; }");
@@ -86,3 +97,21 @@ void plants::on_pushButtonC6_2_clicked()
     plant =6;
 }
 
+void plants::generateRandomNumberS() {
+    int number = 1 + std::rand() % 36; // Generates a number between 37 and 72
+     ui->textEdit_2->setText(QString("Generated number: %1").arg(number));
+     locBrain = number;
+     QString buttonName = QString("pushButtonS%1").arg(number);
+     QPushButton *button = findChild<QPushButton *>(buttonName);
+      QString imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/sun.png";
+    button ->setStyleSheet("QPushButton { "
+                             "    border-image: url(" + imagePath + ") stretch;"
+                             "}");
+    QTimer::singleShot(3000, [button]() {
+          button->setStyleSheet("QPushButton { "
+                                "    background-color: rgba(255, 255, 255, 0); "
+                                "    border: none; "
+                                "}");
+      });
+
+}

@@ -33,6 +33,8 @@ private slots:
 private:
     Ui::plants *ui;
     void applyStylesheets();
+    void generateRandomNumberS();
+     QTimer *timer;
 };
 
 #endif // PLANTS_H

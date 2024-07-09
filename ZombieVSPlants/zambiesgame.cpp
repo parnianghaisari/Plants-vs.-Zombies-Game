@@ -72,6 +72,14 @@ void zambiesGame::applyStylesheets()
         }
 
     }
+    for (int i = 37; i <= 72; ++i) {
+        QString buttonName = QString("pushButtonB%1").arg(i);
+        QPushButton *button = findChild<QPushButton*>(buttonName);
+        if (button) {
+            button->setStyleSheet("QPushButton { background-color: rgba(255, 255, 255, 0); border: none; }");
+        }
+
+    }
 }
 
 void zambiesGame::on_pushButtonC2_clicked()
@@ -107,7 +115,7 @@ void zambiesGame::generateRandomNumberZ() {
     int number = 37 + std::rand() % 36; // Generates a number between 37 and 72
      ui->textEdit->setText(QString("Generated number: %1").arg(number));
      locBrain = number;
-     QString buttonName = QString("pushButton_%1").arg(number);
+     QString buttonName = QString("pushButtonB%1").arg(number);
      QPushButton *button = findChild<QPushButton *>(buttonName);
       QString imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/Brain.png";
     button ->setStyleSheet("QPushButton { "
