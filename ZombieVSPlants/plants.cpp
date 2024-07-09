@@ -1,4 +1,3 @@
-
 #include "plants.h"
 #include "ui_plants.h"
 #include "zambiesgame.h"
