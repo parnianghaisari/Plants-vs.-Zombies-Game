@@ -5,7 +5,8 @@
 #include <QTimer>
 #include <QWidget>
 #include "globals.h"
-
+#include <QSignalMapper>
+#include <QPushButton>
 namespace Ui {
 class plants;
 }
@@ -31,12 +32,14 @@ private slots:
     void on_pushButtonC5_2_clicked();
 
     void on_pushButtonC6_2_clicked();
-
+   void handleButtonClick();
 private:
     Ui::plants *ui;
     void applyStylesheets();
     void generateRandomNumberS();
      QTimer *timer;
+     QSignalMapper *signalMapper;
+     int locSun;
 };
 
 #endif // PLANTS_H

@@ -42,6 +42,17 @@ zambiesGame::zambiesGame(QWidget *parent)
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &zambiesGame::generateRandomNumberZ);
     timer->start(5000);
+    for (int i = 37; i <= 72; ++i) {
+        QString buttonName = QString("pushButtonB%1").arg(i);
+        QPushButton *button = findChild<QPushButton *>(buttonName);
+        if (button) {
+            connect(button, &QPushButton::clicked, this, &zambiesGame::handleButtonClick);
+        } else {
+            qDebug() << "Button not found:" << buttonName;
+        }
+    }
+
+
 }
 
 zambiesGame::~zambiesGame()
@@ -75,6 +86,7 @@ void zambiesGame::applyStylesheets()
     for (int i = 37; i <= 72; ++i) {
         QString buttonName = QString("pushButtonB%1").arg(i);
         QPushButton *button = findChild<QPushButton*>(buttonName);
+
         if (button) {
             button->setStyleSheet("QPushButton { background-color: rgba(255, 255, 255, 0); border: none; }");
         }
@@ -111,21 +123,39 @@ void zambiesGame::on_pushButtonC6_clicked()
     zamby=6;
 }
 
-void zambiesGame::generateRandomNumberZ() {
-    int number = 37 + std::rand() % 36; // Generates a number between 37 and 72
-     ui->textEdit->setText(QString("Generated number: %1").arg(number));
-     locBrain = number;
-     QString buttonName = QString("pushButtonB%1").arg(number);
-     QPushButton *button = findChild<QPushButton *>(buttonName);
-      QString imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/Brain.png";
-    button ->setStyleSheet("QPushButton { "
-                             "    border-image: url(" + imagePath + ") stretch;"
-                             "}");
-    QTimer::singleShot(3000, [button]() {
-          button->setStyleSheet("QPushButton { "
-                                "    background-color: rgba(255, 255, 255, 0); "
-                                "    border: none; "
-                                "}");
-      });
 
+void zambiesGame::generateRandomNumberZ() {
+    locBrain = 37 + std::rand() % 36; // Generates a number between 37 and 72
+    QString buttonName = QString("pushButtonB%1").arg(locBrain);
+    QPushButton *button = findChild<QPushButton *>(buttonName);
+    if (button) {
+        QString imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/Brain.png";
+        button->setStyleSheet("QPushButton { "
+                              "    border-image: url(" + imagePath + ") stretch;"
+                              "}");
+        QTimer::singleShot(3000, [button]() {
+            button->setStyleSheet("QPushButton { "
+                                  "    background-color: rgba(255, 255, 255, 0); "
+                                  "    border: none; "
+                                  "}");
+        });
+        ui->textEdit_2->setText(QString::number(locBrain));
+    }
+}
+
+void zambiesGame::handleButtonClick() {
+
+    QPushButton *button = qobject_cast<QPushButton *>(sender());
+    if (button) {
+        QString buttonName = QString("pushButtonB%1").arg(locBrain);
+        if (button->objectName() == buttonName) {
+            Branis += 25;
+            ui->textEdit->setText(QString::number(Branis));
+
+            button->setStyleSheet("QPushButton { "
+                                  "    background-color: rgba(255, 255, 255, 0); "
+                                  "    border: none; "
+                                  "}");
+       }
+    }
 }

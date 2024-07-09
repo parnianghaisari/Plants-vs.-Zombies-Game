@@ -10,6 +10,8 @@
 #include <QBrush>
 #include "board.h"
 #include <QTimer>
+#include <QSignalMapper>
+#include <QPushButton>
 namespace Ui {
 class zambiesGame;
 }
@@ -37,11 +39,14 @@ private slots:
 
     void on_pushButtonC6_clicked();
     void generateRandomNumberZ();
+    void handleButtonClick();
 
 private:
     Ui::zambiesGame *ui;
-     void applyStylesheets();
-     QTimer *timer;
+    void applyStylesheets();
+    QTimer *timer;
+    QSignalMapper *signalMapper;
+    int locBrain;
 };
 
 

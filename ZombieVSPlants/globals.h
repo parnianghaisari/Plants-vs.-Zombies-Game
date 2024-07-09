@@ -7,8 +7,6 @@
 extern QTcpSocket *clientS;
 extern int zamby;
 extern int plant;
-extern int locBrain;
-extern int lockSun;
 extern int Branis;
 extern int Suns;
 extern QHash<int , int> gamehash;
