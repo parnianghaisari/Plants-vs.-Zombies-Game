@@ -58,66 +58,31 @@ void plants::on_pushButton_7_clicked()
     thirdWindow->show();
 }
 
-<<<<<<< HEAD
-
 void plants::on_pushButtonC1_2_clicked()
-=======
-void plants::on_pushButton_clicked()
->>>>>>> b52bf0993ed7fb44be4492b562057526b8f7bdbc
 {
     plant=1;
 }
-
-
-<<<<<<< HEAD
 void plants::on_pushButtonC2_2_clicked()
-=======
-void plants::on_pushButton_2_clicked()
->>>>>>> b52bf0993ed7fb44be4492b562057526b8f7bdbc
 {
     plant=2;
 }
-
-
-<<<<<<< HEAD
 void plants::on_pushButtonC3_2_clicked()
-=======
-void plants::on_pushButton_3_clicked()
->>>>>>> b52bf0993ed7fb44be4492b562057526b8f7bdbc
 {
     plant=3;
 }
 
-
-<<<<<<< HEAD
 void plants::on_pushButtonC4_2_clicked()
-=======
-void plants::on_pushButton_4_clicked()
->>>>>>> b52bf0993ed7fb44be4492b562057526b8f7bdbc
 {
     plant=4;
 }
 
-
-<<<<<<< HEAD
 void plants::on_pushButtonC5_2_clicked()
-=======
-
-void plants::on_pushButton_5_clicked()
->>>>>>> b52bf0993ed7fb44be4492b562057526b8f7bdbc
 {
     plant=5;
 }
 
-
-<<<<<<< HEAD
 void plants::on_pushButtonC6_2_clicked()
 {
     plant =6;
-=======
-void plants::on_pushButton_6_clicked()
-{
-    plant=6;
->>>>>>> b52bf0993ed7fb44be4492b562057526b8f7bdbc
 }
 
