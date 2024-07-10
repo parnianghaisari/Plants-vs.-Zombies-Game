@@ -48,8 +48,7 @@ void GameLogicHandling::createZombie(int iid, int position)
         else
             zombie = new PurpleHairZombie;
         zombieMap[iid] = zombie;
-        zombieMap[iid] = zombie;
-        updateMap(position, iid);
+        updateMap(position, zombie->getName());
 
         QThread *thread = new QThread;
         threads.append(thread);
@@ -96,12 +95,12 @@ void GameLogicHandling::createPlant(int iid, int position)
 
 void GameLogicHandling::moveAndAttack(Zombie *zombie, int position)
 {
-    int newPosition = position;
+    int newPosition = position -6;
     int count = 0;
     int count1 = 0;
     while (zombie->getHealth() > 0) {
 
-        if (!gameMap[position - 6])
+        if (!gameMap[newPosition])
         {
             if (zombie->getName()/1000 == 15 && !count)
                 QThread::sleep(1);
@@ -109,7 +108,8 @@ void GameLogicHandling::moveAndAttack(Zombie *zombie, int position)
                 QThread::sleep(zombie->getDelay());
 
             gameMap[position] = 0; // Clear the old position
-            newPosition -= 6; // Move right (this logic can be adjusted as needed)
+
+            position = newPosition;
 
             if (newPosition > 0) { // Check bounds
                 updateMap(newPosition, zombie->getName());
@@ -117,10 +117,15 @@ void GameLogicHandling::moveAndAttack(Zombie *zombie, int position)
                 winner = 1;
                 break; // Exit loop if out of bounds
             }
-            continue;
             ++count;
+            newPosition -= 6;
+            continue;
         }
-
+        if (newPosition <= 0)
+        {
+            winner = 1;
+            break;
+        }
 
         if (zombie->getName()/1000 == 15 && !count1)
             QThread::sleep(1);

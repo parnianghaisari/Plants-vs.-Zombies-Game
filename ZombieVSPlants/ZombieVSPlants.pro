@@ -22,7 +22,6 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     mainwindow2.cpp \
-    mapshowing.cpp \
     peashooterplant.cpp \
     plant.cpp \
     plants.cpp \
@@ -50,7 +49,6 @@ HEADERS += \
     loginwindow.h \
     mainwindow.h \
     mainwindow2.h \
-    mapshowing.h \
     peashooterplant.h \
     plant.h \
     plants.h \

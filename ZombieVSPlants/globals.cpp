@@ -10,6 +10,7 @@ int Suns=800;
 int RandomB=0;
 int RandomS=0;
 QHash<int , int> gamehash;
+QMap<int, int> gameMap;
 void setVal(){
     for (int i=1 ; i<=72 ; i++){
         gamehash.insert(i,0);

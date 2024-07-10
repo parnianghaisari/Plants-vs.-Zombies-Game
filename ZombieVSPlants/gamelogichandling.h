@@ -29,7 +29,6 @@ class GameLogicHandling : public QWidget
 public:
     explicit GameLogicHandling(QWidget *parent = nullptr);
     ~GameLogicHandling();
-    QMap<int, int> gameMap; // Position, Character ID
     int winner = -1;//1 -> zombie , 0 -> plant
 
     void createZombie(int iid, int position);

@@ -12,7 +12,6 @@
 #include <QTimer>
 #include <QSignalMapper>
 #include <QPushButton>
-#include "mapshowing.h"
 #include "gamelogichandling.h"
 namespace Ui {
 class zambiesGame;
@@ -25,6 +24,7 @@ class zambiesGame : public QMainWindow
 public:
     explicit zambiesGame(QWidget *parent = nullptr);
     ~zambiesGame();
+
 
 private slots:
     void on_pushButtonC1_clicked();
@@ -54,7 +54,8 @@ private slots:
     void on_pushButton_71_clicked();
 
     void on_pushButton_72_clicked();
- void showMapZ(QMap<int, int> m, int first, int last);
+ void showMapZ(int first, int last);
+  void setupMapUpdaters();
 private:
     Ui::zambiesGame *ui;
     void applyStylesheets();
@@ -62,9 +63,9 @@ private:
     QSignalMapper *signalMapper;
     GameLogicHandling gameLogicHandlerZ;
     int locBrain;
-    QVector<QThread *> threads;
-    QVector<MapUpdater *> mapUpdaters;
-    void setupMapUpdaters();
+     QVector<QThread *> allThreads;
+     int segmentSize;
+      int totalSegments;
 };
 
 
