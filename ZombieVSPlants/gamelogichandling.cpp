@@ -34,7 +34,7 @@ void GameLogicHandling::initializeMap()
 
 void GameLogicHandling::createZombie(int iid, int position)
 {
-    if(position <= 72 && position >= 67)
+    if(position <= 72 && position >= 67 && !gameMap[position])
     {
         Zombie *zombie = nullptr;
         if(iid == 11)
@@ -66,7 +66,7 @@ void GameLogicHandling::createZombie(int iid, int position)
 
 void GameLogicHandling::createPlant(int iid, int position)
 {
-    if(position <= 72 && position >= 67)
+    if(position <= 72 && position >= 67 && !gameMap[position])
     {
         Plant *plant = nullptr;
         if(iid == 21)
