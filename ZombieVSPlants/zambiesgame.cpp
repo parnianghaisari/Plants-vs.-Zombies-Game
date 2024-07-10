@@ -318,7 +318,7 @@ void zambiesGame::showMapZ()
          this->hide();
          ForgotWindow* FWindow= new ForgotWindow();
          FWindow->show();
-         qDebug() << "Timer stopped because winner == -1";
+         qDebug() << "Timer stopped because winner == 1";
          return; // Exit the function to avoid further processing
      }
       if(beforeMoving.size()!=0)
