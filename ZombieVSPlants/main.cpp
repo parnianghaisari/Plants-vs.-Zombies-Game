@@ -8,8 +8,8 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-   // plants p;
-   // p.show();
+    //plants p;
+   //p.show();
     zambiesGame w;
     w.show();
        // Create a QTimer for periodic printing
@@ -17,8 +17,8 @@ int main(int argc, char *argv[])
        QObject::connect(&timer, &QTimer::timeout, []() {
            // Print map values from key 1 to 72
 
-               qDebug() << "Map key:" << 68 << "Value:" << gameMap.value(68);
-                 qDebug() << "Map key:" << 62 << "Value:" << gameMap.value(62);
+               qDebug() << "Map key:" << 1 << "Value:" << gameMap.value(1);
+                 qDebug() << "Map key:" << 2 << "Value:" << gameMap.value(2);
 
        });
        timer.start(3000);

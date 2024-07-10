@@ -6,6 +6,8 @@
 #include <QList>
 #include <QTime>
 #include <QTimer>
+#include <QElapsedTimer>
+#include <QCoreApplication>
 
 #include "globals.h"
 #include "astronautzombie.h"
@@ -33,6 +35,8 @@ public:
 
     void createZombie(int iid, int position);
     void createPlant(int iid, int position);
+
+    void wait(int milliseconds);
 
 private:
     QMap<int, Zombie*> zombieMap; // ID, Zombie*

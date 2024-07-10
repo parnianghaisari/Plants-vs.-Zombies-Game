@@ -65,7 +65,7 @@ void GameLogicHandling::createZombie(int iid, int position)
 
 void GameLogicHandling::createPlant(int iid, int position)
 {
-    if(position <= 72 && position >= 67 && !gameMap[position])
+    if(position <= 36 && position >= 1 && !gameMap[position])
     {
         Plant *plant = nullptr;
         if(iid == 21)
@@ -95,6 +95,16 @@ void GameLogicHandling::createPlant(int iid, int position)
 
         thread->start();
     }
+}
+
+void GameLogicHandling::wait(int milliseconds)
+{
+    QElapsedTimer timer;
+    timer.start();
+
+   while (timer.elapsed() < milliseconds) {
+       QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+   }
 }
 
 void GameLogicHandling::moveAndAttack(Zombie *zombie, int position)
@@ -144,7 +154,7 @@ void GameLogicHandling::moveAndAttack(Zombie *zombie, int position)
             plant->health -= zombie->getPower();
             if (plant->health <= 0) {
                 updateMap(newPosition, 0); // Plant dies
-                deadPlants.insert(newPosition, plant->name);
+                deadPlants.append(newPosition);
                 plantMap.remove(plantID);
                 delete plant;
             }
@@ -170,7 +180,7 @@ void GameLogicHandling::plantAttack(Plant *plant, int position)
                 if (zombie->getHealth() <= 0)
                 {
                     updateMap(i, 0); //zombie die o ina
-                    deadZombies.insert(i, zombie->getName());
+                    deadZombies.append(i);
                     zombieMap.remove(zombieID);
                     delete zombie;
                 }
@@ -178,10 +188,22 @@ void GameLogicHandling::plantAttack(Plant *plant, int position)
     }
     if (plant->name/1000 == 24)
     {
+        wait(1000);
         plumExplode(position);
+        gameMap[position] = 0;
+        deadPlants.append(position);
+        plantMap.remove(plant->name);
+        delete plant;
     }
-    else if (plant->name/1000 == 25)
+    else
+    {
+        wait(1000);
         jalapenoExplode(position);
+        gameMap[position] = 0;
+        deadPlants.append(position);
+        plantMap.remove(plant->name);
+        delete plant;
+    }
 }
 
 void GameLogicHandling::updateMap(int position, int id)
@@ -205,14 +227,13 @@ void GameLogicHandling::plumExplode(int position)
                     if (zombie->getHealth() <= 0)
                     {
                         updateMap(i, 0); //zombie die o ina
-                        deadZombies.insert(i, zombie->getName());
+                        deadZombies.append(i);
                         zombieMap.remove(zombieID);
                         delete zombie;
                     }
                 }
         ++loc;
     }
-
 
 }
 
@@ -230,7 +251,7 @@ void GameLogicHandling::jalapenoExplode(int position)
             if (zombie->getHealth() <= 0)
             {
                 updateMap(i, 0); //zombie die o ina
-                deadZombies.insert(i, zombie->getName());
+                deadZombies.append(i);
                 zombieMap.remove(zombieID);
                 delete zombie;
             }
