@@ -12,7 +12,7 @@
 #include <QTimer>
 #include <QSignalMapper>
 #include <QPushButton>
-
+#include "mapshowing.h"
 #include "gamelogichandling.h"
 namespace Ui {
 class zambiesGame;
@@ -43,20 +43,18 @@ private slots:
     void generateRandomNumberZ();
     void handleButtonClick();
     void putCard();
-    void showMapZ(QMap<int , int> m , int first , int last);
 
     void on_pushButton_67_clicked();
 
     void on_pushButton_68_clicked();
 
     void on_pushButton_69_clicked();
-
     void on_pushButton_70_clicked();
 
     void on_pushButton_71_clicked();
 
     void on_pushButton_72_clicked();
-
+ void showMapZ(QMap<int, int> m, int first, int last);
 private:
     Ui::zambiesGame *ui;
     void applyStylesheets();
@@ -64,6 +62,9 @@ private:
     QSignalMapper *signalMapper;
     GameLogicHandling gameLogicHandlerZ;
     int locBrain;
+    QVector<QThread *> threads;
+    QVector<MapUpdater *> mapUpdaters;
+    void setupMapUpdaters();
 };
 
 

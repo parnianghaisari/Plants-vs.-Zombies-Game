@@ -8,7 +8,7 @@ zambiesGame::zambiesGame(QWidget *parent)
 {
 
     ui->setupUi(this);
-
+    setupMapUpdaters();
     this->setStyleSheet("zambiesGame { background-image: url(D:/AP_newPro/AP_project/ZombieVSPlants/Screenshot_12_optimized.png); }");
 
     QString imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/regular zombie.jpg";
@@ -50,14 +50,44 @@ zambiesGame::zambiesGame(QWidget *parent)
             qDebug() << "Button not found:" << buttonName;
         }
     }
-    //    showMapZ(gameLogicHandlerZ.gameMap);
+
 
 
 }
 
 zambiesGame::~zambiesGame()
 {
+
+    for (QThread *thread : threads) {
+        thread->quit();
+        thread->wait();
+    }
+    qDeleteAll(mapUpdaters);
+    qDeleteAll(threads);
     delete ui;
+}
+void zambiesGame::setupMapUpdaters() {
+    const int segmentSize = 6;
+    const int totalSegments = 12;
+    QMap<int, int> initialGameMap = gameLogicHandlerZ.gameMap;
+
+    for (int i = 0; i < totalSegments; ++i) {
+        int first = i * segmentSize + 1;
+        int last = first + segmentSize - 1;
+
+        QThread *thread = new QThread;
+        MapUpdater *mapUpdater = new MapUpdater(first, last);
+
+        mapUpdater->moveToThread(thread);
+        connect(thread, &QThread::started, mapUpdater, &MapUpdater::startUpdating);
+        connect(mapUpdater, &MapUpdater::updateMapZ, this, &zambiesGame::showMapZ);
+
+        threads.append(thread);
+        mapUpdaters.append(mapUpdater);
+
+        mapUpdater->setGameMap(initialGameMap);
+        thread->start();
+    }
 }
 
 void zambiesGame::on_pushButtonC1_clicked()
@@ -250,79 +280,13 @@ void zambiesGame::putCard()
 
    }
 }
-void zambiesGame:: showMapZ(QMap<int , int> m){
-    QString buttonName = QString("pushButtonB%1").arg(1);
-    QPushButton *button = findChild<QPushButton *>(buttonName);
-    for(int i=1 ; i<=72 ; i++){
-        if(m[i]/1000 ==11){
-            buttonName = QString("pushButton_%1").arg(i);
-            button = findChild<QPushButton *>(buttonName);
-            if (button) {
-                QString imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/regular zombie.jpg";
-                button->setStyleSheet("QPushButton { "
-                                      "    border-image: url(" + imagePath + ") stretch;"
-                                      "}");
-        }
-    }
-         if(m[i]/1000 ==12){
-            buttonName = QString("pushButton_%1").arg(i);
-            button = findChild<QPushButton *>(buttonName);
-            if (button) {
-                QString imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/leaf hair zombie.jpg";
-                button->setStyleSheet("QPushButton { "
-                                      "    border-image: url(" + imagePath + ") stretch;"
-                                      "}");
-        }
-    }
-         if(m[i]/1000 ==13){
-            buttonName = QString("pushButton_%1").arg(i);
-            button = findChild<QPushButton *>(buttonName);
-            if (button) {
-                QString imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/astronaut zombie.jpg";
-                button->setStyleSheet("QPushButton { "
-                                      "    border-image: url(" + imagePath + ") stretch;"
-                                      "}");
-        }
-    }
-         if(m[i]/1000 ==14){
-            buttonName = QString("pushButton_%1").arg(i);
-            button = findChild<QPushButton *>(buttonName);
-            if (button) {
-                QString imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/tall zombie.jpg";
-                button->setStyleSheet("QPushButton { "
-                                      "    border-image: url(" + imagePath + ") stretch;"
-                                      "}");
-        }
-    }
-         if(m[i]/1000 ==15){
-            buttonName = QString("pushButton_%1").arg(i);
-            button = findChild<QPushButton *>(buttonName);
-            if (button) {
-                QString imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/Bucket head zombie.jpg";
-                button->setStyleSheet("QPushButton { "
-                                      "    border-image: url(" + imagePath + ") stretch;"
-                                      "}");
-        }
-    }
-         if(m[i]/1000 ==16){
-            buttonName = QString("pushButton_%1").arg(i);
-            button = findChild<QPushButton *>(buttonName);
-            if (button) {
-                QString imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/purple hair zombie.jpg";
-                button->setStyleSheet("QPushButton { "
-                                      "    border-image: url(" + imagePath + ") stretch;"
-                                      "}");
-        }
-    }
-}
-}
-
 void zambiesGame::on_pushButton_67_clicked()
 {
     if ( gameLogicHandlerZ.gameMap[67] == 0) {
          gameLogicHandlerZ.createZombie(zamby, 67);
          ui->textEdit->setText("hi");
-        showMapZ( gameLogicHandlerZ.gameMap);
+         setupMapUpdaters();
+
     }
 }
 
@@ -331,7 +295,7 @@ void zambiesGame::on_pushButton_68_clicked()
 {
     if ( gameLogicHandlerZ.gameMap[68] == 0) {
          gameLogicHandlerZ.createZombie(zamby, 68);
-    showMapZ( gameLogicHandlerZ.gameMap);
+
     }
 }
 
@@ -340,7 +304,6 @@ void zambiesGame::on_pushButton_69_clicked()
 {
     if ( gameLogicHandlerZ.gameMap[69] == 0) {
          gameLogicHandlerZ.createZombie(zamby, 69);
-    showMapZ( gameLogicHandlerZ.gameMap);
     }
 }
 
@@ -349,7 +312,7 @@ void zambiesGame::on_pushButton_70_clicked()
 {
     if ( gameLogicHandlerZ.gameMap[70] == 0) {
          gameLogicHandlerZ.createZombie(zamby, 70);
-    showMapZ( gameLogicHandlerZ.gameMap);
+
     }
 }
 
@@ -358,7 +321,7 @@ void zambiesGame::on_pushButton_71_clicked()
 {
     if ( gameLogicHandlerZ.gameMap[71] == 0) {
          gameLogicHandlerZ.createZombie(zamby, 71);
-    showMapZ( gameLogicHandlerZ.gameMap);
+
     }
 }
 
@@ -367,7 +330,30 @@ void zambiesGame::on_pushButton_72_clicked()
 {
     if ( gameLogicHandlerZ.gameMap[72] == 0) {
          gameLogicHandlerZ.createZombie(zamby, 72);
-    showMapZ( gameLogicHandlerZ.gameMap);
+
     }
 }
 
+void zambiesGame::showMapZ(QMap<int, int> m, int first, int last) {
+    for (int i = first; i <= last; ++i) {
+           qDebug() << "showMapZ called for range:" << first << "-" << last;
+        QString buttonName = QString("pushButton_%1").arg(i);
+        QPushButton *button = findChild<QPushButton *>(buttonName);
+        if (button) {
+            QString imagePath;
+            switch(m[i] / 1000) {
+                case 11: imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/regular zombie.jpg"; break;
+                case 12: imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/leaf hair zombie.jpg"; break;
+                case 13: imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/astronaut zombie.jpg"; break;
+                case 14: imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/tall zombie.jpg"; break;
+                case 15: imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/Bucket head zombie.jpg"; break;
+                case 16: imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/purple hair zombie.jpg"; break;
+            }
+            if (!imagePath.isEmpty()) {
+                button->setStyleSheet("QPushButton { "
+                                      "    border-image: url(" + imagePath + ") stretch;"
+                                      "}");
+            }
+        }
+    }
+}
