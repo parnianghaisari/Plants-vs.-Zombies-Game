@@ -79,30 +79,48 @@ void plants::on_pushButton_7_clicked()
 
 void plants::on_pushButtonC1_2_clicked()
 {
-    plant=1;
+    if(Suns >= 125)
+        plant=26;
+    else
+        plant =0;
 }
 void plants::on_pushButtonC2_2_clicked()
 {
-    plant=2;
+    if(Suns >= 150)
+        plant=25;
+    else
+        plant =0;
 }
 void plants::on_pushButtonC3_2_clicked()
 {
-    plant=3;
+    if(Suns >= 50)
+        plant=21;
+    else
+        plant =0;
 }
 
 void plants::on_pushButtonC4_2_clicked()
 {
-    plant=4;
+    if(Suns >= 175)
+        plant=24;
+    else
+        plant =0;
 }
 
 void plants::on_pushButtonC5_2_clicked()
 {
-    plant=5;
+    if(Suns >= 100)
+        plant=22;
+    else
+        plant =0;
 }
 
 void plants::on_pushButtonC6_2_clicked()
 {
-    plant=6;
+    if(Suns >= 100)
+        plant=23;
+    else
+        plant =0;
 }
 
 void plants::generateRandomNumberS() {

@@ -10,16 +10,26 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
    // plants p;
    // p.show();
-   // zambiesGame w;
- // w.show();
+    zambiesGame w;
+    w.show();
+       // Create a QTimer for periodic printing
+       QTimer timer;
+       QObject::connect(&timer, &QTimer::timeout, []() {
+           // Print map values from key 1 to 72
+
+               qDebug() << "Map key:" << 68 << "Value:" << gameMap.value(68);
+                 qDebug() << "Map key:" << 62 << "Value:" << gameMap.value(62);
+
+       });
+       timer.start(3000);
     //plants p;
     //p.show();
     //MainWindow w;
    // w.show();
   //  SignUpWindow l;
-    //l.show();
-   LoginWindow d;
-   d.show();
+   // l.show();
+  // LoginWindow d;
+  // d.show();
 
     return a.exec();
 }

@@ -7,6 +7,8 @@
 #include "globals.h"
 #include <QSignalMapper>
 #include <QPushButton>
+
+#include "gamelogichandling.h"
 namespace Ui {
 class plants;
 }
