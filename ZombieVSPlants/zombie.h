@@ -18,6 +18,12 @@ public:
     explicit Zombie(int _name, int _health, double _movementDelay, int _powerAttack, double _timeBetweenAttack, int _brainVal, QObject *parent = nullptr);
     virtual ~Zombie();
 
+    int getName();
+    int& getHealth();
+    double getDelay();
+    int getPower();
+    double getTime();
+    int getBrain();
 };
 
 #endif // ZOMBIE_H
