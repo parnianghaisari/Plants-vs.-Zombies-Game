@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
 <<<<<<< HEAD
+<!-- Written by QtCreator 7.0.2, 2024-07-10T03:38:01. -->
+=======
+<<<<<<< HEAD
 <<<<<<< HEAD
 <!-- Written by QtCreator 7.0.2, 2024-07-09T22:01:10. -->
 =======
@@ -12,6 +15,7 @@
 <!-- Written by QtCreator 7.0.2, 2024-07-09T22:01:10. -->
 >>>>>>> 4ff5ea02dda55f16a798c8f1e03a665060b1fdbd
 >>>>>>> Pari
+>>>>>>> e24fd0363e2158ec0e0baf285e195ba332055d3c
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
