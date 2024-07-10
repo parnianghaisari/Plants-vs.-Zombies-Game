@@ -9,6 +9,10 @@ LoginWindow::LoginWindow(QWidget *parent) :
     this->setStyleSheet("LoginWindow { background-image: url(D:/AP_newPro/AP_project/ZombieVSPlants/pvz2-ea-hero-pvz2-xl.jpg.adapt.crop16x9.1023w.jpg); }");
    ui->password->setEchoMode(QLineEdit::Password); // hide password
    ui->password->setMaxLength(8); // only 8 charachters
+   QString imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/unhide.png";
+   ui->pushButton_3->setStyleSheet("QPushButton { "
+                         "    border-image: url(" + imagePath + ") stretch;"
+                         "}");
 
 }
 
@@ -32,7 +36,8 @@ void LoginWindow::on_pushButton_clicked()
 
 void LoginWindow::on_pushButton_2_clicked()
 {
-   QByteArray data="l+";
+
+    QByteArray data="l+";
     clientS->write(data);
     QByteArray data1 = ui->username->text().toUtf8()+ "+";
     clientS->write(data1);
@@ -48,5 +53,11 @@ void LoginWindow::on_pushButton_2_clicked()
     {
      ui->textEdit->setText("wrong...");
     }
+}
+
+
+void LoginWindow::on_pushButton_3_clicked()
+{
+      ui->password->setEchoMode(QLineEdit::Normal);
 }
 

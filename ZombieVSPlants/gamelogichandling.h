@@ -29,7 +29,6 @@ class GameLogicHandling : public QWidget
 public:
     explicit GameLogicHandling(QWidget *parent = nullptr);
     ~GameLogicHandling();
-    QMap<int, int> gameMap; // Position, Character ID
     int winner = -1;//1 -> zombie , 0 -> plant
 
     void createZombie(int iid, int position);
@@ -39,8 +38,6 @@ private:
     QMap<int, Zombie*> zombieMap; // ID, Zombie*
     QMap<int, Plant*> plantMap; // ID, Plant*
     QList<QThread*> threads;
-    QTimer *gameTimer;
-    QTime *deadline;
 
     void initializeMap();
     void moveAndAttack(Zombie *zombie, int position);
@@ -49,9 +46,6 @@ private:
     void checkWinningCondition();
     void plumExplode(int position);
     void jalapenoExplode(int position);
-private slots:
-    void updateTimer();
-    void endGame();
 };
 
 #endif // GAMELOGICHANDLING_H
