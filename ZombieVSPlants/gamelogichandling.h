@@ -39,8 +39,6 @@ private:
     QMap<int, Zombie*> zombieMap; // ID, Zombie*
     QMap<int, Plant*> plantMap; // ID, Plant*
     QList<QThread*> threads;
-    QTimer *gameTimer;
-    QTime *deadline;
 
     void initializeMap();
     void moveAndAttack(Zombie *zombie, int position);
@@ -49,9 +47,6 @@ private:
     void checkWinningCondition();
     void plumExplode(int position);
     void jalapenoExplode(int position);
-private slots:
-    void updateTimer();
-    void endGame();
 };
 
 #endif // GAMELOGICHANDLING_H

@@ -5,8 +5,6 @@ GameLogicHandling::GameLogicHandling(QWidget *parent)
     : QWidget{parent}
 {
     initializeMap();
-    connect(gameTimer, &QTimer::timeout, this, &GameLogicHandling::updateTimer);
-    gameTimer->start(1000);
 }
 
 GameLogicHandling::~GameLogicHandling()
@@ -100,24 +98,31 @@ void GameLogicHandling::moveAndAttack(Zombie *zombie, int position)
 {
     int newPosition = position;
     int count = 0;
+    int count1 = 0;
     while (zombie->getHealth() > 0) {
-        if (zombie->getName()%1000 == 15 && !count)
-            QThread::sleep(1);
-        else
-            QThread::sleep(zombie->getDelay());
 
-        gameMap[position] = 0; // Clear the old position
-        newPosition -= 6; // Move right (this logic can be adjusted as needed)
+        if (!gameMap[position - 6])
+        {
+            if (zombie->getName()/1000 == 15 && !count)
+                QThread::sleep(1);
+            else
+                QThread::sleep(zombie->getDelay());
 
-        if (newPosition > 0) { // Check bounds
-            updateMap(newPosition, zombie->getName());
-        } else {
-            winner = 1;
-            endGame();
-            break; // Exit loop if out of bounds
+            gameMap[position] = 0; // Clear the old position
+            newPosition -= 6; // Move right (this logic can be adjusted as needed)
+
+            if (newPosition > 0) { // Check bounds
+                updateMap(newPosition, zombie->getName());
+            } else {
+                winner = 1;
+                break; // Exit loop if out of bounds
+            }
+            continue;
+            ++count;
         }
 
-        if (zombie->getName()%1000 == 15 && !count)
+
+        if (zombie->getName()/1000 == 15 && !count1)
             QThread::sleep(1);
         else
             QThread::sleep(zombie->getTime());
@@ -133,7 +138,7 @@ void GameLogicHandling::moveAndAttack(Zombie *zombie, int position)
             }
         }
 
-        ++count;
+        ++count1;
 
     }
 
@@ -158,11 +163,11 @@ void GameLogicHandling::plantAttack(Plant *plant, int position)
                 }
             }
     }
-    if (plant->name == 24)
+    if (plant->name/1000 == 24)
     {
         plumExplode(position);
     }
-    else
+    else if (plant->name/1000 == 25)
         jalapenoExplode(position);
 }
 
@@ -170,12 +175,6 @@ void GameLogicHandling::updateMap(int position, int id)
 {
     gameMap[position] = id;
     qDebug() << "Updated position" << position << "with ID" << id;
-}
-
-void GameLogicHandling::checkWinningCondition()
-{
-    if (winner != 1)
-        winner = 0;
 }
 
 void GameLogicHandling::plumExplode(int position)
@@ -256,20 +255,4 @@ void GameLogicHandling::jalapenoExplode(int position)
                 delete zombie;
             }
         }
-}
-
-void GameLogicHandling::updateTimer()
-{
-    *deadline = deadline->addSecs(-1);
-    qDebug() << "Time remaining:" << deadline->toString("mm:ss");
-
-    if (deadline->minute() == 0 && deadline->second() == 0) {
-        gameTimer->stop();
-        endGame();
-    }
-}
-
-void GameLogicHandling::endGame()
-{
-    checkWinningCondition();
 }

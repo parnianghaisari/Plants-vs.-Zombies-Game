@@ -12,6 +12,8 @@
 #include <QTimer>
 #include <QSignalMapper>
 #include <QPushButton>
+
+#include "gamelogichandling.h"
 namespace Ui {
 class zambiesGame;
 }
@@ -40,12 +42,27 @@ private slots:
     void on_pushButtonC6_clicked();
     void generateRandomNumberZ();
     void handleButtonClick();
+    void putCard();
+    void showMapZ(QMap<int , int> m , int first , int last);
+
+    void on_pushButton_67_clicked();
+
+    void on_pushButton_68_clicked();
+
+    void on_pushButton_69_clicked();
+
+    void on_pushButton_70_clicked();
+
+    void on_pushButton_71_clicked();
+
+    void on_pushButton_72_clicked();
 
 private:
     Ui::zambiesGame *ui;
     void applyStylesheets();
     QTimer *timer;
     QSignalMapper *signalMapper;
+    GameLogicHandling gameLogicHandlerZ;
     int locBrain;
 };
 
