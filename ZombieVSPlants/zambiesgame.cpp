@@ -344,14 +344,14 @@ void zambiesGame::showMapZ(int first, int last)
         QString buttonName = QString("pushButton_%1").arg(i);
                QPushButton *button = findChild<QPushButton*>(buttonName);
 
-               if (button) {
-                   QString currentStyleSheet = button->styleSheet();
+             //  if (button) {
+               //    QString currentStyleSheet = button->styleSheet();
 
                    // Check if the current stylesheet does not contain a specific background color
-                   if (!currentStyleSheet.contains("background-color: rgba(255, 255, 255, 0)") &&gameMap[i] ==0) {
+                 //  if (!currentStyleSheet.contains("background-color: rgba(255, 255, 255, 0)") &&gameMap[i] ==0) {
                        // Clear the button background and remove border
-                       button->setStyleSheet("QPushButton { background-color: rgba(255, 255, 255, 0); border: none; }");
-                   }
+                   //    button->setStyleSheet("QPushButton { background-color: rgba(255, 255, 255, 0); border: none; }");
+                   //}
             QString imagePath;
             switch (gameMap[i] / 1000)
             {
@@ -382,4 +382,4 @@ void zambiesGame::showMapZ(int first, int last)
             }
         }
     }
-}
+
