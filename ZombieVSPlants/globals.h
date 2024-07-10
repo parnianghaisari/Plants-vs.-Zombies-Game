@@ -3,6 +3,7 @@
 
 #include<QTcpSocket>
 #include <QHash>
+#include <QMap>
 
 extern QTcpSocket *clientS;
 extern int zamby;

@@ -14,6 +14,7 @@ SOURCES += \
     bucketheadzombie.cpp \
     datahandeler.cpp \
     forgotwindow.cpp \
+    gamelogichandling.cpp \
     globals.cpp \
     jalapeno.cpp \
     leafheadzombie.cpp \
@@ -41,6 +42,7 @@ HEADERS += \
     bucketheadzombie.h \
     datahandeler.h \
     forgotwindow.h \
+    gamelogichandling.h \
     globals.h \
     jalapeno.h \
     leafheadzombie.h \
