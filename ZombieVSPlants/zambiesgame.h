@@ -13,6 +13,7 @@
 #include <QSignalMapper>
 #include <QPushButton>
 #include "gamelogichandling.h"
+#include"forgotwindow.h"
 namespace Ui {
 class zambiesGame;
 }
@@ -54,18 +55,16 @@ private slots:
     void on_pushButton_71_clicked();
 
     void on_pushButton_72_clicked();
- void showMapZ(int first, int last);
-  void setupMapUpdaters();
+    void showMapZ();
+
 private:
     Ui::zambiesGame *ui;
     void applyStylesheets();
     QTimer *timer;
+     QTimer *timer2;
     QSignalMapper *signalMapper;
     GameLogicHandling gameLogicHandlerZ;
     int locBrain;
-     QVector<QThread *> allThreads;
-     int segmentSize;
-      int totalSegments;
 };
 
 
