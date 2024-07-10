@@ -285,54 +285,56 @@ void zambiesGame::putCard()
 }
 void zambiesGame::on_pushButton_67_clicked()
 {
-    if ( gameMap[67] == 0) {
+    if (zamby!=0&& gameMap[67] == 0) {
          gameLogicHandlerZ.createZombie(zamby, 67);
          ui->textEdit->setText("hi");
          setupMapUpdaters();
-
+    zamby=0;
     }
 }
 
 
 void zambiesGame::on_pushButton_68_clicked()
 {
-    if ( gameMap[68] == 0) {
+    if ( zamby!=0&&gameMap[68] == 0) {
          gameLogicHandlerZ.createZombie(zamby, 68);
-
+    zamby=0;
     }
 }
 
 
 void zambiesGame::on_pushButton_69_clicked()
 {
-    if ( gameMap[69] == 0) {
+    if (zamby!=0&& gameMap[69] == 0) {
          gameLogicHandlerZ.createZombie(zamby, 69);
+             zamby=0;
     }
 }
 
 
 void zambiesGame::on_pushButton_70_clicked()
 {
-    if ( gameMap[70] == 0) {
+    if (zamby!=0&& gameMap[70] == 0) {
          gameLogicHandlerZ.createZombie(zamby, 70);
-
+    zamby=0;
     }
 }
 
 
 void zambiesGame::on_pushButton_71_clicked()
 {
-    if ( gameMap[71] == 0) {
+    if (zamby!=0&& gameMap[71] == 0) {
          gameLogicHandlerZ.createZombie(zamby, 71);
-
+    zamby=0;
     }
 }
 
 
 void zambiesGame::on_pushButton_72_clicked()
 {
-    if ( gameMap[72] == 0) {
+    if (zamby!=0&& gameMap[72] == 0) {
          gameLogicHandlerZ.createZombie(zamby, 72);
+         zamby=0;
 
     }
 }
