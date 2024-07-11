@@ -640,6 +640,7 @@ void plants::showMapP()
          qDebug() << "Timer stopped because winner == 1";
          return; // Exit the function to avoid further processing
      }
+      qDebug() << "show p";
       QLabel *label = new QLabel(this);
        QString imagePath;
       if(beforeMoving.size()!=0)
@@ -726,9 +727,11 @@ void plants::showMapP()
            beforeMoving.clear();
       }
   if(bornZombies.size()!=0)
+      qDebug()<<"3";
     {for (auto i = bornZombies.begin(); i != bornZombies.end(); ++i) {
         int a=i.key();
         int b=i.value();
+        qDebug()<<a;
         QString imagePath;
         QString buttonName = QString("pushButton_%1").arg(a);
         QLabel *label = new QLabel(this);
@@ -869,6 +872,7 @@ bornPlants.clear();
 
 
 void plants:: listenServerP(){
+    Suns=9;
     QByteArray data = clientS->readAll();
     QString str(data);
     QStringList usAndps= str.split('+');
@@ -876,6 +880,9 @@ void plants:: listenServerP(){
         bool ok1, ok2;
         int value1 = usAndps[1].toInt(&ok1);
         int value2 = usAndps[2].toInt(&ok2);
+        qDebug()<<value1<<"llll";
+        qDebug()<<value2 <<":::";
+        qDebug()<<Suns ;
      if(value2>20)
         if (ok1 && ok2) {
             gameLogicHandlerP.createPlant(value1, value2);
@@ -883,4 +890,6 @@ void plants:: listenServerP(){
      else
            gameLogicHandlerP.createZombie(value1, value2);
     }
+    qDebug()<<bornPlants.size() <<"////";
+     qDebug()<<bornZombies.size();
 }

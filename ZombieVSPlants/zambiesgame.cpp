@@ -296,6 +296,7 @@ void zambiesGame::showMapZ()
          qDebug() << "Timer stopped because winner == 1";
          return; // Exit the function to avoid further processing
      }
+     qDebug() << "show ";
       QLabel *label = new QLabel(this);
        QString imagePath;
       if(beforeMoving.size()!=0)
@@ -386,6 +387,7 @@ void zambiesGame::showMapZ()
         int a=i.key();
         int b=i.value();
         QString imagePath;
+           qDebug()<<a;
         QString buttonName = QString("pushButton_%1").arg(a);
         QLabel *label = new QLabel(this);
         QPushButton  *button = findChild<QPushButton*>(buttonName);
@@ -485,12 +487,14 @@ if(deadZombies.size()!=0)
 
     }
     deadPlants.clear();
+    qDebug()<<"3";
     for (auto i = bornPlants.begin(); i !=bornPlants.end(); ++i)
     {
 
         QString buttonName = QString("pushButton_%1").arg(i.key());
         QPushButton *button = findChild<QPushButton*>(buttonName);
         QString imagePath;
+           qDebug()<<i.key();
         switch (i.value() / 1000)
         {
         case 21:
@@ -525,6 +529,7 @@ if(deadZombies.size()!=0)
 
 
 void zambiesGame:: listenServerZ(){
+    Suns=9;
     QByteArray data = clientS->readAll();
     QString str(data);
     QStringList usAndps= str.split('+');
@@ -532,6 +537,9 @@ void zambiesGame:: listenServerZ(){
         bool ok1, ok2;
         int value1 = usAndps[1].toInt(&ok1);
         int value2 = usAndps[2].toInt(&ok2);
+        qDebug()<<value1<<"llll";
+        qDebug()<<value2<<"::";
+          qDebug()<<Suns ;
      if(value2>20)
         if (ok1 && ok2) {
             gameLogicHandlerZ.createPlant(value1, value2);
@@ -539,6 +547,8 @@ void zambiesGame:: listenServerZ(){
      else
            gameLogicHandlerZ.createZombie(value1, value2);
     }
+    qDebug()<<bornPlants.size() <<"////";
+     qDebug()<<bornZombies.size();
 }
 
 //void zambiesGame::onGameTimerTimeout()

@@ -13,22 +13,22 @@ int main(int argc, char *argv[])
    // zambiesGame w;
    // w.show();
        // Create a QTimer for periodic printing
-       QTimer timer;
-      QObject::connect(&timer, &QTimer::timeout, []() {
+      // QTimer timer;
+     // QObject::connect(&timer, &QTimer::timeout, []() {
            // Print map values from key 1 to 72
 
-              for(auto i=bornPlants.begin(); i!=bornPlants.end(); i++)
-              {
-                  qDebug()<<i.key() <<",," <<i.value();
-              }
-              qDebug()<<"-----------";
-              for(auto i=bornZombies.begin(); i!=bornZombies.end(); i++)
-              {
-                  qDebug()<<i.key() <<",," <<i.value();
-              }
+          //    for(auto i=bornPlants.begin(); i!=bornPlants.end(); i++)
+          //    {
+          //        qDebug()<<i.key() <<",," <<i.value();
+          //    }
+         //     qDebug()<<"-----------";
+         //     for(auto i=bornZombies.begin(); i!=bornZombies.end(); i++)
+         //     {
+         //         qDebug()<<i.key() <<",," <<i.value();
+         //     }
 
-      });
-       timer.start(3000);
+   //   });
+   //    timer.start(3000);
     //plants p;
     //p.show();
     MainWindow w;
