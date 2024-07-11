@@ -61,9 +61,10 @@ QString Server::getWifiIPv4Address()
 
 void Server::sendMessageToClients(const QString &message, int id)
 {
-    QByteArray data = message.toUtf8();
-    if (clients[id]->state() == QAbstractSocket::ConnectedState)
-        clients[id]->write(data);
+    QTcpSocket *client = clients.value(id, nullptr);
+    if (client) {
+        client->write(message.toUtf8());
+    }
 }
 
 void Server::StartTheGame(int num1, int num2)
@@ -127,14 +128,14 @@ void Server::readClient() {
             sendMessageToClients(str, it.key());
         }
     }
-    else if (usAndps[0] == 'h' && clients.size() == 1) //sposed to be commented
+    else if (usAndps[0] == 'h' && clients.size() == 2) //sposed to be commented
     {
         QString one = "1";
         QString two = "0";
         auto it = clients.begin();
         sendMessageToClients(two, it.key());
-        //it++;
-        //sendMessageToClients(two, it.key());
+        it++;
+        sendMessageToClients(one, it.key());
     }
 
     if (flagForStarting == 2)
@@ -151,12 +152,11 @@ void Server::handleClientDisconnected() {
     QTcpSocket *socket = qobject_cast<QTcpSocket*>(sender());
     if (!socket) return;
 
-    int socketDescriptor = socket->socketDescriptor();
-    clients.remove(socketDescriptor);
+    qDebug() << "Client disconnected: " << socket->socketDescriptor();
+    clients.remove(socket->socketDescriptor());
     flagForStarting--;
     emit clientDisconnected(socket->peerAddress().toString());
     socket->deleteLater();
-    qDebug() << "Client disconnected";;
 }
 
 void Server::broadcastMessage(const QByteArray &message, QTcpSocket *excludeSocket) {
