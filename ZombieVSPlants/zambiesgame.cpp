@@ -4,7 +4,7 @@
 zambiesGame::zambiesGame(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::zambiesGame),
-      gameTimer(new QTimer(this)),
+      //gameTimer(new QTimer(this)),
       gameLogicHandlerZ(this)
 {
 
@@ -36,10 +36,10 @@ zambiesGame::zambiesGame(QWidget *parent)
                            "    border-image: url(" + imagePath + ") stretch;"
                              "}");
 
-     gameTimer->setInterval(240000); // 4 minutes
-     connect(gameTimer, &QTimer::timeout, this, &zambiesGame::onGameTimerTimeout);
+     //gameTimer->setInterval(240000); // 4 minutes
+     //connect(gameTimer, &QTimer::timeout, this, &zambiesGame::onGameTimerTimeout);
 
-     gameTimer->start();
+     //gameTimer->start();
 
     ui->textEdit->setText(QString::number(Branis));
     applyStylesheets();
@@ -529,16 +529,16 @@ void zambiesGame:: listenServerZ(){
     }
 }
 
-void zambiesGame::onGameTimerTimeout()
-{
-    if (gameLogicHandlerZ.winner != -1)
-    {
-        gameLogicHandlerZ.winner = 0;
-        qDebug() << "plants win!";
-    }
-
-    qDebug() << "Zombie wins!";
-
-    this->hide();
-    gameTimer->stop();
-}
+//void zambiesGame::onGameTimerTimeout()
+//{
+  //  if (gameLogicHandlerZ.winner != -1)
+    //{
+      //  gameLogicHandlerZ.winner = 0;
+        //qDebug() << "plants win!";
+    //}
+//
+    //qDebug() << "Zombie wins!";
+//
+  //  this->hide();
+    //gameTimer->stop();
+//}
