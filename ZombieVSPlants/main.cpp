@@ -10,8 +10,8 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     //plants p;
    //p.show();
-    //zambiesGame w;
-   // w.show();
+    zambiesGame w;
+    w.show();
        // Create a QTimer for periodic printing
        QTimer timer;
        QObject::connect(&timer, &QTimer::timeout, []() {
@@ -24,8 +24,8 @@ int main(int argc, char *argv[])
        timer.start(3000);
     //plants p;
     //p.show();
-    MainWindow w;
-   w.show();
+    //MainWindow w;
+   //w.show();
   //  SignUpWindow l;
    // l.show();
   // LoginWindow d;

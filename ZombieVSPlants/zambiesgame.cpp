@@ -4,7 +4,8 @@
 zambiesGame::zambiesGame(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::zambiesGame),
-     gameLogicHandlerZ(this)
+      //gameTimer(new QTimer(this)),
+      gameLogicHandlerZ(this)
 {
 
     ui->setupUi(this);
@@ -34,9 +35,15 @@ zambiesGame::zambiesGame(QWidget *parent)
      ui->pushButtonC6 ->setStyleSheet("QPushButton { "
                            "    border-image: url(" + imagePath + ") stretch;"
                              "}");
+
+     //gameTimer->setInterval(240000); // 4 minutes
+     //connect(gameTimer, &QTimer::timeout, this, &zambiesGame::onGameTimerTimeout);
+
+     //gameTimer->start();
+
     ui->textEdit->setText(QString::number(Branis));
     applyStylesheets();
-     srand(time(nullptr));
+    srand(time(nullptr));
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &zambiesGame::generateRandomNumberZ);
     timer->start(5000);
@@ -49,8 +56,8 @@ zambiesGame::zambiesGame(QWidget *parent)
             qDebug() << "Button not found:" << buttonName;
         }
     }
-      timer2 = new QTimer(this);
-      connect(timer2, &QTimer::timeout, this, &zambiesGame::showMapZ);
+     timer2 = new QTimer(this);
+     connect(timer2, &QTimer::timeout, this, &zambiesGame::showMapZ);
      timer2->start(500);
      listen = new QTimer(this);
      connect(timer, &QTimer::timeout, this, &zambiesGame::listenServerZ);
@@ -275,7 +282,8 @@ void zambiesGame::showMapZ()
          this->hide();
          ForgotWindow* FWindow= new ForgotWindow();
          FWindow->show();
-         return;
+         qDebug() << "Timer stopped because winner == 1";
+         return; // Exit the function to avoid further processing
      }
       QLabel *label = new QLabel(this);
        QString imagePath;
@@ -520,3 +528,17 @@ void zambiesGame:: listenServerZ(){
         }
     }
 }
+
+//void zambiesGame::onGameTimerTimeout()
+//{
+  //  if (gameLogicHandlerZ.winner != -1)
+    //{
+      //  gameLogicHandlerZ.winner = 0;
+        //qDebug() << "plants win!";
+    //}
+//
+    //qDebug() << "Zombie wins!";
+//
+  //  this->hide();
+    //gameTimer->stop();
+//}

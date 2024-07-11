@@ -96,9 +96,9 @@ void Server::readClient() {
     }
     else if (usAndps[0] == "f")
     {
-            Login log;
-            QString res = log.matchPN(usAndps[1], usAndps[2]);
-            sendMessageToClients(res, socketDescriptor);
+        Login log;
+        QString res = log.matchPN(usAndps[1], usAndps[2]);
+        sendMessageToClients(res, socketDescriptor);
     }
     else if (usAndps[0] == "s")
     {
