@@ -207,7 +207,6 @@ void zambiesGame::handleButtonClick() {
 void zambiesGame::on_pushButton_67_clicked()
 {
     if (zamby != 0 && gameMap[67] == 0) {
-        gameLogicHandlerZ.createZombie(zamby, 67);
 
         QString s = QString::number(zamby);
         QByteArray data = "g+" + s.toUtf8() + "+67";
@@ -533,10 +532,12 @@ void zambiesGame:: listenServerZ(){
         bool ok1, ok2;
         int value1 = usAndps[1].toInt(&ok1);
         int value2 = usAndps[2].toInt(&ok2);
-
+     if(value2>20)
         if (ok1 && ok2) {
             gameLogicHandlerZ.createPlant(value1, value2);
         }
+     else
+           gameLogicHandlerZ.createZombie(value1, value2);
     }
 }
 

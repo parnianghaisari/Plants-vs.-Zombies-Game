@@ -162,7 +162,6 @@ void plants::handleButtonClick() {
 void plants::on_pushButton_1_clicked()
 {
     if (plant != 0 && gameMap[1] == 0) {
-        gameLogicHandlerP.createPlant(plant, 1);
 
         QString s = QString::number(plant);
         QByteArray data = "g+" + s.toUtf8() + "+1";
@@ -877,9 +876,11 @@ void plants:: listenServerP(){
         bool ok1, ok2;
         int value1 = usAndps[1].toInt(&ok1);
         int value2 = usAndps[2].toInt(&ok2);
-
+     if(value2>20)
         if (ok1 && ok2) {
-            gameLogicHandlerP.createZombie(value1, value2);
+            gameLogicHandlerP.createPlant(value1, value2);
         }
+     else
+           gameLogicHandlerP.createZombie(value1, value2);
     }
 }
