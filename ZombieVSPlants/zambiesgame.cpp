@@ -61,7 +61,7 @@ zambiesGame::zambiesGame(QWidget *parent)
      timer2->start(500);
      listen = new QTimer(this);
      connect(timer, &QTimer::timeout, this, &zambiesGame::listenServerZ);
-     listen->start(500);
+     listen->start(200);
 
 }
 
@@ -486,14 +486,13 @@ if(deadZombies.size()!=0)
 
     }
     deadPlants.clear();
-    for (int i = 1; i <= 36; ++i)
+    for (int i = 0; i <bornPlants.size(); ++i)
     {
-    if(gameMap[i]!=0)
-    {
-        QString buttonName = QString("pushButton_%1").arg(i);
+
+        QString buttonName = QString("pushButton_%1").arg(bornPlants[i]);
         QPushButton *button = findChild<QPushButton*>(buttonName);
         QString imagePath;
-        switch (gameMap[i] / 1000)
+        switch (bornPlants[i] / 1000)
         {
         case 21:
             imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/pea shooter.jpg";
@@ -522,7 +521,7 @@ if(deadZombies.size()!=0)
         }
     }
 
-}
+
 }
 
 
