@@ -119,7 +119,10 @@ void Server::readClient() {
     }
     else if (usAndps[0] == 'z' || usAndps[0] == 'p')
     {
-        broadcastMessage(data, socket);
+        auto it = clients.begin();
+        sendMessageToClients(str, it.key());
+        it++;
+        sendMessageToClients(str, it.key());
     }
     else if (usAndps[0] == 'h' && clients.size() == 2) //sposed to be commented
     {
