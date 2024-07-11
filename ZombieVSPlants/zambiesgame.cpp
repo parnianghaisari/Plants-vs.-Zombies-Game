@@ -542,9 +542,9 @@ void zambiesGame::listenServerZ() {
         int id = parts[1].toInt();
         int position = parts[2].toInt();
 
-        if (id<20) { // Zombie
+        if (command=='z') { // Zombie
             gameLogicHandlerZ.createZombie(id, position);
-        } else  { // Plant
+        } else if(command =='p')  { // Plant
             gameLogicHandlerZ.createPlant(id, position);
         }
 
