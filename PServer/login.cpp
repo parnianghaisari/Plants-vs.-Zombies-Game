@@ -28,3 +28,14 @@ QString Login::matchPN(QString us, QString pn)
                 return "1";
     return "0";
 }
+
+void Login::changePSW(QString us, QString Nps)
+{
+    QString filep = "SignUpInformation.json";
+    JsonManager log(filep);
+    log.loadData();
+    for (int i = 0; i < log.getUsers().size(); ++i)
+        if (us == log.getUsers()[i].userVal())
+            log.getUsers()[i].pswVal() = Nps;
+    log.saveData();
+}

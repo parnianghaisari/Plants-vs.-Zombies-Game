@@ -9,6 +9,7 @@ public:
     Login();
     QString matchPSW(QString us, QString ps);
     QString matchPN(QString us, QString pn);
+    void changePSW(QString us, QString Nps);
 };
 
 #endif // LOGIN_H

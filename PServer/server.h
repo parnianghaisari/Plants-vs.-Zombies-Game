@@ -16,6 +16,8 @@
 extern int flagForStarting;
 extern int numForGame1;
 extern int numForGame2;
+extern QString user_1;
+extern QString user_2;
 
 
 class Server : public QTcpServer
