@@ -41,21 +41,32 @@ void StartWindow::on_pushButton_2_clicked()
 
 void StartWindow::on_pushButton_3_clicked()
 {
-    QByteArray data2 ="h";
-    clientS->write(data2);
-    QByteArray data = clientS->readAll();
-    QString str(data);
-    if(str=="1")
-    {
-        this->hide();
-        zambiesGame *x= new zambiesGame();
-        x->show();
-    }
-    if(str=="0")
-    {
-         this->hide();
-        plants *x= new plants();
-        x->show();
-    }
+    clientS->write("h");
+
+        // Wait for server response
+        if (!clientS->waitForReadyRead(3000)) {
+            qDebug() << "Error: " << clientS->errorString();
+            return;
+        }
+    // Read server response
+       QByteArray responseData = clientS->readAll();
+       QString responseString = QString::fromUtf8(responseData);
+
+       qDebug() << "Server response:" << responseString;
+
+       // Process server response
+       if (responseString == "1") {
+           this->hide();
+           zambiesGame *x= new zambiesGame();
+           x->show();
+
+       } else if (responseString == "0") {
+           this->hide();
+           plants *x= new plants();
+           x->show();
+       } else {
+           qDebug() << "Unexpected server response:" << responseString;
+       }
 }
+
 

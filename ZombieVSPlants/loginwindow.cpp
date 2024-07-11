@@ -37,22 +37,38 @@ void LoginWindow::on_pushButton_clicked()
 void LoginWindow::on_pushButton_2_clicked()
 {
 
-    QByteArray data="l+";
-    clientS->write(data);
-    QByteArray data1 = ui->username->text().toUtf8()+ "+";
-    clientS->write(data1);
-    QByteArray data2 = ui->password->text().toUtf8();
-    clientS->write(data2);
-    QByteArray lisend = clientS->readAll();
-    if(lisend=="1")
-    {
-        StartWindow * FWindow= new StartWindow();
-        FWindow->show();
-    }
-    if(lisend=="0")
-    {
-     ui->textEdit->setText("wrong...");
-    }
+    QByteArray requestData = "l+";
+      QByteArray usernameData = ui->username->text().toUtf8() + "+";
+      QByteArray passwordData = ui->password->text().toUtf8();
+
+      // Send login request to server
+      clientS->write(requestData);
+      clientS->write(usernameData);
+      clientS->write(passwordData);
+
+      // Wait for server response
+      if (!clientS->waitForReadyRead(3000)) {
+          qDebug() << "Error: " << clientS->errorString();
+          return;
+      }
+      // Read server response
+         QByteArray responseData = clientS->readAll();
+         QString responseString = QString::fromUtf8(responseData);
+
+         qDebug() << "Server response:" << responseString;
+
+         // Process server response
+         if (responseString == "1") {
+             qDebug() << "Login successful.";
+             this->hide();
+             StartWindow *startWindow = new StartWindow();
+             startWindow->show();
+         } else if (responseString == "0") {
+             qDebug() << "Login failed. Invalid credentials.";
+             ui->textEdit->setText("Wrong username or password.");
+         } else {
+             qDebug() << "Unexpected server response:" << responseString;
+         }
 }
 
 

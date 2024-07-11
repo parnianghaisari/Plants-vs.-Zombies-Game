@@ -26,7 +26,9 @@ void ForgotWindow::on_pushButton_clicked()
        QByteArray data2 = ui->phone->text().toUtf8();
        clientS->write(data2);
       QByteArray lisend = clientS->readAll();
-       if(lisend=="1"){
+      QString str(lisend);
+      qDebug()<<str;
+       if(str=="1"){
         QByteArray data="n+";
         clientS->write(data);
         QByteArray data1 = ui->user->text().toUtf8()+ "+";
@@ -36,7 +38,7 @@ void ForgotWindow::on_pushButton_clicked()
         StartWindow * FWindow= new StartWindow();
         FWindow->show();
     }
-    if(lisend=="0")
+    if(str=="0")
     {
      ui->textEdit->setText("wrong...");
     }
