@@ -3,6 +3,8 @@
 #include <QStringList>
 
 int flagForStarting = 0;
+int numForGame1 = -1;
+int numForGame2 = -1;
 
 Server::Server(QObject *parent)
     : QTcpServer(parent) {
@@ -69,9 +71,17 @@ void Server::StartTheGame(int num1, int num2)
     QString client2;
     int client = QRandomGenerator::global()->bounded(2);
     if (client)
+    {
+        numForGame1 = 1;
+        numForGame2 = 0;
         client2 = "0";
+    }
     else
+    {
+        numForGame1 = 0;
+        numForGame2 = 1;
         client2 = "1";
+    }
     QString client1 = QString::number(client);
     sendMessageToClients(client1, num1);
     sendMessageToClients(client2, num2);
@@ -106,9 +116,32 @@ void Server::readClient() {
         Users user(usAndps[1], usAndps[2], usAndps[3], usAndps[4], usAndps[5]);
         sig.sign(user);
     }
+    else if (usAndps[0] == 'g')
+    {
+        auto it = clients.begin();
+        if (it.key() != socketDescriptor)
+            sendMessageToClients(str, it.key());
+        else
+        {
+            ++it;
+            sendMessageToClients(str, it.key());
+        }
+    }
+    else if (usAndps[0] == 'h' && clients.size() == 1) //sposed to be commented
+    {
+        QString one = "1";
+        QString two = "0";
+        auto it = clients.begin();
+        sendMessageToClients(two, it.key());
+        //it++;
+        //sendMessageToClients(two, it.key());
+    }
 
     if (flagForStarting == 2)
+    {
+        flagForStarting = 0;
         StartTheGame(clients[0]->socketDescriptor(), clients[1]->socketDescriptor());
+    }
 
     emit messageReceived(message);
     //broadcastMessage(data, socket);
@@ -120,6 +153,7 @@ void Server::handleClientDisconnected() {
 
     int socketDescriptor = socket->socketDescriptor();
     clients.remove(socketDescriptor);
+    flagForStarting--;
     emit clientDisconnected(socket->peerAddress().toString());
     socket->deleteLater();
     qDebug() << "Client disconnected";;
