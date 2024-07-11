@@ -14,6 +14,8 @@
 #include "signup.h"
 
 extern int flagForStarting;
+extern int numForGame1;
+extern int numForGame2;
 
 
 class Server : public QTcpServer
