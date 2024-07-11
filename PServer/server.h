@@ -37,6 +37,7 @@ public slots:
     QString getWifiIPv4Address();
     void sendMessageToClients(const QString &message, int id);
     void StartTheGame(int num1, int num2);
+    void StartTheSecond(int num1, int num2);
 
 private slots:
     void readClient();
