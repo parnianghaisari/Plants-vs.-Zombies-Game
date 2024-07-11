@@ -37,13 +37,22 @@ void MainWindow::on_pushButton_clicked()
         connectToServer();
       this->hide();
 
+        QByteArray data = clientS->readAll();
+        QString str(data);
+        if(data=="1")
+        {
+            zambiesGame *x= new zambiesGame();
+            x->show();
+        }
+        if(data=="0")
+        {
+            plants *x= new plants();
+            x->show();
+        }
 
-    MainWindow2* secondWindow= new MainWindow2();
-     secondWindow->show();
+  //  MainWindow2* secondWindow= new MainWindow2();
+  //   secondWindow->show();
           }
-    else{
-
-    }
 
 }
 

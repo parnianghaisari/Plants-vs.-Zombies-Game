@@ -58,12 +58,13 @@ private slots:
 
     void on_pushButton_72_clicked();
     void showMapZ();
-
+    void listenServerZ();
 private:
     Ui::zambiesGame *ui;
     void applyStylesheets();
     QTimer *timer;
-     QTimer *timer2;
+    QTimer *timer2;
+    QTimer *listen;
     QSignalMapper *signalMapper;
     GameLogicHandling gameLogicHandlerZ;
     int locBrain;

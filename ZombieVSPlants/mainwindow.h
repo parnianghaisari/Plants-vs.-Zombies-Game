@@ -7,7 +7,8 @@
 #include <QNetworkInterface>
 #include <QString>
 #include <QList>
-
+#include "plants.h"
+#include "zambiesgame.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE

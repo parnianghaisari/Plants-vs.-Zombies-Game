@@ -106,11 +106,14 @@ private slots:
    void on_pushButton_36_clicked();
 
    void showMapP();
+   void listenServerP();
 private:
     Ui::plants *ui;
     void applyStylesheets();
     void generateRandomNumberS();
      QTimer *timer;
+     QTimer *timer2;
+     QTimer *listen;
      GameLogicHandling gameLogicHandlerP;
      QSignalMapper *signalMapper;
      int locSun;
