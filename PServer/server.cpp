@@ -6,6 +6,9 @@ int flagForStarting = 0;
 int numForGame1 = -1;
 int numForGame2 = -1;
 
+QString user_1 = "";
+QString user_2 = "";
+
 Server::Server(QObject *parent)
     : QTcpServer(parent) {
     QHostAddress localAddress(getWifiIPv4Address());
@@ -88,6 +91,23 @@ void Server::StartTheGame(int num1, int num2)
     sendMessageToClients(client2, num2);
 }
 
+void Server::StartTheSecond(int num1, int num2)
+{
+    QString client1;
+    QString client2;
+    if (numForGame1 == 1)
+    {
+        client1 = "0";
+        client2 = "1";
+    }
+    else{
+        client1 = "1";
+        client2 = "0";
+    }
+    sendMessageToClients(client1, num1);
+    sendMessageToClients(client2, num2);
+}
+
 void Server::readClient() {
     QTcpSocket *socket = qobject_cast<QTcpSocket*>(sender());
     if (!socket) return;
@@ -103,6 +123,14 @@ void Server::readClient() {
     {
         Login log;
         QString res = log.matchPSW(usAndps[1], usAndps[2]);
+        if (res == "1")
+        {
+            if (user_1 == "")
+                user_1 = usAndps[1];
+            else
+                user_2 = usAndps[1];
+            ++flagForStarting;
+        }
         sendMessageToClients(res, socketDescriptor);
     }
     else if (usAndps[0] == "f")
@@ -116,6 +144,25 @@ void Server::readClient() {
         SignUp sig;
         Users user(usAndps[1], usAndps[2], usAndps[3], usAndps[4], usAndps[5]);
         sig.sign(user);
+        ++flagForStarting;
+    }
+    else if (usAndps[0] == "n")
+    {
+        Login log;
+        log.changePSW(usAndps[1], usAndps[2]);
+        ++flagForStarting;
+    }
+    else if (usAndps[0] == 'i')
+    {
+        JsonManager manage(usAndps[1], 0);
+        manage.loadHistoryData();
+        QString his = "";
+        for (int i = 0; i < manage.getHistory().size(); ++i)
+        {
+            his += '+';
+            his += manage.getHistory()[i].historyToString();
+        }
+        sendMessageToClients(his, socketDescriptor);
     }
     else if (usAndps[0] == 'z' || usAndps[0] == 'p')
     {
@@ -126,18 +173,20 @@ void Server::readClient() {
     }
     else if (usAndps[0] == 'h' && clients.size() == 2) //sposed to be commented
     {
-        QString one = "1";
-        QString two = "0";
-        auto it = clients.begin();
-        sendMessageToClients(two, it.key());
-        it++;
-        sendMessageToClients(one, it.key());
-    }
-
-    if (flagForStarting == 2)
-    {
-        flagForStarting = 0;
-        StartTheGame(clients[0]->socketDescriptor(), clients[1]->socketDescriptor());
+        if (numForGame1 == -1 && numForGame2 == -1)
+        {
+            auto it = clients.begin();
+            auto it2 = it;
+            it2++;
+            StartTheGame(it.key(), it2.key());
+        }
+        else
+        {
+            auto it = clients.begin();
+            auto it2 = it;
+            it2++;
+            StartTheSecond(it.key(), it2.key());
+        }
     }
 
     emit messageReceived(message);

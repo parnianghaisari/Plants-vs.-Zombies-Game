@@ -38,6 +38,7 @@ QJsonObject UserHistory::toJson() const
     json["ronewinner"] = round1Winner;
     json["rtwo"] = round2;
     json["rtwowinner"] = round2Winner;
+    json["date"] = date.toString();
     return json;
 }
 
@@ -48,4 +49,17 @@ void UserHistory::fromJson(const QJsonObject &json)
     round1Winner = json["ronewinner"].toString();
     round2 = json["rtwo"].toString();
     round2Winner = json["rtwowinner"].toString();
+    date.fromString(json["date"].toString());
+
+}
+
+QString UserHistory::historyToString() const
+{
+    return QString("%1, %2, %3, %4, %5, %6")
+            .arg(rival)
+            .arg(round1)
+            .arg(round1Winner)
+            .arg(round2)
+            .arg(round2Winner)
+            .arg(date.toString());
 }

@@ -177,7 +177,14 @@ void GameLogicHandling::plantAttack(Plant *plant, int position)
                 if (zombie->getHealth() <= 0)
                 {
                     updateMap(i, 0); //zombie die o ina
-                    deadZombies.append(i);
+                    auto it = beforeMoving.find(i);
+                    if (it == beforeMoving.end())
+                        deadZombies.append(i);
+                    else
+                    {
+                        beforeMoving.erase(it);
+                        deadZombies.append(i);
+                    }
                     zombieMap.remove(zombieID);
                     delete zombie;
                 }
@@ -225,7 +232,14 @@ void GameLogicHandling::plumExplode(int position)
                     if (zombie->getHealth() <= 0)
                     {
                         updateMap(i, 0); //zombie die o ina
-                        deadZombies.append(i);
+                        auto it = beforeMoving.find(i);
+                        if (it == beforeMoving.end())
+                            deadZombies.append(i);
+                        else
+                        {
+                            beforeMoving.erase(it);
+                            deadZombies.append(i);
+                        }
                         zombieMap.remove(zombieID);
                         delete zombie;
                     }
@@ -249,7 +263,14 @@ void GameLogicHandling::jalapenoExplode(int position)
             if (zombie->getHealth() <= 0)
             {
                 updateMap(i, 0); //zombie die o ina
-                deadZombies.append(i);
+                auto it = beforeMoving.find(i);
+                if (it == beforeMoving.end())
+                    deadZombies.append(i);
+                else
+                {
+                    beforeMoving.erase(it);
+                    deadZombies.append(i);
+                }
                 zombieMap.remove(zombieID);
                 delete zombie;
             }
