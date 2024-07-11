@@ -81,7 +81,6 @@ void GameLogicHandling::createPlant(int iid, int position)
         else
             plant = new BoomerangPlant;
         plantMap[iid] = plant;
-        plantMap[iid] = plant;
         updateMap(position, plant->name);
 
         bornPlants.insert(position, plant->name);

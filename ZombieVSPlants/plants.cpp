@@ -161,20 +161,16 @@ void plants::handleButtonClick() {
 
 void plants::on_pushButton_1_clicked()
 {
-    if (plant != 0 && gameMap[67] == 0) {
-        gameLogicHandlerP.createZombie(plant, 1);
+    if (plant != 0 && gameMap[1] == 0) {
+        gameLogicHandlerP.createPlant(plant, 1);
 
-        QString s = QString::number(zamby);
+        QString s = QString::number(plant);
         QByteArray data = "g+" + s.toUtf8() + "+1";
 
         if (clientS->state() == QAbstractSocket::ConnectedState) {
             qDebug() << "Attempting to write data to socket...";
             clientS->write(data);
-            if (clientS->waitForBytesWritten(5000)) {  // Wait up to 5 seconds
-                qDebug() << "Data written to socket.";
-            } else {
-                qDebug() << "Failed to write data to socket:" << clientS->errorString();
-            }
+
         } else {
             qDebug() << "Socket is not connected!";
         }
@@ -817,11 +813,12 @@ if(deadZombies.size()!=0)
                                     "    border: none; "
                                     "}");
           }
-       deadZombies.pop_front();
+
 }
 }
     beforeMoving.clear();
     bornZombies.clear();
+    deadZombies.clear();
 
     for(int i=0 ;i<deadPlants.size(); i++)
     {
@@ -834,13 +831,13 @@ if(deadZombies.size()!=0)
 
     }
     deadPlants.clear();
-    for (int i = 0; i <bornPlants.size(); ++i)
+    for (auto i = bornPlants.begin(); i !=bornPlants.end(); ++i)
     {
 
-        QString buttonName = QString("pushButton_%1").arg(bornPlants[i]);
+        QString buttonName = QString("pushButton_%1").arg(i.key());
         QPushButton *button = findChild<QPushButton*>(buttonName);
         QString imagePath;
-        switch (bornPlants[i] / 1000)
+        switch (i.value() / 1000)
         {
         case 21:
             imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/pea shooter.jpg";
@@ -868,8 +865,7 @@ if(deadZombies.size()!=0)
                                   "}");
         }
     }
-
-
+bornPlants.clear();
 }
 
 

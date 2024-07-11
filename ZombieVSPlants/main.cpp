@@ -14,13 +14,20 @@ int main(int argc, char *argv[])
    // w.show();
        // Create a QTimer for periodic printing
        QTimer timer;
-       QObject::connect(&timer, &QTimer::timeout, []() {
+      QObject::connect(&timer, &QTimer::timeout, []() {
            // Print map values from key 1 to 72
 
-               qDebug() << "Map key:" << 1 << "Value:" << gameMap.value(1);
-                 qDebug() << "Map key:" << 2 << "Value:" << gameMap.value(2);
+              for(auto i=bornPlants.begin(); i!=bornPlants.end(); i++)
+              {
+                  qDebug()<<i.key() <<",," <<i.value();
+              }
+              qDebug()<<"-----------";
+              for(auto i=bornZombies.begin(); i!=bornZombies.end(); i++)
+              {
+                  qDebug()<<i.key() <<",," <<i.value();
+              }
 
-       });
+      });
        timer.start(3000);
     //plants p;
     //p.show();
