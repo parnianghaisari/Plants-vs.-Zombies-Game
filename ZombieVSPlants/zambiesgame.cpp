@@ -87,13 +87,6 @@ void zambiesGame::on_pushButtonC1_clicked()
         zamby =0;
 }
 
-void zambiesGame::on_pushButton_7_clicked()
-{
-    this->hide();
-    LoginWindow* thirdWindow= new LoginWindow();
-    thirdWindow->show();
-}
-
 void zambiesGame::applyStylesheets()
 {
     for (int i = 1; i <= 72; ++i) {
@@ -235,60 +228,119 @@ void zambiesGame::on_pushButton_67_clicked()
 
 void zambiesGame::on_pushButton_68_clicked()
 {
-    if ( zamby!=0&&gameMap[68] == 0) {
-         gameLogicHandlerZ.createZombie(zamby, 68);
-         QString s = QString::number(zamby);
-        QByteArray data="g+"+s.toUtf8() +"+68";
-        clientS->write(data);
-    zamby=0;
+    if (zamby != 0 && gameMap[68] == 0) {
+
+        QString s = QString::number(zamby);
+        QByteArray data = "z+" + s.toUtf8() + "+68";
+
+        if (clientS->state() == QAbstractSocket::ConnectedState) {
+            qDebug() << "Attempting to write data to socket...";
+            clientS->write(data);
+            if (clientS->waitForBytesWritten(5000)) {  // Wait up to 5 seconds
+                qDebug() << "Data written to socket.";
+            } else {
+                qDebug() << "Failed to write data to socket:" << clientS->errorString();
+            }
+        } else {
+            qDebug() << "Socket is not connected!";
+        }
+
+        zamby = 0;
     }
 }
 
 
 void zambiesGame::on_pushButton_69_clicked()
 {
-    if (zamby!=0&& gameMap[69] == 0) {
-         gameLogicHandlerZ.createZombie(zamby, 69);
-         QString s = QString::number(zamby);
-        QByteArray data="g+"+s.toUtf8() +"+69";
-        clientS->write(data);
-             zamby=0;
+    if (zamby != 0 && gameMap[69] == 0) {
+
+        QString s = QString::number(zamby);
+        QByteArray data = "z+" + s.toUtf8() + "+69";
+
+        if (clientS->state() == QAbstractSocket::ConnectedState) {
+            qDebug() << "Attempting to write data to socket...";
+            clientS->write(data);
+            if (clientS->waitForBytesWritten(5000)) {  // Wait up to 5 seconds
+                qDebug() << "Data written to socket.";
+            } else {
+                qDebug() << "Failed to write data to socket:" << clientS->errorString();
+            }
+        } else {
+            qDebug() << "Socket is not connected!";
+        }
+
+        zamby = 0;
     }
 }
 
 void zambiesGame::on_pushButton_70_clicked()
 {
-    if (zamby!=0&& gameMap[70] == 0) {
-         gameLogicHandlerZ.createZombie(zamby, 70);
-         QString s = QString::number(zamby);
-        QByteArray data="g+"+s.toUtf8() +"+70";
-        clientS->write(data);
-    zamby=0;
+    if (zamby != 0 && gameMap[70] == 0) {
+
+        QString s = QString::number(zamby);
+        QByteArray data = "z+" + s.toUtf8() + "+70";
+
+        if (clientS->state() == QAbstractSocket::ConnectedState) {
+            qDebug() << "Attempting to write data to socket...";
+            clientS->write(data);
+            if (clientS->waitForBytesWritten(5000)) {  // Wait up to 5 seconds
+                qDebug() << "Data written to socket.";
+            } else {
+                qDebug() << "Failed to write data to socket:" << clientS->errorString();
+            }
+        } else {
+            qDebug() << "Socket is not connected!";
+        }
+
+        zamby = 0;
     }
 }
 
 
 void zambiesGame::on_pushButton_71_clicked()
 {
-    if (zamby!=0&& gameMap[71] == 0) {
-         gameLogicHandlerZ.createZombie(zamby, 71);
-         QString s = QString::number(zamby);
-        QByteArray data="g+"+s.toUtf8() +"+71";
-        clientS->write(data);
-    zamby=0;
+    if (zamby != 0 && gameMap[71] == 0) {
+
+        QString s = QString::number(zamby);
+        QByteArray data = "z+" + s.toUtf8() + "+71";
+
+        if (clientS->state() == QAbstractSocket::ConnectedState) {
+            qDebug() << "Attempting to write data to socket...";
+            clientS->write(data);
+            if (clientS->waitForBytesWritten(5000)) {  // Wait up to 5 seconds
+                qDebug() << "Data written to socket.";
+            } else {
+                qDebug() << "Failed to write data to socket:" << clientS->errorString();
+            }
+        } else {
+            qDebug() << "Socket is not connected!";
+        }
+
+        zamby = 0;
     }
 }
 
 
 void zambiesGame::on_pushButton_72_clicked()
 {
-    if (zamby!=0&& gameMap[72] == 0) {
-         gameLogicHandlerZ.createZombie(zamby, 72);
-         QString s = QString::number(zamby);
-        QByteArray data="g+"+s.toUtf8() +"+72";
-        clientS->write(data);
-         zamby=0;
+    if (zamby != 0 && gameMap[72] == 0) {
 
+        QString s = QString::number(zamby);
+        QByteArray data = "z+" + s.toUtf8() + "+72";
+
+        if (clientS->state() == QAbstractSocket::ConnectedState) {
+            qDebug() << "Attempting to write data to socket...";
+            clientS->write(data);
+            if (clientS->waitForBytesWritten(5000)) {  // Wait up to 5 seconds
+                qDebug() << "Data written to socket.";
+            } else {
+                qDebug() << "Failed to write data to socket:" << clientS->errorString();
+            }
+        } else {
+            qDebug() << "Socket is not connected!";
+        }
+
+        zamby = 0;
     }
 }
 void zambiesGame::showMapZ()
@@ -548,7 +600,7 @@ void zambiesGame::listenServerZ() {
             gameLogicHandlerZ.createPlant(id, position);
         }
 
-        showMapZ(); // Update the UI to reflect the changes
+        showMapZ();
     }
 }
 //void zambiesGame::onGameTimerTimeout()
