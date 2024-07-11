@@ -47,9 +47,9 @@ plants::plants(QWidget *parent) :
               qDebug() << "Button not found:" << buttonName;
           }
       }
-      timer = new QTimer(this);
+      timer2 = new QTimer(this);
        connect(timer, &QTimer::timeout, this, &plants::showMapP);
-       timer->start(1000);
+       timer2->start(1000);
 }
 
 plants::~plants()
@@ -515,6 +515,191 @@ void plants::on_pushButton_36_clicked()
 void plants::showMapP()
 {
 
+    if (gameLogicHandlerP.winner == 1) {
+         timer2->stop();
+         this->hide();
+         ForgotWindow* FWindow= new ForgotWindow();
+         FWindow->show();
+         return;
+     }
+      QLabel *label = new QLabel(this);
+       QString imagePath;
+      if(beforeMoving.size()!=0)
+     { for (auto i = beforeMoving.begin(); i != beforeMoving.end(); ++i) {
+        int a=i.key();
+        int b=i.value();
+        QMovie *movie;
+        QString buttonName = QString("pushButton_%1").arg(a);
+        QPushButton *button = findChild<QPushButton*>(buttonName);
+        if (button) {
+               QLabel* label = button->findChild<QLabel*>();
+               if (label) {
+                   button->layout()->removeWidget(label);
+                   label->deleteLater();
+               }
+               button->setStyleSheet("QPushButton { "
+                                     "    background-color: rgba(255, 255, 255, 0); "
+                                     "    border: none; "
+                                     "}");
+           }
+         buttonName = QString("pushButton_%1").arg(a-6);
+         button = findChild<QPushButton*>(buttonName);
+        switch (b/1000)
+        {
+        case 11:
+           {
+
+            imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/walking-plants-vs-zombies-ezgif.com-resize.gif";
+            movie = new QMovie(imagePath);
+            label->setMovie(movie);
+            movie->start();
+            break;
+        }
+        case 12:
+        {
+
+        imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/Buckethead-Zombie-unscreen-ezgif.com-resize.gif";
+         movie = new QMovie(imagePath);
+         label->setMovie(movie);
+         movie->start();
+         break;
+     }
+        case 13:
+        {
+        imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/leafhead-unscreen-ezgif.com-resize.gif";
+         movie = new QMovie(imagePath);
+         label->setMovie(movie);
+         movie->start();
+         break;
+     }
+        case 14:
+        {
+
+         imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/walking-plants-vs-zombies-ezgif.com-resize.gif";
+         movie = new QMovie(imagePath);
+         label->setMovie(movie);
+         movie->start();
+         break;
+     }
+        case 15:
+        {  imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/astronaut-unscreen.gif";
+           movie = new QMovie(imagePath);
+           label->setMovie(movie);
+           movie->start();
+           break;
+      }
+        case 16:
+        {
+            imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/purple-hair-unscreen-ezgif.com-resize.gif";
+           movie = new QMovie(imagePath);
+           label->setMovie(movie);
+           movie->start();
+           break;
+      }
+        }
+        if (!imagePath.isEmpty())
+        {
+            button->setStyleSheet("QPushButton { border: none; }"); // Remove border if needed
+            button->setLayout(new QHBoxLayout);
+            button->layout()->addWidget(label);
+        }
+
+     }
+           beforeMoving.clear();
+      }
+  if(bornZombies.size()!=0)
+    {for (auto i = bornZombies.begin(); i != bornZombies.end(); ++i) {
+        int a=i.key();
+        int b=i.value();
+        QString imagePath;
+        QString buttonName = QString("pushButton_%1").arg(a);
+        QLabel *label = new QLabel(this);
+        QPushButton  *button = findChild<QPushButton*>(buttonName);
+        QMovie *movie;
+       ui->textEdit->setText(QString::number(b/1000));
+       switch (b/1000)
+       {
+       case 11:
+          {
+
+           imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/walking-plants-vs-zombies-ezgif.com-resize.gif";
+           movie = new QMovie(imagePath);
+           label->setMovie(movie);
+           movie->start();
+           break;
+       }
+       case 12:
+       {
+
+       imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/Buckethead-Zombie-unscreen-ezgif.com-resize.gif";
+        movie = new QMovie(imagePath);
+        label->setMovie(movie);
+        movie->start();
+        break;
+    }
+       case 13:
+       {
+       imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/leafhead-unscreen-ezgif.com-resize.gif";
+        movie = new QMovie(imagePath);
+        label->setMovie(movie);
+        movie->start();
+        break;
+    }
+       case 14:
+       {
+
+        imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/walking-plants-vs-zombies-ezgif.com-resize.gif";
+        movie = new QMovie(imagePath);
+        label->setMovie(movie);
+        movie->start();
+        break;
+    }
+       case 15:
+       {  imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/astronaut-unscreen.gif";
+          movie = new QMovie(imagePath);
+          label->setMovie(movie);
+          movie->start();
+          break;
+     }
+       case 16:
+       {
+           imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/purple-hair-unscreen-ezgif.com-resize.gif";
+          movie = new QMovie(imagePath);
+          label->setMovie(movie);
+          movie->start();
+          break;
+     }
+       }
+        if (!imagePath.isEmpty())
+        {
+            button->setStyleSheet("QPushButton { border: none; }"); // Remove border if needed
+            button->setLayout(new QHBoxLayout);
+            button->layout()->addWidget(label);
+        }
+        bornZombies.clear();
+}
+    }
+if(deadZombies.size()!=0)
+  {   for (int i = 0; i != deadZombies.size(); ++i) {
+       QString buttonName = QString("pushButton_%1").arg(deadZombies[i]);
+       QPushButton *button = findChild<QPushButton*>(buttonName);
+       if (button) {
+              QLabel* label = button->findChild<QLabel*>();
+              if (label) {
+                  button->layout()->removeWidget(label);
+                  label->deleteLater();
+              }
+              button->setStyleSheet("QPushButton { "
+                                    "    background-color: rgba(255, 255, 255, 0); "
+                                    "    border: none; "
+                                    "}");
+          }
+       deadZombies.pop_front();
+}
+}
+    beforeMoving.clear();
+    bornZombies.clear();
+
     for(int i=0 ;i<deadPlants.size(); i++)
     {
         QString buttonName = QString("pushButton_%1").arg(deadPlants[i]);
@@ -528,40 +713,40 @@ void plants::showMapP()
     deadPlants.clear();
     for (int i = 1; i <= 36; ++i)
     {
-        if(gameMap[i]!=0)
+    if(gameMap[i]!=0)
+    {
+        QString buttonName = QString("pushButton_%1").arg(i);
+        QPushButton *button = findChild<QPushButton*>(buttonName);
+        QString imagePath;
+        switch (gameMap[i] / 1000)
         {
-            QString buttonName = QString("pushButton_%1").arg(i);
-            QPushButton *button = findChild<QPushButton*>(buttonName);
-            QString imagePath;
-            switch (gameMap[i] / 1000)
-            {
-            case 21:
-                imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/pea shooter.jpg";
-                break;
-            case 22:
-                imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/two_peashooter.jpg";
-                break;
-            case 23:
-                imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/walnut.jpg";
-                break;
-            case 24:
-                imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/plum mine.jpg";
-                break;
-            case 25:
-                imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/jalapino.jpg";
-                break;
-            case 26:
-                imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/boomerang.jpg";
-                break;
-            }
-            if (!imagePath.isEmpty())
-            {
-                button->setStyleSheet("QPushButton { "
-                                      "    border-image: url(" + imagePath + ") stretch;"
-                                      "}");
-            }
+        case 21:
+            imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/pea shooter.jpg";
+            break;
+        case 22:
+            imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/two_peashooter.jpg";
+            break;
+        case 23:
+            imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/walnut.jpg";
+            break;
+        case 24:
+            imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/plum mine.jpg";
+            break;
+        case 25:
+            imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/jalapino.jpg";
+            break;
+        case 26:
+            imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/boomerang.jpg";
+            break;
         }
-
+        if (!imagePath.isEmpty())
+        {
+            button->setStyleSheet("QPushButton { "
+                                  "    border-image: url(" + imagePath + ") stretch;"
+                                  "}");
+        }
     }
+
+}
 
 }
