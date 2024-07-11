@@ -117,16 +117,9 @@ void Server::readClient() {
         Users user(usAndps[1], usAndps[2], usAndps[3], usAndps[4], usAndps[5]);
         sig.sign(user);
     }
-    else if (usAndps[0] == 'g')
+    else if (usAndps[0] == 'z' || usAndps[0] == 'p')
     {
-        auto it = clients.begin();
-        if (it.key() != socketDescriptor)
-            sendMessageToClients(str, it.key());
-        else
-        {
-            ++it;
-            sendMessageToClients(str, it.key());
-        }
+        broadcastMessage(data, socket);
     }
     else if (usAndps[0] == 'h' && clients.size() == 2) //sposed to be commented
     {
@@ -163,6 +156,7 @@ void Server::broadcastMessage(const QByteArray &message, QTcpSocket *excludeSock
     for (QTcpSocket *client : clients) {
             if (client != excludeSocket) {
                 client->write(message);
+                client->flush();
             }
         }
 }
