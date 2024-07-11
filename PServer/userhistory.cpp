@@ -10,7 +10,7 @@ QString &UserHistory::rivalVal()
     return rival;
 }
 
-QString &UserHistory::roun1Val()
+QString &UserHistory::round1Val()
 {
     return round1;
 }

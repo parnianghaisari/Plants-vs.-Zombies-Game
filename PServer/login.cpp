@@ -7,7 +7,7 @@ Login::Login()
 
 QString Login::matchPSW(QString us, QString ps)
 {
-    QString filep = "SignUpInformation.json";
+    QString filep = "D:\\AP\\AP_project\\PServer\\SignUpInformation.json";
     JsonManager log(filep);
     log.loadData();
     for (int i = 0; i < log.getUsers().size(); ++i)
@@ -19,7 +19,7 @@ QString Login::matchPSW(QString us, QString ps)
 
 QString Login::matchPN(QString us, QString pn)
 {
-    QString filep = "SignUpInformation.json";
+    QString filep = "D:\\AP\\AP_project\\PServer\\SignUpInformation.json";
     JsonManager log(filep);
     log.loadData();
     for (int i = 0; i < log.getUsers().size(); ++i)
@@ -31,7 +31,7 @@ QString Login::matchPN(QString us, QString pn)
 
 void Login::changePSW(QString us, QString Nps)
 {
-    QString filep = "SignUpInformation.json";
+    QString filep = "D:\\AP\\AP_project\\PServer\\SignUpInformation.json";
     JsonManager log(filep);
     log.loadData();
     for (int i = 0; i < log.getUsers().size(); ++i)

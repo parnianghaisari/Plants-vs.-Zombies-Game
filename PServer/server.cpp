@@ -119,7 +119,7 @@ void Server::readClient() {
     QStringList usAndps = str.split('+');
     for (int i = 0; i < usAndps.size(); ++i)
         qDebug() << "Received data from client :" << usAndps[i];
-    if (usAndps[0] == "l")
+    if (usAndps[0] == 'l')
     {
         Login log;
         QString res = log.matchPSW(usAndps[1], usAndps[2]);
@@ -131,22 +131,25 @@ void Server::readClient() {
                 user_2 = usAndps[1];
             ++flagForStarting;
         }
+        qDebug() << res;
         sendMessageToClients(res, socketDescriptor);
     }
-    else if (usAndps[0] == "f")
+    else if (usAndps[0] == 'f')
     {
         Login log;
         QString res = log.matchPN(usAndps[1], usAndps[2]);
         sendMessageToClients(res, socketDescriptor);
     }
-    else if (usAndps[0] == "s")
+    else if (usAndps[0] == 's')
     {
+        qDebug() << usAndps[5];
         SignUp sig;
         Users user(usAndps[1], usAndps[2], usAndps[3], usAndps[4], usAndps[5]);
+        qDebug() << usAndps[1];
         sig.sign(user);
         ++flagForStarting;
     }
-    else if (usAndps[0] == "n")
+    else if (usAndps[0] == 'n')
     {
         Login log;
         log.changePSW(usAndps[1], usAndps[2]);
