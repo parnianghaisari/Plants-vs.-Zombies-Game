@@ -35,17 +35,21 @@ void MainWindow::on_pushButton_clicked()
           {
             //check address and port
         connectToServer();
-      this->hide();
-
+      //this->hide();
+ QByteArray data2 ="h";
+ clientS->write(data2);
         QByteArray data = clientS->readAll();
+        qDebug()<<data;
         QString str(data);
-        if(data=="1")
+        if(str=="1")
         {
+            this->hide();
             zambiesGame *x= new zambiesGame();
             x->show();
         }
-        if(data=="0")
+        if(str=="0")
         {
+             this->hide();
             plants *x= new plants();
             x->show();
         }

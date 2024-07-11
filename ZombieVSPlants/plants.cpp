@@ -161,13 +161,25 @@ void plants::handleButtonClick() {
 
 void plants::on_pushButton_1_clicked()
 {
-    if (plant!=0&& gameMap[1] == 0) {
-         gameLogicHandlerP.createPlant(plant, 1);
-         QString s = QString::number(plant);
-        QByteArray data="g+"+s.toUtf8() +"+1";
-        clientS->write(data);
-         plant=0;
+    if (plant != 0 && gameMap[67] == 0) {
+        gameLogicHandlerP.createZombie(plant, 1);
 
+        QString s = QString::number(zamby);
+        QByteArray data = "g+" + s.toUtf8() + "+1";
+
+        if (clientS->state() == QAbstractSocket::ConnectedState) {
+            qDebug() << "Attempting to write data to socket...";
+            clientS->write(data);
+            if (clientS->waitForBytesWritten(5000)) {  // Wait up to 5 seconds
+                qDebug() << "Data written to socket.";
+            } else {
+                qDebug() << "Failed to write data to socket:" << clientS->errorString();
+            }
+        } else {
+            qDebug() << "Socket is not connected!";
+        }
+
+        plant = 0;
     }
 }
 
@@ -178,7 +190,7 @@ void plants::on_pushButton_2_clicked()
          gameLogicHandlerP.createPlant(plant, 2);
          QString s = QString::number(plant);
         QByteArray data="g+"+s.toUtf8() +"+2";
-        clientS->write(data);
+       // clientS->write(data);
          plant=0;
 
     }
@@ -191,7 +203,7 @@ void plants::on_pushButton_3_clicked()
          gameLogicHandlerP.createPlant(plant, 3);
          QString s = QString::number(plant);
         QByteArray data="g+"+s.toUtf8() +"+3";
-        clientS->write(data);
+        //clientS->write(data);
          plant=0;
 
     }

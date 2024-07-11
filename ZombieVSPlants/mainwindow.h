@@ -6,6 +6,7 @@
 #include <QHostInfo>
 #include <QNetworkInterface>
 #include <QString>
+#include <QStringList>
 #include <QList>
 #include "plants.h"
 #include "zambiesgame.h"

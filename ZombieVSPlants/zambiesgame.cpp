@@ -206,13 +206,25 @@ void zambiesGame::handleButtonClick() {
 }
 void zambiesGame::on_pushButton_67_clicked()
 {
-    if (zamby!=0&& gameMap[67] == 0) {
-         gameLogicHandlerZ.createZombie(zamby, 67);
-          QString s = QString::number(zamby);
-         QByteArray data="g+"+s.toUtf8() +"+67";
-         clientS->write(data);
+    if (zamby != 0 && gameMap[67] == 0) {
+        gameLogicHandlerZ.createZombie(zamby, 67);
 
-    zamby=0;
+        QString s = QString::number(zamby);
+        QByteArray data = "g+" + s.toUtf8() + "+67";
+
+        if (clientS->state() == QAbstractSocket::ConnectedState) {
+            qDebug() << "Attempting to write data to socket...";
+            clientS->write(data);
+            if (clientS->waitForBytesWritten(5000)) {  // Wait up to 5 seconds
+                qDebug() << "Data written to socket.";
+            } else {
+                qDebug() << "Failed to write data to socket:" << clientS->errorString();
+            }
+        } else {
+            qDebug() << "Socket is not connected!";
+        }
+
+        zamby = 0;
     }
 }
 
