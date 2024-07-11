@@ -169,7 +169,7 @@ void GameLogicHandling::plantAttack(Plant *plant, int position)
     {
         QThread::sleep(plant->firingRate * 2);
         for (int i = position; i <= 72; i += 6)
-            if (gameMap[i] <= 20000 && gameMap[i])
+            if (gameMap[i] <= 20000 && gameMap[i] >= 11000)
             {
                 int zombieID = gameMap[i];
                 Zombie *zombie = zombieMap[zombieID];
