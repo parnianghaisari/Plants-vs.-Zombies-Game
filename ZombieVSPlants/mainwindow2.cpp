@@ -23,18 +23,18 @@ MainWindow2::~MainWindow2()
 
 void MainWindow2::on_pushButton_clicked()
 {
-//QByteArray data="l";
-//clientS->write(data);
-this->hide();
-LoginWindow* thirdWindow= new LoginWindow();
-thirdWindow->show();
+   QByteArray data="l";
+   clientS->write(data);
+   this->hide();
+   LoginWindow* thirdWindow= new LoginWindow();
+   thirdWindow->show();
 }
 
 
 void MainWindow2::on_pushButton_2_clicked()
 {
-    //QByteArray data="s";
-   // clientS->write(data);
+    QByteArray data="s";
+    clientS->write(data);
     this->hide();
     SignUpWindow* SWindow= new SignUpWindow();
     SWindow->show();

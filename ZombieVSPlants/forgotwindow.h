@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include"globals.h"
+#include  "startwindow.h"
 namespace Ui {
 class ForgotWindow;
 }
@@ -13,6 +14,7 @@ class ForgotWindow : public QMainWindow
 
 public:
     explicit ForgotWindow(QWidget *parent = nullptr);
+    int checkPassword();
     ~ForgotWindow();
 
 private slots:

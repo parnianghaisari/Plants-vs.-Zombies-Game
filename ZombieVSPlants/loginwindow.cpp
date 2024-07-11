@@ -47,7 +47,7 @@ void LoginWindow::on_pushButton_2_clicked()
     if(lisend=="1")
     {
         StartWindow * FWindow= new StartWindow();
-    FWindow->show();
+        FWindow->show();
     }
     if(lisend=="0")
     {

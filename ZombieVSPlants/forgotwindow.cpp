@@ -16,11 +16,53 @@ ForgotWindow::~ForgotWindow()
 
 void ForgotWindow::on_pushButton_clicked()
 {
-    QByteArray data="f+";
-    clientS->write(data);
-    QByteArray data1 = ui->phone->text().toUtf8()+ "+";
-    clientS->write(data1);
-    QByteArray data2 = ui->pass->text().toUtf8();
-    clientS->write(data2);
+    int check =checkPassword();
+    if(check==1)
+    {
+       QByteArray data="f+";
+       clientS->write(data);
+       QByteArray data1 = ui->user->text().toUtf8()+ "+";
+       clientS->write(data1);
+       QByteArray data2 = ui->phone->text().toUtf8();
+       clientS->write(data2);
+      QByteArray lisend = clientS->readAll();
+       if(lisend=="1"){
+        QByteArray data="n+";
+        clientS->write(data);
+        QByteArray data1 = ui->user->text().toUtf8()+ "+";
+        clientS->write(data1);
+        QByteArray data2 = ui->pass->text().toUtf8();
+        clientS->write(data2);
+        StartWindow * FWindow= new StartWindow();
+        FWindow->show();
+    }
+    if(lisend=="0")
+    {
+     ui->textEdit->setText("wrong...");
+    }
+
+  }
+    else{
+        ui->textEdit->setText("wrong pass...");
+    }
 }
 
+int ForgotWindow::checkPassword() {
+    QString password = ui->pass->text();
+
+    if (password.length() != 8) {
+        return 0;
+    }
+    QRegularExpression upperCaseRegex("[A-Z]");
+    QRegularExpressionMatch upperCaseMatch = upperCaseRegex.match(password);
+    if (!upperCaseMatch.hasMatch()) {
+        return 0;
+    }
+
+    QRegularExpression numberRegex("[0-9]");
+    QRegularExpressionMatch numberMatch = numberRegex.match(password);
+    if (!numberMatch.hasMatch()) {
+        return 0;
+    }
+   return 1;
+}

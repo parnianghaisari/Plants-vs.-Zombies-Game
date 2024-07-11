@@ -14,6 +14,7 @@ SOURCES += \
     bucketheadzombie.cpp \
     datahandeler.cpp \
     forgotwindow.cpp \
+    gamehistory.cpp \
     gamelogichandling.cpp \
     globals.cpp \
     jalapeno.cpp \
@@ -28,6 +29,7 @@ SOURCES += \
     plummineplant.cpp \
     purplehairzombie.cpp \
     regularzombie.cpp \
+    setting.cpp \
     signupwindow.cpp \
     startwindow.cpp \
     tallzombie.cpp \
@@ -42,6 +44,7 @@ HEADERS += \
     bucketheadzombie.h \
     datahandeler.h \
     forgotwindow.h \
+    gamehistory.h \
     gamelogichandling.h \
     globals.h \
     jalapeno.h \
@@ -55,6 +58,7 @@ HEADERS += \
     plummineplant.h \
     purplehairzombie.h \
     regularzombie.h \
+    setting.h \
     signupwindow.h \
     startwindow.h \
     tallzombie.h \
@@ -65,10 +69,12 @@ HEADERS += \
 
 FORMS += \
     forgotwindow.ui \
+    gamehistory.ui \
     loginwindow.ui \
     mainwindow.ui \
     mainwindow2.ui \
     plants.ui \
+    setting.ui \
     signupwindow.ui \
     startwindow.ui \
     zambiesgame.ui

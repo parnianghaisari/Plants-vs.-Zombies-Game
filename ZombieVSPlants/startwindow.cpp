@@ -11,15 +11,51 @@ StartWindow::StartWindow(QWidget *parent) :
     dataHandler = new DataHandler(this);
 
     // Connect DataHandler signal to MainWindow slot
-    connect(dataHandler, &DataHandler::dataReceived, this, &StartWindow::updateLineEdit);
 }
 
-void StartWindow::updateLineEdit(const QByteArray &data)
-{
-    QString dataStr = QString::fromUtf8(data);
-    ui->lineEdit_dataReceived->setText(dataStr);
-}
 StartWindow::~StartWindow()
 {
     delete ui;
 }
+
+void StartWindow::on_pushButton_clicked()
+{
+    QByteArray data="i";
+    clientS->write(data);
+    QByteArray lisend = clientS->readAll();
+    this->hide();
+    QString receivedString = QString::fromUtf8(lisend);
+    gameHistory *w  =  new gameHistory();
+    w->show();
+    w->setTextInTextEdit(receivedString);
+}
+
+
+void StartWindow::on_pushButton_2_clicked()
+{
+    this->hide();
+    setting *u= new setting();
+    u->show();
+}
+
+
+void StartWindow::on_pushButton_3_clicked()
+{
+    QByteArray data2 ="h";
+    clientS->write(data2);
+    QByteArray data = clientS->readAll();
+    QString str(data);
+    if(str=="1")
+    {
+        this->hide();
+        zambiesGame *x= new zambiesGame();
+        x->show();
+    }
+    if(str=="0")
+    {
+         this->hide();
+        plants *x= new plants();
+        x->show();
+    }
+}
+

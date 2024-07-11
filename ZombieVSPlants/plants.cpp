@@ -668,156 +668,192 @@ void plants::on_pushButton_24_clicked()
 
 void plants::on_pushButton_25_clicked()
 {
-    if (plant!=0&& gameMap[25] == 0) {
-         gameLogicHandlerP.createPlant(plant, 25);
-         QString s = QString::number(plant);
-        QByteArray data="g+"+s.toUtf8() +"+25";
-        clientS->write(data);
-         plant=0;
+    if (plant != 0 && gameMap[25] == 0) {
+        QString s = QString::number(plant);
+        QByteArray data = "p+" + s.toUtf8() + "+25";
 
+        if (clientS->state() == QAbstractSocket::ConnectedState) {
+            qDebug() << "Attempting to write data to socket...";
+            clientS->write(data);
+
+        }
+        plant = 0;
     }
 }
 
 
 void plants::on_pushButton_26_clicked()
 {
-    if (plant!=0&& gameMap[26] == 0) {
-         gameLogicHandlerP.createPlant(plant, 26);
-         QString s = QString::number(plant);
-        QByteArray data="g+"+s.toUtf8() +"+26";
-        clientS->write(data);
-         plant=0;
+    if (plant != 0 && gameMap[26] == 0) {
+        QString s = QString::number(plant);
+        QByteArray data = "p+" + s.toUtf8() + "+26";
 
+        if (clientS->state() == QAbstractSocket::ConnectedState) {
+            qDebug() << "Attempting to write data to socket...";
+            clientS->write(data);
+
+        }
+        plant = 0;
     }
 }
 
 
 void plants::on_pushButton_27_clicked()
 {
-    if (plant!=0&& gameMap[27] == 0) {
-         gameLogicHandlerP.createPlant(plant, 27);
-         QString s = QString::number(plant);
-        QByteArray data="g+"+s.toUtf8() +"+27";
-        clientS->write(data);
-         plant=0;
+    if (plant != 0 && gameMap[27] == 0) {
+        QString s = QString::number(plant);
+        QByteArray data = "p+" + s.toUtf8() + "+27";
 
+        if (clientS->state() == QAbstractSocket::ConnectedState) {
+            qDebug() << "Attempting to write data to socket...";
+            clientS->write(data);
+
+        }
+        plant = 0;
     }
 }
 
 
 void plants::on_pushButton_28_clicked()
 {
-    if (plant!=0&& gameMap[28] == 0) {
-         gameLogicHandlerP.createPlant(plant, 28);
-         QString s = QString::number(plant);
-        QByteArray data="g+"+s.toUtf8() +"+28";
-        clientS->write(data);
-         plant=0;
+    if (plant != 0 && gameMap[28] == 0) {
+        QString s = QString::number(plant);
+        QByteArray data = "p+" + s.toUtf8() + "+28";
 
+        if (clientS->state() == QAbstractSocket::ConnectedState) {
+            qDebug() << "Attempting to write data to socket...";
+            clientS->write(data);
+
+        }
+        plant = 0;
     }
 }
 
 
 void plants::on_pushButton_29_clicked()
 {
-    if (plant!=0&& gameMap[29] == 0) {
-         gameLogicHandlerP.createPlant(plant, 29);
-         QString s = QString::number(plant);
-        QByteArray data="g+"+s.toUtf8() +"+29";
-        clientS->write(data);
-         plant=0;
+    if (plant != 0 && gameMap[29] == 0) {
+        QString s = QString::number(plant);
+        QByteArray data = "p+" + s.toUtf8() + "+29";
 
+        if (clientS->state() == QAbstractSocket::ConnectedState) {
+            qDebug() << "Attempting to write data to socket...";
+            clientS->write(data);
+
+        }
+        plant = 0;
     }
 }
 
 
 void plants::on_pushButton_30_clicked()
 {
-    if (plant!=0&& gameMap[30] == 0) {
-         gameLogicHandlerP.createPlant(plant, 30);
-         QString s = QString::number(plant);
-        QByteArray data="g+"+s.toUtf8() +"+30";
-        clientS->write(data);
-         plant=0;
+    if (plant != 0 && gameMap[30] == 0) {
+        QString s = QString::number(plant);
+        QByteArray data = "p+" + s.toUtf8() + "+30";
 
+        if (clientS->state() == QAbstractSocket::ConnectedState) {
+            qDebug() << "Attempting to write data to socket...";
+            clientS->write(data);
+
+        }
+        plant = 0;
     }
 }
 
 
 void plants::on_pushButton_31_clicked()
 {
-    if (plant!=0&& gameMap[31] == 0) {
-         gameLogicHandlerP.createPlant(plant, 31);
-         QString s = QString::number(plant);
-        QByteArray data="g+"+s.toUtf8() +"+31";
-        clientS->write(data);
-         plant=0;
+    if (plant != 0 && gameMap[31] == 0) {
+        QString s = QString::number(plant);
+        QByteArray data = "p+" + s.toUtf8() + "+31";
 
+        if (clientS->state() == QAbstractSocket::ConnectedState) {
+            qDebug() << "Attempting to write data to socket...";
+            clientS->write(data);
+
+        }
+        plant = 0;
     }
 }
 
 
 void plants::on_pushButton_32_clicked()
 {
-    if (plant!=0&& gameMap[32] == 0) {
-         gameLogicHandlerP.createPlant(plant, 32);
-         QString s = QString::number(plant);
-        QByteArray data="p+"+s.toUtf8() +"+32";
-        clientS->write(data);
-         plant=0;
+    if (plant != 0 && gameMap[32] == 0) {
+        QString s = QString::number(plant);
+        QByteArray data = "p+" + s.toUtf8() + "+32";
 
+        if (clientS->state() == QAbstractSocket::ConnectedState) {
+            qDebug() << "Attempting to write data to socket...";
+            clientS->write(data);
+
+        }
+        plant = 0;
     }
 }
 
 
 void plants::on_pushButton_33_clicked()
 {
-    if (plant!=0&& gameMap[33] == 0) {
-         gameLogicHandlerP.createPlant(plant, 33);
-         QString s = QString::number(plant);
-        QByteArray data="p+"+s.toUtf8() +"+33";
-        clientS->write(data);
-         plant=0;
+    if (plant != 0 && gameMap[33] == 0) {
+        QString s = QString::number(plant);
+        QByteArray data = "p+" + s.toUtf8() + "+33";
 
+        if (clientS->state() == QAbstractSocket::ConnectedState) {
+            qDebug() << "Attempting to write data to socket...";
+            clientS->write(data);
+
+        }
+        plant = 0;
     }
 }
 
 
 void plants::on_pushButton_34_clicked()
 {
-    if (plant!=0&& gameMap[34] == 0) {
-         gameLogicHandlerP.createPlant(plant, 34);
-         QString s = QString::number(plant);
-        QByteArray data="p+"+s.toUtf8() +"+34";
-        clientS->write(data);
-         plant=0;
+    if (plant != 0 && gameMap[34] == 0) {
+        QString s = QString::number(plant);
+        QByteArray data = "p+" + s.toUtf8() + "+34";
 
+        if (clientS->state() == QAbstractSocket::ConnectedState) {
+            qDebug() << "Attempting to write data to socket...";
+            clientS->write(data);
+
+        }
+        plant = 0;
     }
 }
 
 
 void plants::on_pushButton_35_clicked()
 {
-    if (plant!=0&& gameMap[35] == 0) {
-         gameLogicHandlerP.createPlant(plant, 35);
-         QString s = QString::number(plant);
-        QByteArray data="p+"+s.toUtf8() +"+35";
-        clientS->write(data);
-         plant=0;
+    if (plant != 0 && gameMap[35] == 0) {
+        QString s = QString::number(plant);
+        QByteArray data = "p+" + s.toUtf8() + "+35";
 
+        if (clientS->state() == QAbstractSocket::ConnectedState) {
+            qDebug() << "Attempting to write data to socket...";
+            clientS->write(data);
+
+        }
+        plant = 0;
     }
 }
 
 
 void plants::on_pushButton_36_clicked()
 {
-    if (plant!=0&& gameMap[36] == 0) {
-         gameLogicHandlerP.createPlant(plant, 36);
-         QString s = QString::number(plant);
-        QByteArray data="p+"+s.toUtf8() +"+36";
-        clientS->write(data);
-         plant=0;
+    if (plant != 0 && gameMap[36] == 0) {
+        QString s = QString::number(plant);
+        QByteArray data = "p+" + s.toUtf8() + "+36";
 
+        if (clientS->state() == QAbstractSocket::ConnectedState) {
+            qDebug() << "Attempting to write data to socket...";
+            clientS->write(data);
+
+        }
+        plant = 0;
     }
 }
 

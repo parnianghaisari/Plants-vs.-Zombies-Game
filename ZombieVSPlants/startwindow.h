@@ -3,6 +3,11 @@
 
 #include <QMainWindow>
 #include "datahandeler.h"
+#include "globals.h"
+#include "gamehistory.h"
+#include"setting.h"
+#include "zambiesgame.h"
+#include "plants.h"
 namespace Ui {
 class StartWindow;
 }
@@ -14,8 +19,13 @@ class StartWindow : public QMainWindow
 public:
     explicit StartWindow(QWidget *parent = nullptr);
     ~StartWindow();
-public slots:
-    void updateLineEdit(const QByteArray &data);
+private slots:
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_3_clicked();
+
 private:
     Ui::StartWindow *ui;
    DataHandler *dataHandler;

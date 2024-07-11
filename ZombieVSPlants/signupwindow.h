@@ -19,6 +19,8 @@ public:
     explicit SignUpWindow(QWidget *parent = nullptr);
     ~SignUpWindow();
      int checkPassword();
+     int checkPhone();
+     int checkEmail();
 
 private slots:
     void on_pushButton_clicked();

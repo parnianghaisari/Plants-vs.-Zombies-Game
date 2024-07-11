@@ -10,6 +10,7 @@
 #include <QList>
 #include "plants.h"
 #include "zambiesgame.h"
+#include "globals.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE

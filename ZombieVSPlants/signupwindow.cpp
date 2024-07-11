@@ -22,7 +22,9 @@ SignUpWindow::~SignUpWindow()
 void SignUpWindow::on_pushButton_clicked()
 {
  int check = checkPassword();
- if(check==1){
+ int checkP =checkPhone();
+ int checkE = checkEmail();
+ if(check==1 && checkP==1 &&checkE==1){
    QByteArray data="s+";
    clientS->write(data);
    QByteArray data1 = ui->name->text().toUtf8()+ "+";
@@ -72,3 +74,25 @@ void SignUpWindow::on_pushButton_2_clicked()
   ui->pass->setEchoMode(QLineEdit::Normal);
 }
 
+int SignUpWindow::checkPhone(){
+    QString phoneNumber = ui->PNumber->text();
+    QRegularExpression regex("^09\\d{9}$");
+    QRegularExpressionMatch match = regex.match(phoneNumber);
+       if (!match.hasMatch()) {
+            ui->textEdit->setText("Invalid phone");
+           return 0;
+       }
+       return 1;
+}
+
+int SignUpWindow::checkEmail(){
+    QString Email= ui->address->text();
+    QRegularExpression regex("\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b");
+     regex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
+      QRegularExpressionMatch match = regex.match(Email);
+       if (!match.hasMatch()) {
+              ui->textEdit->setText("Invalid email");
+           return 0;
+       }
+       return 1;
+}

@@ -27,35 +27,17 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_clicked()
 {
 
-   // QString text_1 = ui->lineEdit->text();
-    //QString text_2="192.168.1.101";
     QString text_3 = ui->lineEdit_2->text();
     QString text_4="2025";
     if( text_3.compare(text_4)==0 )
           {
             //check address and port
         connectToServer();
-      //this->hide();
- QByteArray data2 ="h";
- clientS->write(data2);
-        QByteArray data = clientS->readAll();
-        qDebug()<<data;
-        QString str(data);
-        if(str=="1")
-        {
-            this->hide();
-            zambiesGame *x= new zambiesGame();
-            x->show();
-        }
-        if(str=="0")
-        {
-             this->hide();
-            plants *x= new plants();
-            x->show();
-        }
+        this->hide();
 
-  //  MainWindow2* secondWindow= new MainWindow2();
-  //   secondWindow->show();
+
+    MainWindow2* secondWindow= new MainWindow2();
+    secondWindow->show();
           }
 
 }
