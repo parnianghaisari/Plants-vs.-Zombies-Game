@@ -5,6 +5,7 @@ zambiesGame::zambiesGame(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::zambiesGame),
       //gameTimer(new QTimer(this)),
+      clients(new QTcpSocket(this)),
       gameLogicHandlerZ(this)
 {
 
@@ -56,12 +57,16 @@ zambiesGame::zambiesGame(QWidget *parent)
             qDebug() << "Button not found:" << buttonName;
         }
     }
-     timer2 = new QTimer(this);
-     connect(timer2, &QTimer::timeout, this, &zambiesGame::showMapZ);
-     timer2->start(200);
-     listen = new QTimer(this);
-     connect(timer, &QTimer::timeout, this, &zambiesGame::listenServerZ);
-     listen->start(200);
+    // timer2 = new QTimer(this);
+    // connect(timer2, &QTimer::timeout, this, &zambiesGame::showMapZ);
+     //timer2->start(200);
+     //listen = new QTimer(this);
+     //connect(timer, &QTimer::timeout, this, &zambiesGame::listenServerZ);
+     //listen->start(200);
+    connect(clientS, &QTcpSocket::readyRead, this, &zambiesGame::listenServerZ);
+    connect(&gameLogicHandlerZ, &GameLogicHandling::gameStateUpdated, this, &zambiesGame::showMapZ);
+
+       clientS->connectToHost("192.168.1.107", 2025);
 
 }
 
@@ -209,7 +214,7 @@ void zambiesGame::on_pushButton_67_clicked()
     if (zamby != 0 && gameMap[67] == 0) {
 
         QString s = QString::number(zamby);
-        QByteArray data = "g+" + s.toUtf8() + "+67";
+        QByteArray data = "z+" + s.toUtf8() + "+67";
 
         if (clientS->state() == QAbstractSocket::ConnectedState) {
             qDebug() << "Attempting to write data to socket...";
@@ -528,29 +533,24 @@ if(deadZombies.size()!=0)
 }
 
 
-void zambiesGame:: listenServerZ(){
-    Suns=9;
+void zambiesGame::listenServerZ() {
     QByteArray data = clientS->readAll();
     QString str(data);
-    QStringList usAndps= str.split('+');
-    if (usAndps.size() >= 3) {
-        bool ok1, ok2;
-        int value1 = usAndps[1].toInt(&ok1);
-        int value2 = usAndps[2].toInt(&ok2);
-        qDebug()<<value1<<"llll";
-        qDebug()<<value2<<"::";
-          qDebug()<<Suns ;
-     if(value2>20)
-        if (ok1 && ok2) {
-            gameLogicHandlerZ.createPlant(value1, value2);
-        }
-     else
-           gameLogicHandlerZ.createZombie(value1, value2);
-    }
-    qDebug()<<bornPlants.size() <<"////";
-     qDebug()<<bornZombies.size();
-}
+    QStringList parts = str.split('+');
+    if (parts.size() >= 3) {
+        QString command = parts[0];
+        int id = parts[1].toInt();
+        int position = parts[2].toInt();
 
+        if (id<20) { // Zombie
+            gameLogicHandlerZ.createZombie(id, position);
+        } else  { // Plant
+            gameLogicHandlerZ.createPlant(id, position);
+        }
+
+        showMapZ(); // Update the UI to reflect the changes
+    }
+}
 //void zambiesGame::onGameTimerTimeout()
 //{
   //  if (gameLogicHandlerZ.winner != -1)

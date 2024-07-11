@@ -38,6 +38,9 @@ public:
 
     void wait(int milliseconds);
 
+signals:
+    void gameStateUpdated();
+
 private:
     QMap<int, Zombie*> zombieMap; // ID, Zombie*
     QMap<int, Plant*> plantMap; // ID, Plant*

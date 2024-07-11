@@ -119,7 +119,7 @@ void GameLogicHandling::moveAndAttack(Zombie *zombie, int position)
             else
                 QThread::sleep(zombie->getDelay() * 2);
 
-            gameMap[position] = 0; // Clear the old position
+            updateMap(position, 0); // Clear the old position
 
             beforeMoving.insert(position, zombie->getName());
 
@@ -187,7 +187,7 @@ void GameLogicHandling::plantAttack(Plant *plant, int position)
     {
         wait(1000);
         plumExplode(position);
-        gameMap[position] = 0;
+        updateMap(position, 0);
         deadPlants.append(position);
         plantMap.remove(plant->name);
         delete plant;
@@ -196,7 +196,7 @@ void GameLogicHandling::plantAttack(Plant *plant, int position)
     {
         wait(1000);
         jalapenoExplode(position);
-        gameMap[position] = 0;
+        updateMap(position, 0);
         deadPlants.append(position);
         plantMap.remove(plant->name);
         delete plant;
@@ -206,6 +206,7 @@ void GameLogicHandling::plantAttack(Plant *plant, int position)
 void GameLogicHandling::updateMap(int position, int id)
 {
     gameMap[position] = id;
+    emit gameStateUpdated();
     qDebug() << "Updated position" << position << "with ID" << id;
 }
 

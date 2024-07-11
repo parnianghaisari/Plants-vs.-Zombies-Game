@@ -67,6 +67,7 @@ private:
     QTimer *timer;
     QTimer *timer2;
     QTimer *listen;
+    QTcpSocket *clients;
     //QTimer *gameTimer;
     QSignalMapper *signalMapper;
     GameLogicHandling gameLogicHandlerZ;

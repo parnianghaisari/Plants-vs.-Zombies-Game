@@ -4,6 +4,7 @@
 plants::plants(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::plants),
+     clients(new QTcpSocket(this)),
     gameLogicHandlerP(this)
 {
     ui->setupUi(this);
@@ -47,12 +48,10 @@ plants::plants(QWidget *parent) :
               qDebug() << "Button not found:" << buttonName;
           }
       }
-      timer2 = new QTimer(this);
-       connect(timer, &QTimer::timeout, this, &plants::showMapP);
-       timer2->start(1000);
-      listen = new QTimer(this);
-        connect(timer, &QTimer::timeout, this, &plants::listenServerP);
-        listen->start(500);
+       connect(clientS, &QTcpSocket::readyRead, this, &plants::listenServerP);
+       connect(&gameLogicHandlerP, &GameLogicHandling::gameStateUpdated, this, &plants::showMapP);
+
+          clientS->connectToHost("192.168.1.107", 2025);
 }
 
 plants::~plants()
@@ -161,10 +160,12 @@ void plants::handleButtonClick() {
 
 void plants::on_pushButton_1_clicked()
 {
+    qDebug()<<"in the button";
+    qDebug()<<plant;
     if (plant != 0 && gameMap[1] == 0) {
-
+     qDebug()<<"in the button2";
         QString s = QString::number(plant);
-        QByteArray data = "g+" + s.toUtf8() + "+1";
+        QByteArray data = "p+" + s.toUtf8() + "+1";
 
         if (clientS->state() == QAbstractSocket::ConnectedState) {
             qDebug() << "Attempting to write data to socket...";
@@ -571,7 +572,7 @@ void plants::on_pushButton_32_clicked()
     if (plant!=0&& gameMap[32] == 0) {
          gameLogicHandlerP.createPlant(plant, 32);
          QString s = QString::number(plant);
-        QByteArray data="g+"+s.toUtf8() +"+32";
+        QByteArray data="p+"+s.toUtf8() +"+32";
         clientS->write(data);
          plant=0;
 
@@ -584,7 +585,7 @@ void plants::on_pushButton_33_clicked()
     if (plant!=0&& gameMap[33] == 0) {
          gameLogicHandlerP.createPlant(plant, 33);
          QString s = QString::number(plant);
-        QByteArray data="g+"+s.toUtf8() +"+33";
+        QByteArray data="p+"+s.toUtf8() +"+33";
         clientS->write(data);
          plant=0;
 
@@ -597,7 +598,7 @@ void plants::on_pushButton_34_clicked()
     if (plant!=0&& gameMap[34] == 0) {
          gameLogicHandlerP.createPlant(plant, 34);
          QString s = QString::number(plant);
-        QByteArray data="g+"+s.toUtf8() +"+34";
+        QByteArray data="p+"+s.toUtf8() +"+34";
         clientS->write(data);
          plant=0;
 
@@ -610,7 +611,7 @@ void plants::on_pushButton_35_clicked()
     if (plant!=0&& gameMap[35] == 0) {
          gameLogicHandlerP.createPlant(plant, 35);
          QString s = QString::number(plant);
-        QByteArray data="g+"+s.toUtf8() +"+35";
+        QByteArray data="p+"+s.toUtf8() +"+35";
         clientS->write(data);
          plant=0;
 
@@ -623,7 +624,7 @@ void plants::on_pushButton_36_clicked()
     if (plant!=0&& gameMap[36] == 0) {
          gameLogicHandlerP.createPlant(plant, 36);
          QString s = QString::number(plant);
-        QByteArray data="g+"+s.toUtf8() +"+36";
+        QByteArray data="p+"+s.toUtf8() +"+36";
         clientS->write(data);
          plant=0;
 
@@ -871,25 +872,22 @@ bornPlants.clear();
 }
 
 
-void plants:: listenServerP(){
-    Suns=9;
+void plants::listenServerP() {
     QByteArray data = clientS->readAll();
     QString str(data);
-    QStringList usAndps= str.split('+');
-    if (usAndps.size() >= 3) {
-        bool ok1, ok2;
-        int value1 = usAndps[1].toInt(&ok1);
-        int value2 = usAndps[2].toInt(&ok2);
-        qDebug()<<value1<<"llll";
-        qDebug()<<value2 <<":::";
-        qDebug()<<Suns ;
-     if(value2>20)
-        if (ok1 && ok2) {
-            gameLogicHandlerP.createPlant(value1, value2);
+    qDebug()<<str;
+    QStringList parts = str.split('+');
+    if (parts.size() >= 3) {
+        QString command = parts[0];
+        int id = parts[1].toInt();
+        int position = parts[2].toInt();
+
+        if (command =='z') { // Zombie
+            gameLogicHandlerP.createZombie(id, position);
+        } else if(command =='p') { // Plant
+            gameLogicHandlerP.createPlant(id, position);
         }
-     else
-           gameLogicHandlerP.createZombie(value1, value2);
+
+        showMapP(); // Update the UI to reflect the changes
     }
-    qDebug()<<bornPlants.size() <<"////";
-     qDebug()<<bornZombies.size();
 }

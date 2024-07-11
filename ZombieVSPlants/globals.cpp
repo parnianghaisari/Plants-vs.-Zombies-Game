@@ -6,7 +6,7 @@ int zamby=0;
 int plant=0;
 int lockSun=0;
 int Branis=850000;
-int Suns=0;
+int Suns=1200;
 int RandomB=0;
 int RandomS=0;
 QHash<int , int> gamehash;

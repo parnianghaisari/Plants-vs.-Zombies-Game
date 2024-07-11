@@ -112,6 +112,7 @@ private:
     void applyStylesheets();
     void generateRandomNumberS();
      QTimer *timer;
+     QTcpSocket *clients;
      QTimer *timer2;
      QTimer *listen;
      GameLogicHandling gameLogicHandlerP;
