@@ -14,6 +14,9 @@
 #include <QPushButton>
 #include "gamelogichandling.h"
 #include"forgotwindow.h"
+#include <QMovie>
+#include <QHBoxLayout>
+#include<QLabel>
 namespace Ui {
 class zambiesGame;
 }
@@ -43,7 +46,6 @@ private slots:
     void on_pushButtonC6_clicked();
     void generateRandomNumberZ();
     void handleButtonClick();
-    void putCard();
 
     void on_pushButton_67_clicked();
 
@@ -56,12 +58,13 @@ private slots:
 
     void on_pushButton_72_clicked();
     void showMapZ();
-
+    void listenServerZ();
 private:
     Ui::zambiesGame *ui;
     void applyStylesheets();
     QTimer *timer;
-     QTimer *timer2;
+    QTimer *timer2;
+    QTimer *listen;
     QSignalMapper *signalMapper;
     GameLogicHandling gameLogicHandlerZ;
     int locBrain;
