@@ -78,7 +78,6 @@ FORMS += \
     loginwindow.ui \
     mainwindow.ui \
     mainwindow2.ui \
-    plants.ui \
     secondstrart.ui \
     setting.ui \
     signupwindow.ui \

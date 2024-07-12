@@ -130,13 +130,6 @@ background-color: rgb(47, 47, 47);</string>
        <height>41</height>
       </rect>
      </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(0, 0, 0);
-font: 700 9pt &quot;Segoe UI&quot;;</string>
-     </property>
-     <property name="text">
-      <string>Suns:</string>
-     </property>
     </widget>
     <widget class="QLabel" name="label_2">
      <property name="geometry">
