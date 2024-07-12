@@ -79,21 +79,30 @@ void plants::applyStylesheets()
 void plants::on_pushButtonC1_2_clicked()
 {
     if(Suns >= 125)
-        plant=26;
+       { plant=26;
+        Suns=Suns-125;
+        ui->textEdit->setText(QString::number(Suns));
+    }
     else
         plant =0;
 }
 void plants::on_pushButtonC2_2_clicked()
 {
     if(Suns >= 150)
-        plant=25;
+      {  plant=25;
+        Suns=Suns-125;
+        ui->textEdit->setText(QString::number(Suns));
+    }
     else
         plant =0;
 }
 void plants::on_pushButtonC3_2_clicked()
 {
     if(Suns >= 50)
-        plant=21;
+     {   plant=21;
+        Suns=Suns-50;
+        ui->textEdit->setText(QString::number(Suns));
+    }
     else
         plant =0;
 }
@@ -101,7 +110,10 @@ void plants::on_pushButtonC3_2_clicked()
 void plants::on_pushButtonC4_2_clicked()
 {
     if(Suns >= 175)
-        plant=24;
+     {   plant=24;
+        Suns=Suns-175;
+        ui->textEdit->setText(QString::number(Suns));
+    }
     else
         plant =0;
 }
@@ -109,7 +121,10 @@ void plants::on_pushButtonC4_2_clicked()
 void plants::on_pushButtonC5_2_clicked()
 {
     if(Suns >= 100)
-        plant=22;
+      {  plant=22;
+        Suns=Suns-100;
+        ui->textEdit->setText(QString::number(Suns));
+    }
     else
         plant =0;
 }
@@ -117,7 +132,10 @@ void plants::on_pushButtonC5_2_clicked()
 void plants::on_pushButtonC6_2_clicked()
 {
     if(Suns >= 100)
-        plant=23;
+     {   plant=23;
+        Suns=Suns-100;
+        ui->textEdit->setText(QString::number(Suns));
+    }
     else
         plant =0;
 }
@@ -137,7 +155,6 @@ void plants::generateRandomNumberS() {
                                   "    border: none; "
                                   "}");
         });
-        ui->textEdit_2->setText(QString::number(locSun));
     }
 }
 
@@ -867,7 +884,7 @@ void plants::showMapP()
          qDebug() << "Timer stopped because winner == 1";
          return; // Exit the function to avoid further processing
      }
-      qDebug() << "show p";
+     qDebug() << "show ";
       QLabel *label = new QLabel(this);
        QString imagePath;
       if(beforeMoving.size()!=0)
@@ -954,12 +971,11 @@ void plants::showMapP()
            beforeMoving.clear();
       }
   if(bornZombies.size()!=0)
-      qDebug()<<"3";
     {for (auto i = bornZombies.begin(); i != bornZombies.end(); ++i) {
         int a=i.key();
         int b=i.value();
-        qDebug()<<a;
         QString imagePath;
+           qDebug()<<a;
         QString buttonName = QString("pushButton_%1").arg(a);
         QLabel *label = new QLabel(this);
         QPushButton  *button = findChild<QPushButton*>(buttonName);
@@ -1042,7 +1058,6 @@ if(deadZombies.size()!=0)
                                     "    border: none; "
                                     "}");
           }
-
 }
 }
     beforeMoving.clear();
@@ -1060,12 +1075,14 @@ if(deadZombies.size()!=0)
 
     }
     deadPlants.clear();
+    qDebug()<<"3";
     for (auto i = bornPlants.begin(); i !=bornPlants.end(); ++i)
     {
 
         QString buttonName = QString("pushButton_%1").arg(i.key());
         QPushButton *button = findChild<QPushButton*>(buttonName);
         QString imagePath;
+           qDebug()<<i.key();
         switch (i.value() / 1000)
         {
         case 21:
@@ -1094,9 +1111,9 @@ if(deadZombies.size()!=0)
                                   "}");
         }
     }
-bornPlants.clear();
-}
 
+
+}
 
 void plants::listenServerP() {
     QByteArray data = clientS->readAll();
@@ -1117,3 +1134,5 @@ void plants::listenServerP() {
         showMapP(); // Update the UI to reflect the changes
     }
 }
+
+
