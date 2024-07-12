@@ -360,7 +360,7 @@ void zambiesGame::showMapZ()
           if(RoundG ==2){
 
           }
-          SecondStrart * s =new SecondStrart();
+          StartWindow * s =new StartWindow();
           this->hide();
           s->show();
          return;

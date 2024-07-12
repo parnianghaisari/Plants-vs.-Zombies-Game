@@ -4,12 +4,11 @@
 #include <QMainWindow>
 #include "datahandeler.h"
 #include "globals.h"
-#include "gamehistory.h"
 #include"setting.h"
 #include "zambiesgame.h"
 #include "plants.h"
 #include "globals.h"
-
+#include "gamehistory.h"
 namespace Ui {
 class StartWindow;
 }

@@ -894,9 +894,8 @@ void plants::showMapP()
             p->show();
           }
           else {
-              SecondStrart * s =new SecondStrart();
+             // StartWindow * s =new StartWindow();
               this->hide();
-              s->show();
           }
           return;
      }

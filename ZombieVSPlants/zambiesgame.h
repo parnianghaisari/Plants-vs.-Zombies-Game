@@ -13,11 +13,8 @@
 #include <QSignalMapper>
 #include <QPushButton>
 #include "gamelogichandling.h"
-#include"forgotwindow.h"
 #include <QMovie>
 #include <QHBoxLayout>
-#include<QLabel>
-#include "secondstrart.h"
 #include "lastpage.h"
 namespace Ui {
 class zambiesGame;

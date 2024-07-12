@@ -7,7 +7,6 @@
 #include "globals.h"
 #include <QSignalMapper>
 #include <QPushButton>
-#include "secondstrart.h"
 #include "gamelogichandling.h"
 namespace Ui {
 class plants;
@@ -107,7 +106,6 @@ private slots:
 
    void showMapP();
    void listenServerP();
-   void on_textEdit_copyAvailable(bool b);
 
 private:
     Ui::plants *ui;

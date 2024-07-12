@@ -32,7 +32,6 @@ void setting::on_pushButton_clicked()
        QByteArray byteArrayData = data.toUtf8();
        clientS->write(byteArrayData);
        this->hide();
-       StartWindow *u= new StartWindow();
-       u->show();
+
 
 }

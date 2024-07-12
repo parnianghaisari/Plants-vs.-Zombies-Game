@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include "globals.h"
-#include "startwindow.h"
 namespace Ui {
 class setting;
 }

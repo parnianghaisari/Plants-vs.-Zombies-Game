@@ -1,5 +1,6 @@
 #include "gamehistory.h"
 #include "ui_gamehistory.h"
+#include "startwindow.h"
 
 gameHistory::gameHistory(QWidget *parent) :
     QMainWindow(parent),
@@ -19,8 +20,7 @@ gameHistory::~gameHistory()
 void gameHistory::on_pushButton_clicked()
 {
     this->hide();
-    StartWindow *w =new StartWindow();
-    w->show();
+
 
 }
 

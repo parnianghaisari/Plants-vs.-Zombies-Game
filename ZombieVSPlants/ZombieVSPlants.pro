@@ -30,7 +30,6 @@ SOURCES += \
     plummineplant.cpp \
     purplehairzombie.cpp \
     regularzombie.cpp \
-    secondstrart.cpp \
     setting.cpp \
     signupwindow.cpp \
     startwindow.cpp \
@@ -61,7 +60,6 @@ HEADERS += \
     plummineplant.h \
     purplehairzombie.h \
     regularzombie.h \
-    secondstrart.h \
     setting.h \
     signupwindow.h \
     startwindow.h \
@@ -79,7 +77,6 @@ FORMS += \
     mainwindow.ui \
     mainwindow2.ui \
     plants.ui \
-    secondstrart.ui \
     setting.ui \
     signupwindow.ui \
     startwindow.ui \

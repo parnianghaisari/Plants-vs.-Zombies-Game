@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include"globals.h"
-#include"startwindow.h"
 #include <QTextEdit>
 namespace Ui {
 class gameHistory;
