@@ -44,6 +44,7 @@ zambiesGame::zambiesGame(QWidget *parent)
 
     ui->textEdit->setText(QString::number(Branis));
     applyStylesheets();
+    RoundG++;
     srand(time(nullptr));
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &zambiesGame::generateRandomNumberZ);
@@ -345,13 +346,24 @@ void zambiesGame::on_pushButton_72_clicked()
 }
 void zambiesGame::showMapZ()
 {
-    if (gameLogicHandlerZ.winner == 1) {
-         timer2->stop();
-         this->hide();
-         ForgotWindow* FWindow= new ForgotWindow();
-         FWindow->show();
+    if (gameLogicHandlerZ.winner != 1) {
+     {  timer2->stop();
          qDebug() << "Timer stopped because winner == 1";
-         return; // Exit the function to avoid further processing
+         QString winnerString = QString::number(gameLogicHandlerZ.winner);
+         QByteArray winnerData = winnerString.toUtf8();
+         QByteArray UsernameData = userName.toUtf8();
+         QByteArray data = winnerData + "+" + UsernameData + "+" +"z";
+          clientS->write(data);
+          if (clientS->waitForBytesWritten(5000)) {
+              qDebug() << "Data written to socket.";
+          }
+          if(RoundG ==2){
+
+          }
+          SecondStrart * s =new SecondStrart();
+          this->hide();
+          s->show();
+         return;
      }
      qDebug() << "show ";
      qDebug()<< bornZombies.size();
@@ -589,7 +601,8 @@ if(deadZombies.size()!=0)
 bornPlants.clear();
 deadPlants.clear();
 }
-
+    bornPlants.clear();
+}
 
 void zambiesGame::listenServerZ() {
     QByteArray data = clientS->readAll();

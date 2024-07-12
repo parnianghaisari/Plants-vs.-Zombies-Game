@@ -37,9 +37,17 @@ void SignUpWindow::on_pushButton_clicked()
    clientS->write(data4);
    QByteArray data5 = ui->PNumber->text().toUtf8();
    clientS->write(data5);
-   this->hide();
-   StartWindow* SWindow= new StartWindow();
-   SWindow->show();
+   QByteArray responseData = clientS->readAll();
+   QString responseString = QString::fromUtf8(responseData);
+   if(responseString =="1"){
+      userName=ui->uName->text();
+       this->hide();
+       StartWindow* SWindow= new StartWindow();
+       SWindow->show();
+   }
+ else{
+       ui->textEdit->setText("wrong...");
+   }
  }
 }
 
