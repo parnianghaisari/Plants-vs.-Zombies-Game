@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QEventLoop>
 #include <QTimer>
+#include <QMutex>
 
 GameLogicHandling::GameLogicHandling(QWidget *parent)
     : QWidget{parent}
@@ -120,7 +121,7 @@ void GameLogicHandling::moveAndAttack(Zombie *zombie, int position)
     int newPosition = position - 6;
     int count1 = 0;
     while (zombie->getHealth() > 0) {
-
+        mutex.lock();
         if (!gameMap[newPosition])
         {
             if (zombie->getName()/1000 == 15 && position >= 67 && position <= 72)
@@ -138,14 +139,19 @@ void GameLogicHandling::moveAndAttack(Zombie *zombie, int position)
                 updateMap(newPosition, zombie->getName());
             } else {
                 winner = 1;
+                mutex.unlock();
+
                 break; // Exit loop if out of bounds
             }
             newPosition -= 6;
+            mutex.unlock();
             continue;
+
         }
         if (newPosition <= 0)
         {
             winner = 1;
+            mutex.unlock();
             break;
         }
 
@@ -167,6 +173,7 @@ void GameLogicHandling::moveAndAttack(Zombie *zombie, int position)
         }
 
         ++count1;
+        mutex.unlock();
 
     }
 

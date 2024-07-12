@@ -9,6 +9,8 @@
 #include <QElapsedTimer>
 #include <QCoreApplication>
 
+#include <QMutex>
+
 #include "globals.h"
 #include "astronautzombie.h"
 #include "boomerangplant.h"
@@ -46,6 +48,8 @@ private:
     QMap<int, Zombie*> zombieMap; // ID, Zombie*
     QMap<int, Plant*> plantMap; // ID, Plant*
     QList<QThread*> threads;
+    QMutex mutex;
+
 
     void initializeMap();
     void moveAndAttack(Zombie *zombie, int position);
