@@ -35,6 +35,7 @@ plants::plants(QWidget *parent) :
                            "    border-image: url(" + imagePath + ") stretch;"
                              "}");
        applyStylesheets();
+       RoundG++;
        srand(time(nullptr));
       timer = new QTimer(this);
       connect(timer, &QTimer::timeout, this, &plants::generateRandomNumberS);
@@ -876,13 +877,28 @@ void plants::on_pushButton_36_clicked()
 
 void plants::showMapP()
 {
-    if (gameLogicHandlerP.winner == 1) {
-         timer2->stop();
-         this->hide();
-         ForgotWindow* FWindow= new ForgotWindow();
-         FWindow->show();
+    if (gameLogicHandlerP.winner != 1) {
+     {  timer2->stop();
          qDebug() << "Timer stopped because winner == 1";
-         return; // Exit the function to avoid further processing
+         QString winnerString = QString::number(gameLogicHandlerP.winner);
+         QByteArray winnerData = winnerString.toUtf8();
+         QByteArray UsernameData = userName.toUtf8();
+         QByteArray data = winnerData + "+" + UsernameData + "+" +"p";
+          clientS->write(data);
+          if (clientS->waitForBytesWritten(5000)) {
+              qDebug() << "Data written to socket.";
+          }
+          if(RoundG ==2){
+              this->hide();
+            lastPage * p = new lastPage();
+            p->show();
+          }
+          else {
+              SecondStrart * s =new SecondStrart();
+              this->hide();
+              s->show();
+          }
+          return;
      }
       qDebug() << "show p";
       QLabel *label = new QLabel(this);
@@ -1111,9 +1127,10 @@ if(deadZombies.size()!=0)
                                   "}");
         }
     }
-bornPlants.clear();
-}
 
+}
+    bornPlants.clear();
+}
 
 void plants::listenServerP() {
     QByteArray data = clientS->readAll();

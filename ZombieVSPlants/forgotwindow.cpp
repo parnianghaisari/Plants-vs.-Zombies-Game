@@ -25,10 +25,14 @@ void ForgotWindow::on_pushButton_clicked()
        clientS->write(data1);
        QByteArray data2 = ui->phone->text().toUtf8();
        clientS->write(data2);
-      QByteArray lisend = clientS->readAll();
-      QString str(lisend);
-      qDebug()<<str;
-       if(str=="1"){
+       if (!clientS->waitForReadyRead(3000)){
+           return;
+       }
+       // Read server response
+          QByteArray responseData = clientS->readAll();
+          QString responseString = QString::fromUtf8(responseData);
+      qDebug()<<responseString;
+       if(responseString=="1"){
         QByteArray data="n+";
         clientS->write(data);
         QByteArray data1 = ui->user->text().toUtf8()+ "+";
@@ -38,7 +42,7 @@ void ForgotWindow::on_pushButton_clicked()
         StartWindow * FWindow= new StartWindow();
         FWindow->show();
     }
-    if(str=="0")
+    if(responseString=="0")
     {
      ui->textEdit->setText("wrong...");
     }
