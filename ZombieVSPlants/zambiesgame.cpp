@@ -354,16 +354,19 @@ void zambiesGame::showMapZ()
          return; // Exit the function to avoid further processing
      }
      qDebug() << "show ";
+     qDebug()<< bornZombies.size();
       QLabel *label = new QLabel(this);
        QString imagePath;
       if(beforeMoving.size()!=0)
      { for (auto i = beforeMoving.begin(); i != beforeMoving.end(); ++i) {
+         qDebug() << "show1 ";
         int a=i.key();
         int b=i.value();
         QMovie *movie;
         QString buttonName = QString("pushButton_%1").arg(a);
         QPushButton *button = findChild<QPushButton*>(buttonName);
         if (button) {
+            qDebug() << "show2 ";
                QLabel* label = button->findChild<QLabel*>();
                if (label) {
                    button->layout()->removeWidget(label);
@@ -431,6 +434,7 @@ void zambiesGame::showMapZ()
         }
         if (!imagePath.isEmpty())
         {
+            qDebug() << "show4 ";
             button->setStyleSheet("QPushButton { border: none; }"); // Remove border if needed
             button->setLayout(new QHBoxLayout);
             button->layout()->addWidget(label);
@@ -441,10 +445,11 @@ void zambiesGame::showMapZ()
       }
   if(bornZombies.size()!=0)
     {for (auto i = bornZombies.begin(); i != bornZombies.end(); ++i) {
+          qDebug() << "show 5";
         int a=i.key();
         int b=i.value();
         QString imagePath;
-           qDebug()<<a;
+           qDebug()<<"b is"<<b;
         QString buttonName = QString("pushButton_%1").arg(a);
         QLabel *label = new QLabel(this);
         QPushButton  *button = findChild<QPushButton*>(buttonName);
@@ -505,6 +510,7 @@ void zambiesGame::showMapZ()
        }
         if (!imagePath.isEmpty())
         {
+            qDebug() << "show 6";
             button->setStyleSheet("QPushButton { border: none; }"); // Remove border if needed
             button->setLayout(new QHBoxLayout);
             button->layout()->addWidget(label);
