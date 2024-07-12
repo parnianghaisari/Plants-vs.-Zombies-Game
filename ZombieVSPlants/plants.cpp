@@ -1043,24 +1043,26 @@ void plants::showMapP()
         }
 }
     }
-if(deadZombies.size()!=0)
-  {   for (int i = 0; i != deadZombies.size(); ++i) {
-       QString buttonName = QString("pushButton_%1").arg(deadZombies[i]);
-       QPushButton *button = findChild<QPushButton*>(buttonName);
-       if (button) {
-              QLabel* label = button->findChild<QLabel*>();
-              if (label) {
-                  button->layout()->removeWidget(label);
-                  label->deleteLater();
-              }
-              button->setStyleSheet("QPushButton { "
-                                    "    background-color: rgba(255, 255, 255, 0); "
-                                    "    border: none; "
-                                    "}");
-          }
-
-}
-}
+  if(deadZombies.size()!=0)
+    {   for (int i = 0; i < deadZombies.size(); ++i) {
+         QString buttonName = QString("pushButton_%1").arg(deadZombies[i]);
+         QPushButton *button = findChild<QPushButton*>(buttonName);
+         qDebug() << i+1 <<"zombies deleted";
+         if (button) {
+              qDebug() << i+1 <<"zombies deleted2";
+                QLabel* label = button->findChild<QLabel*>();
+                if (label) {
+                     qDebug() << i+1 <<"zombies deleted3";
+                    button->layout()->removeWidget(label);
+                    label->deleteLater();
+                }
+                button->setStyleSheet("QPushButton { "
+                                      "    background-color: rgba(255, 255, 255, 0); "
+                                      "    border: none; "
+                                      "}");
+            }
+  }
+  }
     beforeMoving.clear();
     bornZombies.clear();
     deadZombies.clear();

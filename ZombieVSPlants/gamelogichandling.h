@@ -58,6 +58,7 @@ private:
     void checkWinningCondition();
     void plumExplode(int position);
     void jalapenoExplode(int position);
+    void cleanupZombie(Zombie *zombie);
 };
 
 #endif // GAMELOGICHANDLING_H
