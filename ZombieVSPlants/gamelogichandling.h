@@ -37,6 +37,7 @@ public:
     void createPlant(int iid, int position);
 
     void wait(int milliseconds);
+    void delay(int milliseconds);
 
 signals:
     void gameStateUpdated();

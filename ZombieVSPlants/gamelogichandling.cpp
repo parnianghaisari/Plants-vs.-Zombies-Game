@@ -1,5 +1,7 @@
 #include "gamelogichandling.h"
 #include <QDebug>
+#include <QEventLoop>
+#include <QTimer>
 
 GameLogicHandling::GameLogicHandling(QWidget *parent)
     : QWidget{parent}
@@ -106,6 +108,13 @@ void GameLogicHandling::wait(int milliseconds)
    }
 }
 
+void GameLogicHandling::delay(int milliseconds)
+{
+    QEventLoop loop;
+        QTimer::singleShot(milliseconds, &loop, &QEventLoop::quit);
+        loop.exec();
+}
+
 void GameLogicHandling::moveAndAttack(Zombie *zombie, int position)
 {
     int newPosition = position - 6;
@@ -115,9 +124,9 @@ void GameLogicHandling::moveAndAttack(Zombie *zombie, int position)
         if (!gameMap[newPosition])
         {
             if (zombie->getName()/1000 == 15 && position >= 67 && position <= 72)
-                QThread::sleep(1 * 2);
+                delay(1000 * 2);
             else
-                QThread::sleep(zombie->getDelay() * 2);
+                delay(zombie->getDelay() * 2000);
 
             updateMap(position, 0); // Clear the old position
 
@@ -141,9 +150,9 @@ void GameLogicHandling::moveAndAttack(Zombie *zombie, int position)
         }
 
         if (zombie->getName()/1000 == 15 && !count1)
-            QThread::sleep(1 * 2);
+            delay(1 * 2000);
         else
-            QThread::sleep(zombie->getTime() * 2);
+            delay(zombie->getTime() * 2000);
 
         if (gameMap[newPosition] >= 20000) { // Assuming IDs >= 10000 represent plants
             int plantID = gameMap[newPosition];
@@ -167,7 +176,7 @@ void GameLogicHandling::plantAttack(Plant *plant, int position)
 {
     while(plant->health > 0)
     {
-        QThread::sleep(plant->firingRate * 2);
+        delay(plant->firingRate * 2000);
         for (int i = position; i <= 72; i += 6)
             if (gameMap[i] <= 20000 && gameMap[i] >= 11000)
             {
