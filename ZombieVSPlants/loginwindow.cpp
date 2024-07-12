@@ -57,6 +57,7 @@ void LoginWindow::on_pushButton_2_clicked()
 
          // Process server response
          if (responseString == "1") {
+             userName=ui->username->text();
              this->hide();
              StartWindow *startWindow = new StartWindow();
              startWindow->show();

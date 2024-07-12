@@ -17,6 +17,8 @@
 #include <QMovie>
 #include <QHBoxLayout>
 #include<QLabel>
+#include "secondstrart.h"
+#include "lastpage.h"
 namespace Ui {
 class zambiesGame;
 }

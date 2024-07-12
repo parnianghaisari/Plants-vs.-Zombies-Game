@@ -107,6 +107,8 @@ private slots:
 
    void showMapP();
    void listenServerP();
+   void on_textEdit_copyAvailable(bool b);
+
 private:
     Ui::plants *ui;
     void applyStylesheets();

@@ -10,6 +10,8 @@ int Branis=0;
 int Suns=0;
 int RandomB=0;
 int RandomS=0;
+int RoundG=0;
+QString userName;
 QHash<int , int> gamehash;
 QMap<int, int> gameMap;
 QMap<int, int> beforeMoving;

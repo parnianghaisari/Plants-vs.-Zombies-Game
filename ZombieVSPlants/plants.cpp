@@ -900,7 +900,7 @@ void plants::showMapP()
           }
           return;
      }
-      qDebug() << "show p";
+     qDebug() << "show ";
       QLabel *label = new QLabel(this);
        QString imagePath;
       if(beforeMoving.size()!=0)
@@ -987,12 +987,11 @@ void plants::showMapP()
 
       }
   if(bornZombies.size()!=0)
-      qDebug()<<"3";
     {for (auto i = bornZombies.begin(); i != bornZombies.end(); ++i) {
         int a=i.key();
         int b=i.value();
-        qDebug()<<a;
         QString imagePath;
+           qDebug()<<a;
         QString buttonName = QString("pushButton_%1").arg(a);
         QLabel *label = new QLabel(this);
         QPushButton  *button = findChild<QPushButton*>(buttonName);
@@ -1093,13 +1092,13 @@ void plants::showMapP()
                               "}");
 
     }
-
     for (auto i = bornPlants.begin(); i !=bornPlants.end(); ++i)
     {
 
         QString buttonName = QString("pushButton_%1").arg(i.key());
         QPushButton *button = findChild<QPushButton*>(buttonName);
         QString imagePath;
+           qDebug()<<i.key();
         switch (i.value() / 1000)
         {
         case 21:
@@ -1132,7 +1131,10 @@ deadPlants.clear();
 bornPlants.clear();
 }
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c559fe007f8ef399522b95764e535f33c93f3572
 void plants::listenServerP() {
     QByteArray data = clientS->readAll();
     QString str(data);
@@ -1152,3 +1154,5 @@ void plants::listenServerP() {
         showMapP(); // Update the UI to reflect the changes
     }
 }
+
+
