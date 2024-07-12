@@ -11,7 +11,7 @@ int Zombie::getName()
     return name;
 }
 
-int& Zombie::getHealth()
+int Zombie::getHealth()
 {
     return health;
 }
@@ -34,4 +34,9 @@ double Zombie::getTime()
 int Zombie::getBrain()
 {
     return brainVal;
+}
+
+void Zombie::changeHealth(int _health)
+{
+    health = _health;
 }

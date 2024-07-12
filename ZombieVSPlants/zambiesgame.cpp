@@ -366,16 +366,19 @@ void zambiesGame::showMapZ()
          return;
      }
      qDebug() << "show ";
+     qDebug()<< bornZombies.size();
       QLabel *label = new QLabel(this);
        QString imagePath;
       if(beforeMoving.size()!=0)
      { for (auto i = beforeMoving.begin(); i != beforeMoving.end(); ++i) {
+         qDebug() << "show1 ";
         int a=i.key();
         int b=i.value();
         QMovie *movie;
         QString buttonName = QString("pushButton_%1").arg(a);
         QPushButton *button = findChild<QPushButton*>(buttonName);
         if (button) {
+            qDebug() << "show2 ";
                QLabel* label = button->findChild<QLabel*>();
                if (label) {
                    button->layout()->removeWidget(label);
@@ -443,20 +446,21 @@ void zambiesGame::showMapZ()
         }
         if (!imagePath.isEmpty())
         {
+            qDebug() << "show4 ";
             button->setStyleSheet("QPushButton { border: none; }"); // Remove border if needed
             button->setLayout(new QHBoxLayout);
             button->layout()->addWidget(label);
         }
 
      }
-           beforeMoving.clear();
       }
   if(bornZombies.size()!=0)
     {for (auto i = bornZombies.begin(); i != bornZombies.end(); ++i) {
+          qDebug() << "show 5";
         int a=i.key();
         int b=i.value();
         QString imagePath;
-           qDebug()<<a;
+           qDebug()<<"b is"<<b;
         QString buttonName = QString("pushButton_%1").arg(a);
         QLabel *label = new QLabel(this);
         QPushButton  *button = findChild<QPushButton*>(buttonName);
@@ -517,20 +521,23 @@ void zambiesGame::showMapZ()
        }
         if (!imagePath.isEmpty())
         {
+            qDebug() << "show 6";
             button->setStyleSheet("QPushButton { border: none; }"); // Remove border if needed
             button->setLayout(new QHBoxLayout);
             button->layout()->addWidget(label);
         }
-        bornZombies.clear();
 }
     }
 if(deadZombies.size()!=0)
-  {   for (int i = 0; i != deadZombies.size(); ++i) {
+  {   for (int i = 0; i < deadZombies.size(); ++i) {
        QString buttonName = QString("pushButton_%1").arg(deadZombies[i]);
        QPushButton *button = findChild<QPushButton*>(buttonName);
+       qDebug() << i+1 <<"zombies deleted";
        if (button) {
+            qDebug() << i+1 <<"zombies deleted2";
               QLabel* label = button->findChild<QLabel*>();
               if (label) {
+                   qDebug() << i+1 <<"zombies deleted3";
                   button->layout()->removeWidget(label);
                   label->deleteLater();
               }
@@ -544,7 +551,6 @@ if(deadZombies.size()!=0)
     beforeMoving.clear();
     bornZombies.clear();
     deadZombies.clear();
-
     for(int i=0 ;i<deadPlants.size(); i++)
     {
         QString buttonName = QString("pushButton_%1").arg(deadPlants[i]);
@@ -555,7 +561,6 @@ if(deadZombies.size()!=0)
                               "}");
 
     }
-    deadPlants.clear();
     qDebug()<<"3";
     for (auto i = bornPlants.begin(); i !=bornPlants.end(); ++i)
     {
@@ -593,7 +598,8 @@ if(deadZombies.size()!=0)
         }
     }
 
-
+bornPlants.clear();
+deadPlants.clear();
 }
     bornPlants.clear();
 }

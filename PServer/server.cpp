@@ -139,10 +139,24 @@ void Server::readClient() {
     }
     else if (usAndps[0] == 'h') //sposed to be commented
     {
-        QString numberString = QString::number(flagForStarting);
-        qDebug() << numberString;
-        sendMessageToClients(numberString, socketDescriptor);
-        ++flagForStarting;
+        if (flagForStarting <= 1)
+        {
+            QString numberString = QString::number(flagForStarting);
+            qDebug() << numberString;
+            if (numForGame1 == -1)
+                numForGame1 = socketDescriptor * 10;
+            else
+                numForGame2 = socketDescriptor * 10 + 1;
+            sendMessageToClients(numberString, socketDescriptor);
+            ++flagForStarting;
+        }
+        else
+        {
+            if (socketDescriptor == (numForGame1/10))
+                sendMessageToClients("1", socketDescriptor);
+            else
+                sendMessageToClients("0", socketDescriptor);
+        }
     }
 
     emit messageReceived(message);
