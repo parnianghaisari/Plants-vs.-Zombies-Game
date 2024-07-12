@@ -441,7 +441,6 @@ void zambiesGame::showMapZ()
         }
 
      }
-           beforeMoving.clear();
       }
   if(bornZombies.size()!=0)
     {for (auto i = bornZombies.begin(); i != bornZombies.end(); ++i) {
@@ -515,7 +514,6 @@ void zambiesGame::showMapZ()
             button->setLayout(new QHBoxLayout);
             button->layout()->addWidget(label);
         }
-        bornZombies.clear();
 }
     }
 if(deadZombies.size()!=0)
@@ -538,7 +536,6 @@ if(deadZombies.size()!=0)
     beforeMoving.clear();
     bornZombies.clear();
     deadZombies.clear();
-
     for(int i=0 ;i<deadPlants.size(); i++)
     {
         QString buttonName = QString("pushButton_%1").arg(deadPlants[i]);
@@ -549,7 +546,6 @@ if(deadZombies.size()!=0)
                               "}");
 
     }
-    deadPlants.clear();
     qDebug()<<"3";
     for (auto i = bornPlants.begin(); i !=bornPlants.end(); ++i)
     {
@@ -587,7 +583,8 @@ if(deadZombies.size()!=0)
         }
     }
 
-
+bornPlants.clear();
+deadPlants.clear();
 }
 
 

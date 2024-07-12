@@ -968,7 +968,7 @@ void plants::showMapP()
         }
 
      }
-           beforeMoving.clear();
+
       }
   if(bornZombies.size()!=0)
       qDebug()<<"3";
@@ -1041,7 +1041,6 @@ void plants::showMapP()
             button->setLayout(new QHBoxLayout);
             button->layout()->addWidget(label);
         }
-        bornZombies.clear();
 }
     }
 if(deadZombies.size()!=0)
@@ -1076,7 +1075,7 @@ if(deadZombies.size()!=0)
                               "}");
 
     }
-    deadPlants.clear();
+
     for (auto i = bornPlants.begin(); i !=bornPlants.end(); ++i)
     {
 
@@ -1111,6 +1110,7 @@ if(deadZombies.size()!=0)
                                   "}");
         }
     }
+deadPlants.clear();
 bornPlants.clear();
 }
 
