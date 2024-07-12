@@ -1128,15 +1128,9 @@ void plants::showMapP()
                                   "}");
         }
     }
-<<<<<<< HEAD
 deadPlants.clear();
 bornPlants.clear();
 }
-=======
->>>>>>> 8e5a9fd3530faf20f7750954427dcb84727eec4f
-
-}
-    bornPlants.clear();
 }
 
 void plants::listenServerP() {
