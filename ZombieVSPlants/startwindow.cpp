@@ -10,7 +10,7 @@ StartWindow::StartWindow(QWidget *parent) :
      this->setStyleSheet("StartWindow { background-image: url(D:/AP_newPro/AP_project/ZombieVSPlants/pvz2-ea-hero-pvz2-xl.jpg.adapt.crop16x9.1023w.jpg); }");
 
     connect(clients, &QTcpSocket::readyRead, this, &StartWindow::listenServer);
-    clients->connectToHost("192.168.1.107", 2025);
+    clients->connectToHost(hostId, 2025);
 }
 
 StartWindow::~StartWindow()

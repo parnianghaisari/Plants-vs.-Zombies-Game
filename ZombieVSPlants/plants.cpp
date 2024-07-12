@@ -51,7 +51,7 @@ plants::plants(QWidget *parent) :
        connect(clientS, &QTcpSocket::readyRead, this, &plants::listenServerP);
        connect(&gameLogicHandlerP, &GameLogicHandling::gameStateUpdated, this, &plants::showMapP);
 
-          clientS->connectToHost("192.168.1.107", 2025);
+          clientS->connectToHost(hostId, 2025);
 }
 
 plants::~plants()
@@ -79,21 +79,30 @@ void plants::applyStylesheets()
 void plants::on_pushButtonC1_2_clicked()
 {
     if(Suns >= 125)
-        plant=26;
+    {    plant=26;
+        Suns=Suns-125;
+        ui->textEdit->setText(QString::number(Suns));
+    }
     else
         plant =0;
 }
 void plants::on_pushButtonC2_2_clicked()
 {
     if(Suns >= 150)
-        plant=25;
+     {   plant=25;
+        Suns=Suns-150;
+        ui->textEdit->setText(QString::number(Suns));
+    }
     else
         plant =0;
 }
 void plants::on_pushButtonC3_2_clicked()
 {
     if(Suns >= 50)
-        plant=21;
+      {  plant=21;
+        Suns=Suns-50;
+        ui->textEdit->setText(QString::number(Suns));
+    }
     else
         plant =0;
 }
@@ -101,7 +110,10 @@ void plants::on_pushButtonC3_2_clicked()
 void plants::on_pushButtonC4_2_clicked()
 {
     if(Suns >= 175)
-        plant=24;
+     {   plant=24;
+        Suns=Suns-175;
+        ui->textEdit->setText(QString::number(Suns));
+    }
     else
         plant =0;
 }
@@ -109,7 +121,10 @@ void plants::on_pushButtonC4_2_clicked()
 void plants::on_pushButtonC5_2_clicked()
 {
     if(Suns >= 100)
-        plant=22;
+     {   plant=22;
+        Suns=Suns-100;
+        ui->textEdit->setText(QString::number(Suns));
+    }
     else
         plant =0;
 }
@@ -117,7 +132,10 @@ void plants::on_pushButtonC5_2_clicked()
 void plants::on_pushButtonC6_2_clicked()
 {
     if(Suns >= 100)
-        plant=23;
+      {  plant=23;
+        Suns=Suns-100;
+        ui->textEdit->setText(QString::number(Suns));
+    }
     else
         plant =0;
 }
@@ -137,7 +155,6 @@ void plants::generateRandomNumberS() {
                                   "    border: none; "
                                   "}");
         });
-        ui->textEdit_2->setText(QString::number(locSun));
     }
 }
 

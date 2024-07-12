@@ -2,7 +2,7 @@
 
 QTcpSocket *clientS =  new QTcpSocket();
 QTcpSocket *socket = new QTcpSocket();
-
+QString hostId;
 int zamby=0;
 int plant=0;
 int lockSun=0;

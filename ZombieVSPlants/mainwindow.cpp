@@ -26,7 +26,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-
+    hostId = ui->lineEdit->text();
     QString text_3 = ui->lineEdit_2->text();
     QString text_4="2025";
     if( text_3.compare(text_4)==0 )

@@ -12,6 +12,7 @@ extern int zamby;
 extern int plant;
 extern int Branis;
 extern int Suns;
+extern QString hostId;
 extern QHash<int , int> gamehash;
 extern QMap<int, int> gameMap;
 extern QMap<int, int> beforeMoving;

@@ -121,24 +121,27 @@ background-color: rgb(47, 47, 47);</string>
       <string/>
      </property>
     </widget>
-    <widget class="QTextEdit" name="textEdit_2">
-     <property name="geometry">
-      <rect>
-       <x>870</x>
-       <y>100</y>
-       <width>455</width>
-       <height>41</height>
-      </rect>
-     </property>
-    </widget>
     <widget class="QTextEdit" name="textEdit">
      <property name="geometry">
       <rect>
        <x>860</x>
-       <y>50</y>
-       <width>455</width>
+       <y>90</y>
+       <width>71</width>
        <height>41</height>
       </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>850</x>
+       <y>50</y>
+       <width>63</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Suns:</string>
      </property>
     </widget>
    </widget>

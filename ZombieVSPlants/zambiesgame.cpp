@@ -66,7 +66,7 @@ zambiesGame::zambiesGame(QWidget *parent)
     connect(clientS, &QTcpSocket::readyRead, this, &zambiesGame::listenServerZ);
     connect(&gameLogicHandlerZ, &GameLogicHandling::gameStateUpdated, this, &zambiesGame::showMapZ);
 
-       clientS->connectToHost("192.168.1.107", 2025);
+       clientS->connectToHost(hostId, 2025);
 
 }
 
