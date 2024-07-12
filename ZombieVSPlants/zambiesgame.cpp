@@ -435,7 +435,7 @@ void zambiesGame::showMapZ()
            movie->start();
            break;
       }
-        case 16:     
+        case 16:
         {
             imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/purple-hair-unscreen-ezgif.com-resize.gif";
            movie = new QMovie(imagePath);
@@ -601,7 +601,6 @@ if(deadZombies.size()!=0)
 bornPlants.clear();
 deadPlants.clear();
 }
-    bornPlants.clear();
 }
 
 void zambiesGame::listenServerZ() {
