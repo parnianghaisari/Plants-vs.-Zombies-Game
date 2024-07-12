@@ -1131,10 +1131,6 @@ deadPlants.clear();
 bornPlants.clear();
 }
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> c559fe007f8ef399522b95764e535f33c93f3572
 void plants::listenServerP() {
     QByteArray data = clientS->readAll();
     QString str(data);
