@@ -19,11 +19,13 @@ public:
     virtual ~Zombie();
 
     int getName();
-    int& getHealth();
+    int getHealth();
     double getDelay();
     int getPower();
     double getTime();
     int getBrain();
+
+    void changeHealth(int _health);
 };
 
 #endif // ZOMBIE_H

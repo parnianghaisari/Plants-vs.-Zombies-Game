@@ -185,53 +185,55 @@ void GameLogicHandling::moveAndAttack(Zombie *zombie, int position)
 void GameLogicHandling::plantAttack(Plant *plant, int position)
 {
     while (plant->health > 0) {
-        delay(plant->firingRate * 2000);
-        for (int i = position; i <= 72; i += 6) {
+            delay(plant->firingRate * 2000);
+            for (int i = position; i <= 72; i += 6) {
+                if (gameMap[i] <= 20000 && gameMap[i] >= 11000) {
+                    int zombieID = gameMap[i];
+                    qDebug() << "Attempting to find zombie with ID:" << zombieID;
 
-            if (gameMap[i] <= 20000 && gameMap[i] >= 11000) {
-                int zombieID = gameMap[i];
-                qDebug() << zombieID;
-                Zombie *zombie = zombieMap[zombieID];
-                qDebug() << zombie->getHealth() << zombie->getName();
-                mutex.lock();
-                zombie->getHealth() -= plant->health;
-                mutex.unlock();
-                if (zombie->getHealth() <= 0) {
                     mutex.lock();
-                    updateMap(i, 0); // Zombie dies
-                    mutex.unlock();
-                    auto it = beforeMoving.find(i);
-                    if (it == beforeMoving.end())
-                        deadZombies.append(i);
-                    else {
-                        beforeMoving.erase(it);
-                        deadZombies.append(i);
+                    if (zombieMap.contains(zombieID)) {
+                        Zombie *zombie = zombieMap[zombieID];
+                        qDebug() << "Found zombie:" << zombie->getName() << "with health:" << zombie->getHealth();
+
+                        zombie->changeHealth(zombie->getHealth() - plant->health);
+                        if (zombie->getHealth() <= 0) {
+                            updateMap(i, 0); // Zombie dies
+                            qDebug() << "Zombie died at position:" << i;
+
+                            auto it = beforeMoving.find(i);
+                            if (it == beforeMoving.end()) {
+                                deadZombies.append(i);
+                            } else {
+                                beforeMoving.erase(it);
+                                deadZombies.append(i);
+                            }
+                            zombieMap.remove(zombieID);
+                            delete zombie;
+                        }
+                    } else {
+                        qDebug() << "Zombie with ID:" << zombieID << "not found in zombieMap";
                     }
-                    zombieMap.remove(zombieID);
-                    delete zombie;
+                    mutex.unlock();
                 }
             }
         }
-    }
-    if (plant->name / 1000 == 24) {
-        wait(1000);
-        plumExplode(position);
+
+        if (plant->name / 1000 == 24) {
+            wait(1000);
+            plumExplode(position);
+        } else {
+            wait(1000);
+            jalapenoExplode(position);
+        }
+
         mutex.lock();
         updateMap(position, 0);
-        mutex.unlock();
         deadPlants.append(position);
         plantMap.remove(plant->name);
         delete plant;
-    } else {
-        wait(1000);
-        jalapenoExplode(position);
-        mutex.lock();
-        updateMap(position, 0);
         mutex.unlock();
-        deadPlants.append(position);
-        plantMap.remove(plant->name);
-        delete plant;
-    }
+
 }
 
 void GameLogicHandling::updateMap(int position, int id)
@@ -252,7 +254,7 @@ void GameLogicHandling::plumExplode(int position)
                     qDebug() << zombieID;
                     Zombie *zombie = zombieMap[zombieID];
                     qDebug() << zombie->getHealth() << zombie->getName();
-                    zombie->getHealth() -= 500;
+                    zombie->changeHealth(zombie->getHealth() - 500);
                     if (zombie->getHealth() <= 0) {
                         mutex.lock();
                         updateMap(i, 0); // Zombie dies
@@ -281,7 +283,7 @@ void GameLogicHandling::jalapenoExplode(int position)
         if (gameMap[i] < 20000 && gameMap[i]) {
             int zombieID = gameMap[i];
             Zombie *zombie = zombieMap[i];
-            zombie->getHealth() -= 500;
+            zombie->changeHealth(zombie->getHealth() - 300);
             if (zombie->getHealth() <= 0) {
                 mutex.lock();
                 updateMap(i, 0); // Zombie dies
