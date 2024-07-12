@@ -10,7 +10,6 @@
 #include "plants.h"
 #include "globals.h"
 
-#include "client.h"
 namespace Ui {
 class StartWindow;
 }
@@ -29,10 +28,12 @@ private slots:
 
     void on_pushButton_3_clicked();
 
+    void listenServer();
+
 private:
     Ui::StartWindow *ui;
    DataHandler *dataHandler;
-   Client *client;
+   QTcpSocket *clients;
 };
 
 #endif // STARTWINDOW_H

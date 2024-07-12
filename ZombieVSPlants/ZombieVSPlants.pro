@@ -12,7 +12,6 @@ SOURCES += \
     astronautzombie.cpp \
     boomerangplant.cpp \
     bucketheadzombie.cpp \
-    client.cpp \
     datahandeler.cpp \
     forgotwindow.cpp \
     gamehistory.cpp \
@@ -43,7 +42,6 @@ HEADERS += \
     astronautzombie.h \
     boomerangplant.h \
     bucketheadzombie.h \
-    client.h \
     datahandeler.h \
     forgotwindow.h \
     gamehistory.h \

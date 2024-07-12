@@ -527,11 +527,11 @@ if(deadZombies.size()!=0)
                                     "    border: none; "
                                     "}");
           }
-       deadZombies.pop_front();
 }
 }
     beforeMoving.clear();
     bornZombies.clear();
+    deadZombies.clear();
 
     for(int i=0 ;i<deadPlants.size(); i++)
     {
