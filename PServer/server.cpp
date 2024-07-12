@@ -20,7 +20,7 @@ Server::Server(QObject *parent)
 }
 
 void Server::incomingConnection(qintptr socketDescriptor) {
-    if (clients.size() >= 2) {
+    if (clients.size() >= 6) {
         qDebug() << "Connection attempt rejected: maximum client limit reached";
         QTcpSocket tempSocket;
         tempSocket.setSocketDescriptor(socketDescriptor);
@@ -131,6 +131,10 @@ void Server::readClient() {
         auto it = clients.begin();
         sendMessageToClients(str, it.key());
         it++;
+        sendMessageToClients(str, it.key());
+        ++it;
+        sendMessageToClients(str, it.key());
+        ++it;
         sendMessageToClients(str, it.key());
     }
     else if (usAndps[0] == 'h') //sposed to be commented

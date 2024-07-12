@@ -9,8 +9,8 @@ StartWindow::StartWindow(QWidget *parent) :
     ui->setupUi(this);
      this->setStyleSheet("StartWindow { background-image: url(D:/AP_newPro/AP_project/ZombieVSPlants/pvz2-ea-hero-pvz2-xl.jpg.adapt.crop16x9.1023w.jpg); }");
 
-    connect(socket, &QTcpSocket::readyRead, this, &StartWindow::listenServer);
-    socket->connectToHost("192.168.1.107", 2025);
+    connect(clients, &QTcpSocket::readyRead, this, &StartWindow::listenServer);
+    clients->connectToHost("192.168.1.107", 2025);
 }
 
 StartWindow::~StartWindow()
@@ -21,8 +21,8 @@ StartWindow::~StartWindow()
 void StartWindow::on_pushButton_clicked()
 {
     QByteArray data="i";
-    socket->write(data);
-    QByteArray lisend = socket->readAll();
+    clients->write(data);
+    QByteArray lisend = clients->readAll();
     this->hide();
     QString receiveString = QString::fromUtf8(lisend);
     gameHistory *w   = new gameHistory();
@@ -42,10 +42,10 @@ void StartWindow::on_pushButton_2_clicked()
 void StartWindow::on_pushButton_3_clicked()
 {
     QByteArray data = "h";
-    if (socket->state() == QAbstractSocket::ConnectedState) {
+    if (clients->state() == QAbstractSocket::ConnectedState) {
         qDebug() << "Attempting to write data to socket...";
-        socket->write(data);
-        if (socket->waitForBytesWritten(5000)) {  // Wait up to 5 seconds
+        clients->write(data);
+        if (clients->waitForBytesWritten(5000)) {  // Wait up to 5 seconds
             qDebug() << "Data written to socket.";
          }
       }
@@ -53,7 +53,7 @@ void StartWindow::on_pushButton_3_clicked()
 
 void StartWindow::listenServer()
 {
-    QByteArray data = socket->readAll();
+    QByteArray data = clients->readAll();
     QString message = QString::fromUtf8(data);
     if (message == "1")
     {
