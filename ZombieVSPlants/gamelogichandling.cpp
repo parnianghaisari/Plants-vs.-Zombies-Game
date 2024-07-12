@@ -154,7 +154,7 @@ void GameLogicHandling::moveAndAttack(Zombie *zombie, int position)
             mutex.unlock();
             break;
         }
-
+        mutex.lock();
         if (zombie->getName()/1000 == 15 && !count1)
             QThread::sleep(1 * 2);
         else
