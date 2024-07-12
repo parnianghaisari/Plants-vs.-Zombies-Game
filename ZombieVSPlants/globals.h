@@ -7,6 +7,7 @@
 #include <QVector>
 
 extern QTcpSocket *clientS;
+extern QTcpSocket *socket;
 extern int zamby;
 extern int plant;
 extern int Branis;
