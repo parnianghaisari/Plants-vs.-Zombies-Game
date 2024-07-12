@@ -8,6 +8,9 @@
 #include"setting.h"
 #include "zambiesgame.h"
 #include "plants.h"
+#include "globals.h"
+
+#include "client.h"
 namespace Ui {
 class StartWindow;
 }
@@ -29,6 +32,7 @@ private slots:
 private:
     Ui::StartWindow *ui;
    DataHandler *dataHandler;
+   Client *client;
 };
 
 #endif // STARTWINDOW_H

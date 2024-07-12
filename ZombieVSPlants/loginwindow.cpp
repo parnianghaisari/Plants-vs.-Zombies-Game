@@ -47,27 +47,21 @@ void LoginWindow::on_pushButton_2_clicked()
       clientS->write(passwordData);
 
       // Wait for server response
-      if (!clientS->waitForReadyRead(3000)) {
-          qDebug() << "Error: " << clientS->errorString();
+      if (!clientS->waitForReadyRead(3000)){
           return;
       }
       // Read server response
          QByteArray responseData = clientS->readAll();
          QString responseString = QString::fromUtf8(responseData);
 
-         qDebug() << "Server response:" << responseString;
 
          // Process server response
          if (responseString == "1") {
-             qDebug() << "Login successful.";
              this->hide();
              StartWindow *startWindow = new StartWindow();
              startWindow->show();
          } else if (responseString == "0") {
-             qDebug() << "Login failed. Invalid credentials.";
              ui->textEdit->setText("Wrong username or password.");
-         } else {
-             qDebug() << "Unexpected server response:" << responseString;
          }
 }
 
