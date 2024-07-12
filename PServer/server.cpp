@@ -70,44 +70,6 @@ void Server::sendMessageToClients(const QString &message, int id)
     }
 }
 
-void Server::StartTheGame(int num1, int num2)
-{
-    QString client2;
-    int client = QRandomGenerator::global()->bounded(2);
-    if (client)
-    {
-        numForGame1 = 1;
-        numForGame2 = 0;
-        client2 = "0";
-    }
-    else
-    {
-        numForGame1 = 0;
-        numForGame2 = 1;
-        client2 = "1";
-    }
-    QString client1 = QString::number(client);
-    sendMessageToClients(client1, num1);
-    sendMessageToClients(client2, num2);
-}
-
-void Server::StartTheSecond(int num1, int num2)
-{
-    QString client1;
-    QString client2;
-    if (numForGame1 == 1)
-    {
-        client1 = "0";
-        client2 = "1";
-    }
-    else{
-        client1 = "1";
-        client2 = "0";
-    }
-    sendMessageToClients(client1, num1);
-    sendMessageToClients(client2, num2);
-}
-
 void Server::readClient() {
     QTcpSocket *socket = qobject_cast<QTcpSocket*>(sender());
     if (!socket) return;
@@ -129,7 +91,6 @@ void Server::readClient() {
                 user_1 = usAndps[1];
             else
                 user_2 = usAndps[1];
-            ++flagForStarting;
         }
         qDebug() << res;
         sendMessageToClients(res, socketDescriptor);
@@ -147,13 +108,11 @@ void Server::readClient() {
         Users user(usAndps[1], usAndps[2], usAndps[3], usAndps[4], usAndps[5]);
         qDebug() << usAndps[1];
         sig.sign(user);
-        ++flagForStarting;
     }
     else if (usAndps[0] == 'n')
     {
         Login log;
         log.changePSW(usAndps[1], usAndps[2]);
-        ++flagForStarting;
     }
     else if (usAndps[0] == 'i')
     {
@@ -174,22 +133,12 @@ void Server::readClient() {
         it++;
         sendMessageToClients(str, it.key());
     }
-    else if (usAndps[0] == 'h' && clients.size() == 2) //sposed to be commented
+    else if (usAndps[0] == 'h') //sposed to be commented
     {
-        if (numForGame1 == -1 && numForGame2 == -1)
-        {
-            auto it = clients.begin();
-            auto it2 = it;
-            it2++;
-            StartTheGame(it.key(), it2.key());
-        }
-        else
-        {
-            auto it = clients.begin();
-            auto it2 = it;
-            it2++;
-            StartTheSecond(it.key(), it2.key());
-        }
+        QString numberString = QString::number(flagForStarting);
+        qDebug() << numberString;
+        sendMessageToClients(numberString, socketDescriptor);
+        ++flagForStarting;
     }
 
     emit messageReceived(message);
