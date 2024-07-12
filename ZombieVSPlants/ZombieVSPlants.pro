@@ -18,6 +18,7 @@ SOURCES += \
     gamelogichandling.cpp \
     globals.cpp \
     jalapeno.cpp \
+    lastpage.cpp \
     leafheadzombie.cpp \
     loginwindow.cpp \
     main.cpp \
@@ -29,6 +30,7 @@ SOURCES += \
     plummineplant.cpp \
     purplehairzombie.cpp \
     regularzombie.cpp \
+    secondstrart.cpp \
     setting.cpp \
     signupwindow.cpp \
     startwindow.cpp \
@@ -48,6 +50,7 @@ HEADERS += \
     gamelogichandling.h \
     globals.h \
     jalapeno.h \
+    lastpage.h \
     leafheadzombie.h \
     loginwindow.h \
     mainwindow.h \
@@ -58,6 +61,7 @@ HEADERS += \
     plummineplant.h \
     purplehairzombie.h \
     regularzombie.h \
+    secondstrart.h \
     setting.h \
     signupwindow.h \
     startwindow.h \
@@ -70,10 +74,12 @@ HEADERS += \
 FORMS += \
     forgotwindow.ui \
     gamehistory.ui \
+    lastpage.ui \
     loginwindow.ui \
     mainwindow.ui \
     mainwindow2.ui \
     plants.ui \
+    secondstrart.ui \
     setting.ui \
     signupwindow.ui \
     startwindow.ui \
