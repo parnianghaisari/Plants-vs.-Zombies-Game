@@ -187,12 +187,15 @@ void GameLogicHandling::plantAttack(Plant *plant, int position)
     while (plant->health > 0) {
         delay(plant->firingRate * 2000);
         for (int i = position; i <= 72; i += 6) {
-            QMutexLocker locker(&mutex);
 
             if (gameMap[i] <= 20000 && gameMap[i] >= 11000) {
                 int zombieID = gameMap[i];
+                qDebug() << zombieID;
                 Zombie *zombie = zombieMap[zombieID];
+                qDebug() << zombie->getHealth() << zombie->getName();
+                mutex.lock();
                 zombie->getHealth() -= plant->health;
+                mutex.unlock();
                 if (zombie->getHealth() <= 0) {
                     mutex.lock();
                     updateMap(i, 0); // Zombie dies
@@ -246,7 +249,9 @@ void GameLogicHandling::plumExplode(int position)
             if (i > 0 && i < 73 && i != position)
                 if (gameMap[i] < 20000 && gameMap[i]) {
                     int zombieID = gameMap[i];
+                    qDebug() << zombieID;
                     Zombie *zombie = zombieMap[zombieID];
+                    qDebug() << zombie->getHealth() << zombie->getName();
                     zombie->getHealth() -= 500;
                     if (zombie->getHealth() <= 0) {
                         mutex.lock();
