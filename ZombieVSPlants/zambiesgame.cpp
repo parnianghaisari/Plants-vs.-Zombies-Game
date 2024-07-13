@@ -346,7 +346,7 @@ void zambiesGame::on_pushButton_72_clicked()
 }
 void zambiesGame::showMapZ()
 {
-    if (gameLogicHandlerZ.winner != 1) {
+    if (gameLogicHandlerZ.winner != -1)
      {  timer2->stop();
          qDebug() << "Timer stopped because winner == 1";
          QString winnerString = QString::number(gameLogicHandlerZ.winner);
@@ -357,15 +357,15 @@ void zambiesGame::showMapZ()
           if (clientS->waitForBytesWritten(5000)) {
               qDebug() << "Data written to socket.";
           }
-          if(RoundG ==2){
-
-          }
+          //if(RoundG ==2){
+//
+          //}
           StartWindow * s =new StartWindow();
           this->hide();
           s->show();
          return;
      }
-     qDebug() << "show ";
+     qDebug() << "showwww ";
      qDebug()<< bornZombies.size();
       QLabel *label = new QLabel(this);
        QString imagePath;
@@ -601,7 +601,7 @@ if(deadZombies.size()!=0)
 bornPlants.clear();
 deadPlants.clear();
 }
-}
+
 
 void zambiesGame::listenServerZ() {
     QByteArray data = clientS->readAll();

@@ -26,6 +26,10 @@ public:
     int getBrain();
 
     void changeHealth(int _health);
+
+
+signals:
+        void zombieDied();
 };
 
 #endif // ZOMBIE_H

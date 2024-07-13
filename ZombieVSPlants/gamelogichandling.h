@@ -43,6 +43,12 @@ public:
 
 signals:
     void gameStateUpdated();
+    void cleanupZombieSignal(Zombie *zombie);
+
+private slots:
+
+    void cleanupZombie(Zombie *zombie);
+
 
 private:
     QMap<int, Zombie*> zombieMap; // ID, Zombie*
@@ -58,7 +64,6 @@ private:
     void checkWinningCondition();
     void plumExplode(int position);
     void jalapenoExplode(int position);
-    void cleanupZombie(Zombie *zombie);
 };
 
 #endif // GAMELOGICHANDLING_H

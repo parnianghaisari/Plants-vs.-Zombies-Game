@@ -15,6 +15,9 @@ public:
     int attackPower;
     int firingRate;
     int sunVal;
+
+signals:
+    void plantDied();
 };
 
 #endif // PLANT_H

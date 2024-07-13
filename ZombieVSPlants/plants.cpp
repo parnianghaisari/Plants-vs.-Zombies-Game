@@ -877,7 +877,7 @@ void plants::on_pushButton_36_clicked()
 
 void plants::showMapP()
 {
-    if (gameLogicHandlerP.winner != 1) {
+    if (gameLogicHandlerP.winner != -1)
      {  timer2->stop();
          qDebug() << "Timer stopped because winner == 1";
          QString winnerString = QString::number(gameLogicHandlerP.winner);
@@ -899,7 +899,7 @@ void plants::showMapP()
           }
           return;
      }
-     qDebug() << "show ";
+     qDebug() << "showww ";
       QLabel *label = new QLabel(this);
        QString imagePath;
       if(beforeMoving.size()!=0)
@@ -910,6 +910,7 @@ void plants::showMapP()
         QString buttonName = QString("pushButton_%1").arg(a);
         QPushButton *button = findChild<QPushButton*>(buttonName);
         if (button) {
+            qDebug() << "showww1 ";
                QLabel* label = button->findChild<QLabel*>();
                if (label) {
                    button->layout()->removeWidget(label);
@@ -990,7 +991,7 @@ void plants::showMapP()
         int a=i.key();
         int b=i.value();
         QString imagePath;
-           qDebug()<<a;
+           qDebug()<<"a is"<<a;
         QString buttonName = QString("pushButton_%1").arg(a);
         QLabel *label = new QLabel(this);
         QPushButton  *button = findChild<QPushButton*>(buttonName);
@@ -1129,7 +1130,7 @@ void plants::showMapP()
 deadPlants.clear();
 bornPlants.clear();
 }
-}
+
 void plants::listenServerP() {
     QByteArray data = clientS->readAll();
     QString str(data);

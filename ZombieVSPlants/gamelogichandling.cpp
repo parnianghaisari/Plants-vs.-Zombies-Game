@@ -8,13 +8,22 @@ GameLogicHandling::GameLogicHandling(QWidget *parent)
     : QWidget{parent}
 {
     initializeMap();
+    connect(this, &GameLogicHandling::cleanupZombieSignal, this, &GameLogicHandling::cleanupZombie);
 }
 
 GameLogicHandling::~GameLogicHandling()
 {
     for (QThread *thread : threads) {
-        thread->quit();
-        thread->wait();
+        thread->quit();  // Request thread to exit event loop
+
+        // Wait for thread to exit (with a timeout)
+        if (!thread->wait(5000)) {
+            qWarning() << "Thread did not exit gracefully. Terminating...";
+            thread->terminate();  // Terminate forcibly if it didn't exit
+            thread->wait();  // Wait for termination
+        }
+
+        // Delete the thread once it's finished
         delete thread;
     }
 
@@ -124,36 +133,31 @@ void GameLogicHandling::moveAndAttack(Zombie *zombie, int position)
     int newPosition = position - 6;
     int count1 = 0;
     while (zombie->getHealth() > 0) {
-        if (zombie->getHealth() <= 0)
-        {
-            cleanupZombie(zombie);
-            break;
-        }
-
         if (!gameMap[newPosition])
         {
-            if (zombie->getName()/1000 == 15 && position >= 67 && position <= 72)
-                delay(1000 * 2);
-            else
-                delay(zombie->getDelay() * 2000);
-
+            delay(zombie->getDelay() * 2000);
             mutex.lock();
+            if (zombie->getHealth() <= 0)
+            {
+                updateMap(position, 0);
+                cleanupZombie(zombie);
+                mutex.unlock();  // Unlock mutex before returning
+                return; // Exit thread if zombie is dead
+            }
+
             updateMap(position, 0); // Clear the old position
-            mutex.unlock();
-
             beforeMoving.insert(position, zombie->getName());
-
             position = newPosition;
-
+            mutex.unlock();
             if (newPosition > 0) { // Check bounds
-                mutex.lock();
                 updateMap(newPosition, zombie->getName());
-                mutex.unlock();
             } else {
                 winner = 1;
+                mutex.unlock();  // Unlock mutex before breaking
                 break; // Exit loop if out of bounds
             }
             newPosition -= 6;
+
             continue;
         }
 
@@ -163,22 +167,21 @@ void GameLogicHandling::moveAndAttack(Zombie *zombie, int position)
             break;
         }
 
-        if (zombie->getName()/1000 == 15 && !count1)
-            delay(1 * 2000);
-        else
-            delay(zombie->getTime() * 2000);
+        delay(zombie->getTime() * 2000);
 
-        if (gameMap[newPosition] >= 20000) { // Assuming IDs >= 10000 represent plants
+        if (gameMap[newPosition] >= 20000) { // Assuming IDs >= 20000 represent plants
             int plantID = gameMap[newPosition];
+            mutex.lock();  // Lock mutex before accessing plantMap
             Plant *plant = plantMap[plantID];
-            plant->health -= zombie->getPower();
-            if (plant->health <= 0) {
-                mutex.lock();
-                updateMap(newPosition, 0); // Plant dies
-                mutex.unlock();
-                deadPlants.append(newPosition);
-                plantMap.remove(plantID);
-                delete plant;
+            if (plant) {
+                plant->health -= zombie->getPower();
+                if (plant->health <= 0) {
+                    updateMap(newPosition, 0); // Plant dies
+                    deadPlants.append(newPosition);
+                    plantMap.remove(plantID);
+                    delete plant;
+                    mutex.unlock();
+                }
             }
         }
 
@@ -189,13 +192,14 @@ void GameLogicHandling::moveAndAttack(Zombie *zombie, int position)
 void GameLogicHandling::plantAttack(Plant *plant, int position)
 {
     while (plant->health > 0) {
-            delay(plant->firingRate * 2000);
+            delay(plant->firingRate * 3000);
             for (int i = position; i <= 72; i += 6) {
                 if (gameMap[i] <= 20000 && gameMap[i] >= 11000) {
+                    mutex.lock();
                     int zombieID = gameMap[i];
                     qDebug() << "Attempting to find zombie with ID:" << zombieID;
 
-                    mutex.lock();
+
                     if (zombieMap.contains(zombieID)) {
                         Zombie *zombie = zombieMap[zombieID];
                         qDebug() << "Found zombie:" << zombie->getName() << "with health:" << zombie->getHealth();
@@ -210,7 +214,7 @@ void GameLogicHandling::plantAttack(Plant *plant, int position)
                             }
                             deadZombies.append(i);
                         }
-                        mutex.unlock();
+                        mutex.unlock();  // Unlock mutex after accessing zombieMap
                     } else {
                         qDebug() << "Zombie with ID:" << zombieID << "not found in zombieMap";
                         mutex.unlock();
@@ -313,11 +317,15 @@ void GameLogicHandling::jalapenoExplode(int position)
 
 void GameLogicHandling::cleanupZombie(Zombie *zombie)
 {
-    if (zombie) {
-        qDebug() << "poooo";
-        mutex.lock();
+    if (zombie)
+    {
+        qDebug() << "Cleaning up zombie:" << zombie->getName();
+
         zombieMap.remove(zombie->getName());
+
+        // Delete the zombie object itself
         delete zombie;
-        mutex.unlock();
-    }
+
+        // Get the thread associated with the zombie
+}
 }
