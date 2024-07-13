@@ -37,11 +37,6 @@ zambiesGame::zambiesGame(QWidget *parent)
                            "    border-image: url(" + imagePath + ") stretch;"
                              "}");
 
-     //gameTimer->setInterval(240000); // 4 minutes
-     //connect(gameTimer, &QTimer::timeout, this, &zambiesGame::onGameTimerTimeout);
-
-     //gameTimer->start();
-
     ui->textEdit->setText(QString::number(Branis));
     applyStylesheets();
     RoundG++;
@@ -58,17 +53,11 @@ zambiesGame::zambiesGame(QWidget *parent)
             qDebug() << "Button not found:" << buttonName;
         }
     }
-    // timer2 = new QTimer(this);
-    // connect(timer2, &QTimer::timeout, this, &zambiesGame::showMapZ);
-     //timer2->start(200);
-     //listen = new QTimer(this);
-     //connect(timer, &QTimer::timeout, this, &zambiesGame::listenServerZ);
-     //listen->start(200);
     connect(clientS, &QTcpSocket::readyRead, this, &zambiesGame::listenServerZ);
     connect(&gameLogicHandlerZ, &GameLogicHandling::gameStateUpdated, this, &zambiesGame::showMapZ);
 
        clientS->connectToHost(hostId, 2025);
-
+       QTimer::singleShot(240000, this, &zambiesGame::openStartWindow);
 }
 
 zambiesGame::~zambiesGame()
@@ -175,6 +164,7 @@ void zambiesGame::generateRandomNumberZ() {
     QString buttonName = QString("pushButtonB%1").arg(locBrain);
     QPushButton *button = findChild<QPushButton *>(buttonName);
     if (button) {
+        IsClicked=1;
         QString imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/Brain.png";
         button->setStyleSheet("QPushButton { "
                               "    border-image: url(" + imagePath + ") stretch;"
@@ -193,8 +183,9 @@ void zambiesGame::handleButtonClick() {
     QPushButton *button = qobject_cast<QPushButton *>(sender());
     if (button) {
         QString buttonName = QString("pushButtonB%1").arg(locBrain);
-        if (button->objectName() == buttonName) {
+        if (button->objectName() == buttonName  && IsClicked ==1) {
             Branis += 25;
+            IsClicked=0;
         ui->textEdit->setText(QString::number(Branis));
             button->setStyleSheet("QPushButton { "
                                   "    background-color: rgba(255, 255, 255, 0); "
@@ -346,8 +337,10 @@ void zambiesGame::on_pushButton_72_clicked()
 }
 void zambiesGame::showMapZ()
 {
-    if (gameLogicHandlerZ.winner != -1)
-     {  timer2->stop();
+    if (gameLogicHandlerZ.winner != -1)   
+     {
+        qDebug() << "Timer stopped because winner2 == 1";
+       // timer2->stop();
          qDebug() << "Timer stopped because winner == 1";
          QString winnerString = QString::number(gameLogicHandlerZ.winner);
          QByteArray winnerData = winnerString.toUtf8();
@@ -621,16 +614,33 @@ void zambiesGame::listenServerZ() {
         showMapZ();
     }
 }
-//void zambiesGame::onGameTimerTimeout()
-//{
-  //  if (gameLogicHandlerZ.winner != -1)
-    //{
-      //  gameLogicHandlerZ.winner = 0;
-        //qDebug() << "plants win!";
-    //}
-//
-    //qDebug() << "Zombie wins!";
-//
-  //  this->hide();
-    //gameTimer->stop();
-//}
+void zambiesGame::openStartWindow()
+{
+    if(gameLogicHandlerZ.winner!=1){
+       gameLogicHandlerZ.winner=0;
+       MainWindow * u=new MainWindow();
+       u->show();
+       this->close();
+    }
+    if(gameLogicHandlerZ.winner==1){
+       MainWindow * u=new MainWindow();
+       u->show();
+       this->close();
+    } // Close the current window if needed
+
+    if (clientS->state() == QAbstractSocket::ConnectedState) {
+        qDebug() << "Attempting to write data to socket...";
+        QString winnerString = QString::number(gameLogicHandlerZ.winner);
+        QByteArray winnerData = winnerString.toUtf8();
+        QByteArray UsernameData = userName.toUtf8();
+        QByteArray data = winnerData + "+" + UsernameData + "+" +"z";
+        clientS->write(data);
+        if (clientS->waitForBytesWritten(5000)) {  // Wait up to 5 seconds
+            qDebug() << "Data written to socket.";
+        } else {
+            qDebug() << "Failed to write data to socket:" << clientS->errorString();
+        }
+    } else {
+        qDebug() << "Socket is not connected!";
+    }
+}

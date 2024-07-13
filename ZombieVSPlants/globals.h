@@ -10,6 +10,7 @@ extern QTcpSocket *clientS;
 extern QTcpSocket *socket;
 extern int zamby;
 extern int plant;
+extern int IsClicked;
 extern int Branis;
 extern int Suns;
 extern int RoundG;

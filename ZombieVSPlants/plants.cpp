@@ -1,6 +1,5 @@
 #include "plants.h"
 #include "ui_plants.h"
-#include "zambiesgame.h"
 plants::plants(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::plants),
@@ -53,6 +52,7 @@ plants::plants(QWidget *parent) :
        connect(&gameLogicHandlerP, &GameLogicHandling::gameStateUpdated, this, &plants::showMapP);
 
           clientS->connectToHost(hostId, 2025);
+          QTimer::singleShot(240000, this, &plants::openStartWindow);
 }
 
 plants::~plants()
@@ -146,6 +146,7 @@ void plants::generateRandomNumberS() {
     QString buttonName = QString("pushButtonS%1").arg(locSun);
     QPushButton *button = findChild<QPushButton *>(buttonName);
     if (button) {
+         IsClicked=1;
         QString imagePath = "D:/AP_newPro/AP_project/ZombieVSPlants/Sun.png";
         button->setStyleSheet("QPushButton { "
                               "    border-image: url(" + imagePath + ") stretch;"
@@ -164,8 +165,9 @@ void plants::handleButtonClick() {
     QPushButton *button = qobject_cast<QPushButton *>(sender());
     if (button) {
         QString buttonName = QString("pushButtonS%1").arg(locSun);
-        if (button->objectName() == buttonName) {
+        if (button->objectName() == buttonName && IsClicked ==1) {
             Suns += 25;
+             IsClicked=0;
             ui->textEdit->setText(QString::number(Suns));
 
             button->setStyleSheet("QPushButton { "
@@ -878,7 +880,8 @@ void plants::on_pushButton_36_clicked()
 void plants::showMapP()
 {
     if (gameLogicHandlerP.winner != -1)
-     {  timer2->stop();
+     { qDebug() << "Timer stopped because winner2 == 1";
+       // timer2->stop();
          qDebug() << "Timer stopped because winner == 1";
          QString winnerString = QString::number(gameLogicHandlerP.winner);
          QByteArray winnerData = winnerString.toUtf8();
@@ -894,8 +897,9 @@ void plants::showMapP()
             p->show();
           }
           else {
-             // StartWindow * s =new StartWindow();
+              lastPage *s = new lastPage();
               this->hide();
+              s->show();
           }
           return;
      }
@@ -1151,4 +1155,33 @@ void plants::listenServerP() {
     }
 }
 
+void plants::openStartWindow()
+{
+    if(gameLogicHandlerP.winner!=1){
+       gameLogicHandlerP.winner=0;
+       MainWindow * u=new MainWindow();
+       u->show();
+       this->close();
+    }
+    if(gameLogicHandlerP.winner==1){
+       MainWindow * u=new MainWindow();
+       u->show();
+       this->close();
+    } // Close the current window if needed
 
+    if (clientS->state() == QAbstractSocket::ConnectedState) {
+        qDebug() << "Attempting to write data to socket...";
+        QString winnerString = QString::number(gameLogicHandlerP.winner);
+        QByteArray winnerData = winnerString.toUtf8();
+        QByteArray UsernameData = userName.toUtf8();
+        QByteArray data = winnerData + "+" + UsernameData + "+" +"p";
+        clientS->write(data);
+        if (clientS->waitForBytesWritten(5000)) {  // Wait up to 5 seconds
+            qDebug() << "Data written to socket.";
+        } else {
+            qDebug() << "Failed to write data to socket:" << clientS->errorString();
+        }
+    } else {
+        qDebug() << "Socket is not connected!";
+    } // Close the current window if needed
+}

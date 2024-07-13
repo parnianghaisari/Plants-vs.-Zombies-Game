@@ -95,6 +95,37 @@ void Server::readClient() {
         qDebug() << res;
         sendMessageToClients(res, socketDescriptor);
     }
+    else if (usAndps[0] == 't')
+    {
+        QString data;
+        QString filep = "D:\\AP\\AP_project\\PServer\\SignUpInformation.json";
+        JsonManager load(filep);
+        load.loadData();
+        for (int i = 0; i < load.getUsers().size(); ++i)
+            if (usAndps[1] == load.getUsers()[i].userVal())
+            {
+                data = load.getUsers()[i].nameVal() + '+' + load.getUsers()[i].userVal() + '+' + load.getUsers()[i].pswVal() + '+' + load.getUsers()[i].numberVal() + '+' + load.getUsers()[i].emailVal();
+                break;
+            }
+        sendMessageToClients(data, socketDescriptor);
+    }
+    else if (usAndps[0] == "t2")
+    {
+        QString filep = "D:\\AP\\AP_project\\PServer\\SignUpInformation.json";
+        JsonManager load(filep);
+        load.loadData();
+        for (int i = 0; i < load.getUsers().size(); ++i)
+            if (usAndps[1] == load.getUsers()[i].userVal())
+            {
+                load.getUsers()[i].nameVal() = usAndps[2];
+                load.getUsers()[i].userVal() = usAndps[3];
+                load.getUsers()[i].pswVal() = usAndps[4];
+                load.getUsers()[i].numberVal() = usAndps[5];
+                load.getUsers()[i].emailVal() = usAndps[6];
+                break;
+            }
+        load.saveData();
+    }
     else if (usAndps[0] == 'f')
     {
         Login log;

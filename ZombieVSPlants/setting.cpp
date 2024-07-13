@@ -6,6 +6,8 @@ setting::setting(QWidget *parent) :
     ui(new Ui::setting)
 {
     ui->setupUi(this);
+    QByteArray byteArrayData ="t+" +userName.toUtf8();
+    clientS->write(byteArrayData);
     QByteArray lisend = clientS->readAll();
     QString strr(lisend);
     QStringList arr =strr.split('+');
@@ -24,12 +26,13 @@ setting::~setting()
 
 void setting::on_pushButton_clicked()
 {
+
     QString data = ui->lineEdit1->text() + '+' +
                       ui->lineEdit2->text() + '+' +
                       ui->lineEdit3->text() + '+' +
                       ui->lineEdit4->text() + '+' +
                       ui->lineEdit5->text();
-       QByteArray byteArrayData = data.toUtf8();
+       QByteArray byteArrayData ="t2+" +userName.toUtf8()+ data.toUtf8();
        clientS->write(byteArrayData);
        this->hide();
 

@@ -33,6 +33,7 @@ void StartWindow::on_pushButton_clicked()
 
 void StartWindow::on_pushButton_2_clicked()
 {
+
     this->hide();
     setting *u=new setting();
     u->show();

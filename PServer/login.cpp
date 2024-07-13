@@ -24,18 +24,23 @@ QString Login::matchPN(QString us, QString pn)
     log.loadData();
     for (int i = 0; i < log.getUsers().size(); ++i)
         if (us == log.getUsers()[i].userVal())
-            if (pn == log.getUsers()[i].nameVal())
+            if (pn == log.getUsers()[i].numberVal())
                 return "1";
     return "0";
 }
 
 void Login::changePSW(QString us, QString Nps)
 {
+    qDebug() << Nps;
     QString filep = "D:\\AP\\AP_project\\PServer\\SignUpInformation.json";
     JsonManager log(filep);
     log.loadData();
     for (int i = 0; i < log.getUsers().size(); ++i)
         if (us == log.getUsers()[i].userVal())
-            log.getUsers()[i].pswVal() = Nps;
+        {
+            log.getUsers()[i].changePSW(Nps);
+            qDebug() << log.getUsers()[i].pswVal();
+            break;
+        }
     log.saveData();
 }

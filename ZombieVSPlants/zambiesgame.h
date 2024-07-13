@@ -16,6 +16,7 @@
 #include <QMovie>
 #include <QHBoxLayout>
 #include "lastpage.h"
+#include "mainwindow.h"
 namespace Ui {
 class zambiesGame;
 }
@@ -56,8 +57,7 @@ private slots:
     void on_pushButton_72_clicked();
     void showMapZ();
     void listenServerZ();
-
-    //void onGameTimerTimeout();
+    void openStartWindow();
 private:
     Ui::zambiesGame *ui;
     void applyStylesheets();
@@ -65,7 +65,6 @@ private:
     QTimer *timer2;
     QTimer *listen;
     QTcpSocket *clients;
-    //QTimer *gameTimer;
     QSignalMapper *signalMapper;
     GameLogicHandling gameLogicHandlerZ;
     int locBrain;

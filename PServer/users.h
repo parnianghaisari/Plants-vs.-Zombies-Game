@@ -19,6 +19,8 @@ public:
     QString& nameVal();
     QString& emailVal();
 
+    void changePSW(QString Nps);
+
 private:
     QString UserName;
     QString PSW;

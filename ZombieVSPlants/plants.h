@@ -1,13 +1,8 @@
 #ifndef PLANTS_H
 #define PLANTS_H
 
-#include <QMainWindow>
-#include <QTimer>
-#include <QWidget>
-#include "globals.h"
-#include <QSignalMapper>
-#include <QPushButton>
-#include "gamelogichandling.h"
+#include "zambiesgame.h"
+
 namespace Ui {
 class plants;
 }
@@ -106,6 +101,7 @@ private slots:
 
    void showMapP();
    void listenServerP();
+   void openStartWindow();
 
 private:
     Ui::plants *ui;

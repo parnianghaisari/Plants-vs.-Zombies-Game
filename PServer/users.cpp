@@ -63,3 +63,9 @@ QString &Users::emailVal()
 {
     return Email;
 }
+
+void Users::changePSW(QString Nps)
+{
+    PSW = Nps;
+    qDebug() << "change psw" << PSW;
+}

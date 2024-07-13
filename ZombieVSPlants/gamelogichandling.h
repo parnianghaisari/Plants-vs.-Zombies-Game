@@ -44,9 +44,10 @@ public:
 signals:
     void gameStateUpdated();
     void cleanupZombieSignal(Zombie *zombie);
+    void cleanupPlantSignl(Plant *plant);
 
 private slots:
-
+    void cleanupPlant(Plant *plant);
     void cleanupZombie(Zombie *zombie);
 
 
