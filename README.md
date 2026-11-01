@@ -1,13 +1,36 @@
-# AP_project
-Planets vs. Zombies
-Welcome to Zombies vs Plants! This game pits your strategic gardening skills against hordes of hungry zombies. Defend your home using an arsenal of plant-based weaponry, each with unique abilities and strengths. Plan your defenses carefully to fend off increasingly challenging waves of zombies.
-Features:
-1.Plant Arsenal: Deploy a variety of plants with unique abilities to fend off zombies.
-2.Zombie Enemies: Encounter different types of zombies, each with their own strengths and weaknesses.
+# Plants vs. Zombies – C++ Game Development
 
-How to Play:
-1.Objective: Protect your home from zombies by strategically placing defensive plants.
-2.Plant Selection: Choose plants from your arsenal and position them in your garden.
-3.Combat: Defeat zombies before they reach your house to survive and progress.
+**Advanced Programming Course Project | 2024**
+
+## Overview
+
+Plants vs. Zombies is an interactive strategy game developed in C++ using the Qt framework. The game challenges players to defend their home against waves of zombies by strategically placing different types of plants, each with unique abilities and defensive capabilities.
+
+The project focuses on object-oriented software design, concurrent programming, network communication, and event-driven application development.
+
+## Features
+
+- **Plant Arsenal:** Different types of plants with unique abilities and attack mechanisms.
+- **Zombie Enemies:** Multiple zombie types with distinct characteristics and behaviors.
+- **Real-Time Gameplay:** Animated game elements and concurrent game operations.
+- **Multiplayer Communication:** UDP-based communication between game instances.
+- **Interactive Controls:** Event-driven user interactions and gameplay management.
+
+## Technical Implementation
+
+- Developed using **C++** and the **Qt Framework**.
+- Applied **Object-Oriented Programming (OOP)** principles to design and organize game components.
+- Implemented **multithreading** to handle real-time animations and concurrent game operations.
+- Utilized **UDP socket programming** for communication between game instances.
+- Designed **event-driven mechanisms** to handle user input and gameplay logic.
+
+## Technologies
+
+- C++
+- Qt Framework
+- Object-Oriented Programming (OOP)
+- Multithreading
+- UDP Socket Programming
+- Event-Driven Programming
 
 
